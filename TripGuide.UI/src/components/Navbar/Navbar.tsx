@@ -10,6 +10,14 @@ const Navbar: React.FC = () => {
   return (
     <AppBar position="static">
       <Toolbar className={styles.toolbar}>
+      <Button
+          component={Link}
+          to="/Introductory"
+          color="inherit"
+          variant={location.pathname === "/Introductory" ? "outlined" : "text"}
+        >
+          Introductory
+        </Button>
         <Button
           component={Link}
           to="/"

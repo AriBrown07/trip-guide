@@ -1,0 +1,135 @@
+// Сброс отступов для всего документа
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; // Запрещаем горизонтальный скролл
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// Шапка (без левого отступа)
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 5vw 1.25rem 0; // Отступ только справа
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+  flex-shrink: 0;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-weight: 700;
+  color: #333;
+  font-size: 2rem;
+  white-space: nowrap;
+  margin-left: 5vw; // Отступ только для логотипа
+}
+
+.nav {
+  display: flex;
+  gap: min(4vw, 60px);
+  margin-right: 5vw; // Отступ только справа
+}
+
+.navButton {
+  font-size: 1.1rem !important;
+  text-transform: none !important;
+  color: #333 !important;
+  padding: 0.6rem 1.8rem !important;
+  white-space: nowrap;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+// Разделитель (на всю ширину без отступов)
+.divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 100vw; // Важно: 100vw вместо 100%
+  margin-left: calc(-50vw + 50%); // Компенсируем возможные отступы
+  flex-shrink: 0;
+}
+
+// Основное содержание (прижато к левому краю)
+.mainContent {
+  flex: 1;
+  background-image: url('../../assets/images/landmark-bg.png');
+  background-size: cover;
+  background-position: left center; // Картинка прижата к левому краю
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: auto;
+  margin-left: 0;
+  padding-left: 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Текстовый блок (без левого отступа)
+.textBlock {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  width: min(90%, 1400px);
+  padding: 4rem 3rem;
+  margin: 2rem auto; // Автоматические отступы по бокам
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  box-sizing: border-box;
+  backdrop-filter: blur(4px);
+  left: 0; // Гарантированно прижимаем к левому краю
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem) !important;
+  font-weight: 700 !important;
+  margin-bottom: 1.5rem !important;
+  color: #222 !important;
+  line-height: 1.2 !important;
+}
+
+.subtitle {
+  font-size: clamp(1.25rem, 2.5vw, 1.8rem) !important;
+  color: #444 !important;
+  margin-bottom: 2.5rem !important;
+  line-height: 1.5 !important;
+}
+
+.ctaButton {
+  padding: 1rem 2.5rem !important;
+  font-size: 1.2rem !important;
+  border-radius: 50px !important;
+  margin-top: 2rem !important;
+}
+
+@media (min-width: 2000px) {
+  .textBlock {
+    padding: 5rem 4rem;
+  }
+  .title {
+    margin-bottom: 2rem !important;
+  }
+}

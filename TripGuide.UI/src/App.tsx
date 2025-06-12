@@ -7,8 +7,15 @@ const App: React.FC = () => {
   return (
     <>
       <Navbar />
-
-      <Container maxWidth="md" sx={{ marginTop: 4 }}>
+      
+      <Container 
+        maxWidth={false} 
+        disableGutters // Отключает стандартные отступы 24px
+        sx={{ 
+          marginTop: 4, // Оставляем только верхний отступ
+          width: "100%", // На всякий случай явно указываем ширину
+        }}
+      >
         <AppRoutes />
       </Container>
     </>
