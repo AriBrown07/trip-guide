@@ -2,7 +2,8 @@
 body, html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; // Запрещаем горизонтальный скролл
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif; // Добавляем стандартный шрифт
 }
 
 .container {
@@ -16,66 +17,112 @@ body, html {
   flex-direction: column;
 }
 
-// Шапка (без левого отступа)
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 5vw 1.25rem 0; // Отступ только справа
-  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1.25rem 5vw;
+  background-color: #FAF1E0;
   z-index: 10;
   flex-shrink: 0;
   height: 80px;
   box-sizing: border-box;
 }
 
-.logo {
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoImage {
+  height: 40px;
+  width: auto;
+}
+
+@font-face {
+  font-family: 'Sacrifice Demo';
+  src: url('./fonts/Lobster-Regular.ttf') format('ttf');
   font-weight: 700;
-  color: #333;
-  font-size: 2rem;
+  font-style: normal;
+}
+
+.logoText {
+  font-family: 'Lobster', sans-serif !important;
+  font-weight: 600 !important;
+  color: #2b1e18!important;
+  -webkit-text-stroke: 1.5px #C17C45;
+  paint-order: stroke fill;
+  letter-spacing: 3px !important;
+  font-size: 1.7rem !important;
   white-space: nowrap;
-  margin-left: 5vw; // Отступ только для логотипа
 }
 
 .nav {
   display: flex;
-  gap: min(4vw, 60px);
-  margin-right: 5vw; // Отступ только справа
+  align-items: center;
+  gap: min(4vw, 10px); // Уменьшил расстояние между элементами
 }
 
 .navButton {
   font-size: 1.1rem !important;
   text-transform: none !important;
   color: #333 !important;
-  padding: 0.6rem 1.8rem !important;
+  padding: 0.6rem 1.2rem !important; // Уменьшил padding
   white-space: nowrap;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1) !important;
   }
 }
 
+.socialIconsHeader {
+  display: flex;
+  align-items: center;
+  gap: min(3vw, 20px); // Расстояние между иконками
+  margin-left: min(4vw, 30px); // Отступ от кнопки авторизации
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+  opacity: 0.8;
+  aspect-ratio: 1/1;
+  
+  &:hover {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
 // Разделитель (на всю ширину без отступов)
 .divider {
   height: 1px;
-  background-color: rgba(0, 0, 0, 0.1);
-  width: 100vw; // Важно: 100vw вместо 100%
-  margin-left: calc(-50vw + 50%); // Компенсируем возможные отступы
+  background-color: #FAF1E0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   flex-shrink: 0;
 }
 
 // Основное содержание (прижато к левому краю)
 .mainContent {
   flex: 1;
-  background-image: url('../../assets/images/landmark-bg.png');
+  background-image: url('../../pics/landmark-bg.png');
   background-size: cover;
-  background-position: left center; // Картинка прижата к левому краю
+  background-position: center;
+  box-shadow: inset 0 0 0 1000px rgba(255,255,255,.4);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: auto;
-  margin-left: 0;
-  padding-left: 0;
   
   &::before {
     content: '';
@@ -88,48 +135,64 @@ body, html {
   }
 }
 
-// Текстовый блок (без левого отступа)
+.socialIconsHeader {
+  display: flex;
+  align-items: center;
+  gap: min(3vw, 20px);
+  margin-left: min(4vw, 30px);
+  
+  // Новые стили для одинаковых иконок
+  img {
+    width: 28px; // Фиксированный размер
+    height: 28px; // Фиксированный размер
+    object-fit: contain; // Сохраняет пропорции
+  }
+}
+
+// Альтернативный вариант - если нужно применить ко всем иконкам на сайте
+.socialIcon {
+  width: 28px !important; // !important гарантирует переопределение
+  height: 28px !important;
+  min-width: 28px; // Запрещаем уменьшение
+  min-height: 28px;
+  object-fit: contain;
+}
+
+// Текстовый блок
 .textBlock {
   position: relative;
   z-index: 1;
-  text-align: center;
+  text-align: left;
   width: min(90%, 1400px);
   padding: 4rem 3rem;
-  margin: 2rem auto; // Автоматические отступы по бокам
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 12px;
-  box-sizing: border-box;
-  backdrop-filter: blur(4px);
-  left: 0; // Гарантированно прижимаем к левому краю
+  margin: 2rem auto;
+  background-color: none;
+  left: 0;
 }
 
 .title {
-  font-size: clamp(2.5rem, 5vw, 4rem) !important;
-  font-weight: 700 !important;
+  font-family: 'Seymour One', sans-serif !important;
+  font-size: 45px !important;
+  font-weight: 400px !important;
   margin-bottom: 1.5rem !important;
-  color: #222 !important;
-  line-height: 1.2 !important;
+  color: #2b1e18 !important;
+  line-height: 1 !important;
+  font-stretch: condensed;
+}
+
+.underTitleDivider {
+  width: 170px; // Ширина полоски
+  height: 5px; // Толщина
+  background-color: #C17C45;
+  margin-top: 1.8rem;
+  margin-bottom: 1.8rem;
 }
 
 .subtitle {
-  font-size: clamp(1.25rem, 2.5vw, 1.8rem) !important;
-  color: #444 !important;
-  margin-bottom: 2.5rem !important;
+  font-family:'Arial', sans-serif !important;
+  font-weight: 900px !important;
+  font-size: 25px !important;
+  color: #2b1e18 !important;
   line-height: 1.5 !important;
 }
 
-.ctaButton {
-  padding: 1rem 2.5rem !important;
-  font-size: 1.2rem !important;
-  border-radius: 50px !important;
-  margin-top: 2rem !important;
-}
-
-@media (min-width: 2000px) {
-  .textBlock {
-    padding: 5rem 4rem;
-  }
-  .title {
-    margin-bottom: 2rem !important;
-  }
-}

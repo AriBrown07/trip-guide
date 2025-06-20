@@ -11,8 +11,7 @@ const App: React.FC = () => {
       <Container 
         maxWidth={false} 
         disableGutters // Отключает стандартные отступы 24px
-        sx={{ 
-          marginTop: 4, // Оставляем только верхний отступ
+        sx={{
           width: "100%", // На всякий случай явно указываем ширину
         }}
       >
