@@ -1,51 +1,53 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+﻿// Controllers/AuthController.cs
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
-[Route("api/[controller]")]
 [ApiController]
+[Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
+    private readonly AppDbContext _context;
+    private readonly IConfiguration _config;
 
-    public AuthController(IConfiguration configuration)
+    public AuthController(AppDbContext context, IConfiguration config)
     {
-        _configuration = configuration;
+        _context = context;
+        _config = config;
     }
 
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginModel model)
+    [HttpPost("register")]
+    public async Task<IActionResult> Register(RegisterDto dto)
     {
-        // 🔹 Временная проверка (потом заменим на базу данных)
-        if (model.Username != "admin" || model.Password != "123")
-            return Unauthorized("Неверный логин или пароль");
+        if (await _context.Users.AnyAsync(u => u.Username == dto.Username))
+            return BadRequest("Username already exists");
 
-        // 🔹 Генерируем JWT-токен
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]!);
-        var tokenDescriptor = new SecurityTokenDescriptor
+        var user = new User
         {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Name, model.Username)
-            }),
-            Expires = DateTime.UtcNow.AddHours(1), // Токен действует 1 час
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature
-            )
+            Username = dto.Username,
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+            Email = dto.Email
         };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        var tokenString = tokenHandler.WriteToken(token);
 
-        return Ok(new { Token = tokenString });
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Registration successful" });
     }
+
+    // ... остальные методы
 }
 
-public class LoginModel
+public class RegisterDto
 {
+    [Required]
+    [StringLength(50, MinimumLength = 3)]
     public string Username { get; set; }
+
+    [Required]
+    [StringLength(100, MinimumLength = 6)]
     public string Password { get; set; }
+
+    [EmailAddress]
+    public string Email { get; set; }
 }

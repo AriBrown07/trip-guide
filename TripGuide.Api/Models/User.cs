@@ -1,7 +1,21 @@
-﻿// Models/User.cs
+﻿
+// Models/User.cs
+using System.ComponentModel.DataAnnotations;
+
 public class User
 {
+    [Key]
     public int Id { get; set; }
+
+    [Required]
+    [StringLength(50)]
     public string Username { get; set; }
-    public string Password { get; set; } // В реальном проекте храните только хеш пароля!
+
+    [Required]
+    public string PasswordHash { get; set; }
+
+    [EmailAddress]
+    public string Email { get; set; }
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
