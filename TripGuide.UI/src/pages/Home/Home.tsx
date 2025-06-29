@@ -1,14 +1,89 @@
 import React from "react";
-import { Paper, Typography } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
+import { Search } from "@mui/icons-material";
 import styles from "./Home.module.scss";
+import pushpin from "../../pics/Home/emoji_pushpin.png";
+import botik from "../../pics/Home/image_bot.png";
+import map from "../../pics/Home/icon_map.png";
+import GlobeComponent from '../../components/GlobeComponent/GlobeComponent';
 
 const Home: React.FC = () => {
-  return (
-    <Paper className={styles.container}>
-      <Typography variant="h4">🏠 Home</Typography>
+  const progressValue = 40;
 
-      <Typography>Welcome to Trip Guide!</Typography>
-    </Paper>
+  return (
+
+    <div className={styles.container}>
+
+      {/* Верхняя левая "кнопка" */}
+      <button
+        className={styles.pushpinButton}
+        // onClick={handlePushpinClick}
+        aria-label="Pushpin button"
+      >
+        <img src={pushpin} alt="" className={styles.pushpinImage} />
+      </button>
+
+      {/* Нижний левый "ботик" */}
+      <button
+        className={styles.botButton}
+        // onClick={handleBotClick}
+        aria-label="Bot button"
+      >
+        <img src={botik} alt="" className={styles.botImage} />
+      </button>
+
+      {/* Центральная планета */}
+      <div className={styles.planetWrapper}>
+        <div className={styles.planet}>
+          <div className={styles.planet1}>
+          <GlobeComponent />
+          </div>
+        </div>
+      </div>
+
+
+      {/* Верхняя панель с элементами управления */}
+      <div className={styles.topPanel}>
+        <Button className={styles.aboutButton}>О нас</Button>
+
+        <input
+          type="text"
+          className={styles.searchField}
+          placeholder="Поиск..."
+        />
+
+        <Button>
+          <Search className={styles.searchButton} />
+        </Button>
+
+        <button className={styles.mapIcon}>
+          <img src={map} alt="" className={styles.botImage} />
+        </button>
+      </div>
+
+      {/* Блокнот справа */}
+      <div className={styles.notebook}>
+        <div className={styles.noteHeader}></div>
+        <div className={styles.noteContent}>
+          <Typography className={styles.noteText}>
+            Это - Ваш персональный помощник по путешествиям. Вращайте планету и выбирайте места, которые хотели бы посетить, чтобы узнать о них больше!
+          </Typography>
+        </div>
+
+      </div>
+
+      {/* Прогресс бар */}
+      <div className={styles.progressContainer}>
+        <div
+          className={styles.progressBar}
+          style={{ width: `${progressValue}%` }}
+        >
+          <span className={styles.progressText}>{progressValue}%</span>
+        </div>
+      </div>
+
+    </div>
+
   );
 };
 
