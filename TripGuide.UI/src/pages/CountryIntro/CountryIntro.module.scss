@@ -1,0 +1,166 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif; // Добавляем стандартный шрифт
+}
+
+.mainContent {
+  display: grid;
+  grid-template-columns: 40% 40% 20%;
+  height: 100vh;
+  background-image: url('../../pics/vintage-map-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1000px rgba(255,255,255,.8);
+  overflow: hidden; // Главный контейнер без прокрутки
+}
+
+.textBox {
+  position: relative;
+  margin-top: -1rem;
+  margin-left: -4rem;
+  background:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textImage {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;    
+}
+
+.overlayText {
+  font-family: 'Huninn';
+  src: url('../../fonts/Huninn-Regular.ttf') format('ttf');
+  position: absolute;
+  top: 50.5%;
+  left: 50.5%;
+  transform: translate(-50%, -50%);
+  width: 80%; // Занимает 80% ширины изображения
+  text-align: center;
+  font-size: 1.45rem;
+  color: #5c3a21; // Цвет "состаренной" бумаги
+  font-weight: 600;
+  line-height: 1.6;
+  padding: 15%;
+  img {
+    max-height: 70px;
+    margin-top: 1rem;
+  }
+}
+
+.mapContainer {
+  flex: 2;
+  margin-left: -3rem;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+  background:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.categoriesPanel {
+  flex: 1;
+  align-self: flex-start;
+  margin-right: 2rem;
+  margin-top: 1rem;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 12px;
+  color: #666;
+  z-index: 1;
+}
+
+.searchInput {
+  .MuiOutlinedInput-root {
+    padding-left: 40px;
+  }
+}
+
+.categoriesList {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+// .categoryItem {
+//   border-bottom: 1px solid #eee;
+//   &:last-child {
+//     border-bottom: none;
+//   }
+// }
+
+.categoryHeader {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px 16px !important;
+    &:hover {
+        background: none;
+  }
+}
+
+.itemsList {
+    width: 100%;
+    padding: 0 !important;
+    overflow-y: auto;
+}
+
+.listItem {
+    width: 100%;
+    padding: 8px 16px 8px 32px !important;
+    font-size: 0.5rem !important;
+    &:hover {
+        background:none;
+  }
+}
+
+.categoriesList, .itemsList {
+  scroll-behavior: smooth;
+}
+
+// .bottomPanel {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-top: 2rem;
+//   padding-top: 1rem;
+//   border-top: 1px solid #ddd;
+// }
+
+@media (max-width: 900px) {
+  .contentWrapper {
+    flex-direction: column;
+  }
+  
+  .mapContainer {
+    height: 400px;
+  }
+  
+  .categoriesPanel {
+    max-height: none;
+  }
+}

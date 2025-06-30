@@ -1,9 +1,8 @@
-// Сброс отступов для всего документа
 body, html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: 'Roboto', sans-serif; // Добавляем стандартный шрифт
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -41,8 +40,8 @@ body, html {
 }
 
 @font-face {
-  font-family: 'Sacrifice Demo';
-  src: url('./fonts/Lobster-Regular.ttf') format('ttf');
+  font-family: 'Lobster';
+  src: url('../../fonts/Lobster-Regular.ttf') format('ttf');
   font-weight: 700;
   font-style: normal;
 }

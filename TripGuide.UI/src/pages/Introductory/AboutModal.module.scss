@@ -1,0 +1,68 @@
+.backdrop {
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modalPaper {
+  border-radius: 12px !important;
+  padding: 20px;
+  max-width: 500px !important;
+  width: 90%;
+}
+
+.modalTitle {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+.closeButton {
+  color: #999;
+  &:hover {
+    color: #333;
+  }
+}
+
+.modalContent {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  padding: 20px !important;
+}
+
+.projectInfo {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .modalPaper {
+    width: 95% !important;
+    margin: 10px !important;
+  }
+  
+  .socialLinks img {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 15px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
