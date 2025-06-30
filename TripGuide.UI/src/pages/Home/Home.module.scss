@@ -1,3 +1,370 @@
+@font-face {
+  font-family: 'BalsamiqSans';
+  src: url('./fonts/BalsamiqSans-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Цвета */
+  --primary-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  --text-color: #000;
+  --progress-bar-color: #c8c290;
+  --search-bg: #cad3d0;
+
+  /* Размеры */
+  --base-space: 16px;
+  --side-margin: 60px;
+  --botside-margin: 75px;
+  --bottom-margin: 60px;
+  --header-height: 60px;
+  --button-size: clamp(40px, 5vw, 60px);
+  --bot-button-size: clamp(80px, 10vw, 100px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .container {
-    padding: 2rem;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+  background-image: url('../../pics/Home/background_home_sky.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  font-family: 'BalsamiqSans', sans-serif;
+}
+
+/* Общие стили для кнопок */
+.button {
+  all: unset;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+пше 
+  &:hover {
+    filter: drop-shadow(var(--primary-shadow));
+  }
+}
+
+/* Кнопка pushpin */
+.pushpinButton {
+  @extend .button;
+  top: var(--side-margin);
+  left: var(--side-margin);
+  width: var(--button-size);
+  height: var(--button-size);
+  z-index: 5;
+
+  &:hover {
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.2));
+  }
+
+  &:active {
+    transform: translateY(4px);
+  }
+
+  .pushpinImage {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    left: 20px;
+    top: 20px;
+  }
+}
+
+/* Кнопка бота */
+.botButton {
+  @extend .button;
+  bottom: var(--bottom-margin);
+  left: var(--botside-margin);
+  width: var(--bot-button-size);
+  height: var(--bot-button-size);
+  z-index: 4;
+
+  &:hover {
+    transform: scale(0.93) translateY(1px);
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.2));
+  }
+
+  &:active {
+    transform: translateY(-4px);
+  }
+
+  .botImage {
+    height: 110px;
+    width: auto;
+    max-height: 110%;
+  }
+
+  @media (max-width: 768px) {
+    left: 20px;
+    bottom: 30px;
+  }
+}
+
+/* Планета */
+.planetWrapper {
+  position: relative; // Фиксированное позиционирование
+  left: 0;
+  top: 0;
+  width: 50vw; // Занимает 50% ширины экрана
+  height: 50vw;
+  z-index: 1;
+}
+
+.planet {
+  position: absolute;
+  width: 90%; // Размер относительно контейнера
+  height: 90%;
+  left: 10%; // Сдвиг от левого края
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  z-index: 2;
+}
+
+.planet1 {
+  position: absolute; 
+  left: -61%;
+  top: -8.7%;
+  z-index: 3;
+}
+
+/* Верхняя панель */
+.topPanel {
+  position: absolute;
+  top: 50px;
+  right: 80px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: transparent;
+
+  @media (max-width: 1200px) {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 60%;
+  }
+
+  @media (max-width: 768px) {
+    width: 80%;
+    gap: var(--base-space);
+  }
+}
+
+.aboutButton {
+  color: var(--text-color);
+  padding: 8px 20px;
+  border-radius: 25px;
+  text-transform: none;
+  font-size: clamp(1rem, 2vw, 1.875rem);
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-right: 32px;
+  white-space: nowrap;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+
+  &:hover {
+    background-color: rgba(51, 51, 51, 0.089);
+    filter: drop-shadow(var(--primary-shadow));
+  }
+}
+
+.searchField {
+  background-color: var(--search-bg);
+  border-radius: 40px;
+  width: clamp(200px, 30vw, 400px);
+  border: none;
+  outline: none;
+  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
+  padding: 16px 24px;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--search-bg) 85%, white);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 1;
+  }
+}
+
+.searchButton {
+  color: var(--text-color);
+  width: 42px;
+  height: 42px;
+  
+}
+
+.mapIcon {
+  width: clamp(50px, 5vw, 76px);
+  height: clamp(40px, 4vw, 61px);
+  background-color: var(--search-bg);
+  border-radius: 35%;
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    filter: drop-shadow(var(--primary-shadow));
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    order: 2;
+  }
+}
+
+.mapImage {
+  height: 50px;
+  width: auto;
+}
+
+/* Блокнот */
+.notebook {
+  position: absolute;
+  top: 45%;
+  right: 10%;
+  transform: translateY(-50%);
+  width: clamp(800px, 60vw, 100px);
+  height: clamp(600px, 72vh, 800px);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1024px) {
+    width: 220px;
+    height: 300px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  /* Шапка с изображением */
+  .noteHeader {
+    width: 100%;
+    height: 140px;
+    background-image: url('../../pics/Home/head_notebook.png');
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    flex-shrink: 0;
+
+    @media (max-width: 1024px) {
+      height: 80px;
+    }
+  }
+
+  /* Контейнер для текста */
+  .noteContent {
+    background-color: #e2e2e2;
+    padding: 20px;
+    overflow-y: auto;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+
+    @media (max-width: 1024px) {
+      padding: 15px;
+    }
+  }
+
+
+  .noteText {
+    font-family: 'BalsamiqSans', sans-serif;
+    font-size: clamp(26px, 2.5vw, 40px);
+    line-height: 1.5;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    width: fit-content;
+
+    @media (max-width: 1024px) {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+}
+
+/* Прогресс бар */
+.progressContainer {
+  position: absolute;
+  bottom: var(--bottom-margin);
+  right: 200px;
+  width: min(80vw, 1150px);
+  height: clamp(40px, 5vw, 60px);
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 40px;
+  overflow: hidden;
+
+  @media (max-width: 1200px) {
+    width: 60vw;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  @media (max-width: 768px) {
+    width: 80vw;
+    height: 40px;
+  }
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--progress-bar-color);
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-color);
+  font-size: clamp(1rem, 3vw, 2.25rem);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  font-family: 'BalsamiqSans', sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 }
