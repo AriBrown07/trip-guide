@@ -1,14 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Typography, Button, IconButton } from "@mui/material";
 import styles from "./Introductory.module.scss";
-import backgroundImage from "../../pics/landmark-bg.png";
+import AboutModal from "./AboutModal";
 import vkIcon from "../../pics/vkLogo.png";
 import tgIcon from "../../pics/tgLogo.png";
 import instIcon from "../../pics/instLogo.png";
-import logo from "../../pics/logo.png"; // Предполагается, что у вас есть файл логотипа
-import { Facebook, Instagram, Twitter, YouTube } from "@mui/icons-material"; // Иконки соцсетей
+import logo from "../../pics/logo.png";
 
 const Introductory: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className={styles.container}>
       {/* Шапка */}
@@ -28,7 +28,7 @@ const Introductory: React.FC = () => {
         
         <nav className={styles.nav}>
           <Button className={styles.navButton}>Главная</Button>
-          <Button className={styles.navButton}>О нас</Button>
+          <Button className={styles.navButton} onClick={() => setIsModalOpen(true)}>О нас</Button>
           <Button className={styles.navButton}>Авторизация</Button>
           
           <div className={styles.socialIconsHeader}>
@@ -43,6 +43,7 @@ const Introductory: React.FC = () => {
             </a>
           </div>
         </nav>
+        <AboutModal open={isModalOpen} onClose={()=>setIsModalOpen(false)} />
       </header>
 
       {/* Разделительная линия */}
