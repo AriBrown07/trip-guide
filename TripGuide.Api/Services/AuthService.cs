@@ -1,11 +1,10 @@
-﻿// Services/AuthService.cs
-using TripGuide.Api.Services;
-using BCrypt.Net;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
+﻿using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using TripGuide.Data;
+using TripGuide.Models;
 
 namespace TripGuide.Api.Services;
 
@@ -20,18 +19,24 @@ public class AuthService : IAuthService
         _config = config;
     }
 
-    public async Task<string> AuthenticateAsync(string username, string password)
+    public async Task<string?> AuthenticateAsync(string username, string password)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Username == username);
 
         if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
             return null;
 
+        var jwtKey = _config["Jwt:Key"];
+        if (string.IsNullOrEmpty(jwtKey))
+            throw new InvalidOperationException("JWT Key is not configured");
+
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
+        var key = Encoding.UTF8.GetBytes(jwtKey);
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new Claim[]
+            Subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
@@ -39,7 +44,9 @@ public class AuthService : IAuthService
             Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature)
+                SecurityAlgorithms.HmacSha256Signature),
+            Issuer = _config["Jwt:Issuer"],
+            Audience = _config["Jwt:Audience"]
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -58,7 +65,7 @@ public class AuthService : IAuthService
             Email = email
         };
 
-        await _context.Users.AddAsync(user);
+        _context.Users.Add(user);
         await _context.SaveChangesAsync();
         return true;
     }

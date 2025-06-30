@@ -5,9 +5,9 @@ using System.Net.Http.Headers;
 using TripGuide.Api.Services.DeepSeek;
 using Microsoft.EntityFrameworkCore;
 using TripGuide.Api.Services; // Добавьте эту строку в начало файла
+using TripGuide.Data;
 
-using Microsoft.EntityFrameworkCore;
-using TripGuide.Api.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();  // Исправлено: AddControllers()
 builder.Services.AddEndpointsApiExplorer();  // Исправлено: AddEndpointsApiExplorer()
 builder.Services.AddSwaggerGen();  // Исправлено: AddSwaggerGen()
+/*
+ builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+ */
+
 
 // Настройка CORS
 builder.Services.AddCors(options =>

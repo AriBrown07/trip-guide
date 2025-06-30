@@ -2,6 +2,7 @@
 // Models/User.cs
 using System.ComponentModel.DataAnnotations;
 
+namespace TripGuide.Models;
 public class User
 {
     [Key]

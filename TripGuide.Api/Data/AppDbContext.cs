@@ -1,5 +1,7 @@
-﻿// Data/AppDbContext.cs
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TripGuide.Models;
+
+namespace TripGuide.Data;
 
 public class AppDbContext : DbContext
 {
@@ -9,8 +11,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>()
-            .HasIndex(u => u.Username)
-            .IsUnique();
+        // Дополнительные настройки таблицы
+        modelBuilder.Entity<User>().ToTable("Users");
     }
 }

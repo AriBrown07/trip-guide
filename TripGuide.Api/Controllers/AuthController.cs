@@ -1,7 +1,8 @@
-﻿// Controllers/AuthController.cs
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using TripGuide.Data; // Убедитесь, что это пространство имен существует
+using TripGuide.Models;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -42,12 +43,12 @@ public class RegisterDto
 {
     [Required]
     [StringLength(50, MinimumLength = 3)]
-    public string Username { get; set; }
+    public string Username { get; set; } = string.Empty;
 
     [Required]
     [StringLength(100, MinimumLength = 6)]
-    public string Password { get; set; }
+    public string Password { get; set; } = string.Empty;
 
     [EmailAddress]
-    public string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 }
