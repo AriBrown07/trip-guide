@@ -6,6 +6,7 @@ import { Weather } from '../pages/Weather/Weather';
 import { Introductory } from '../pages/Introductory/Introductory';
 import Login from '../pages/LoginPage';
 import { NotFound } from '../pages/NotFound';
+import { CountryIntro } from "../pages/CountryIntro/CountryIntro";
 
 interface PrivateRouteProps {
   children: React.ReactElement;
@@ -23,7 +24,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/introductory" element={<Introductory />} />
-
+      <Route path="/CountryIntro" element={<CountryIntro />} />
 
       <Route
         path="/weather"
