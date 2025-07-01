@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../services/auth.service';
 import { Button, Typography } from "@mui/material";
@@ -13,7 +13,20 @@ const RegisterPage: React.FC = () => {
     });
     
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [passwordStrength, setPasswordStrength] = useState(0);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Calculate password strength
+        let strength = 0;
+        if (form.password.length > 0) strength += 1;
+        if (form.password.length >= 8) strength += 1;
+        if (/[A-Z]/.test(form.password)) strength += 1;
+        if (/[0-9]/.test(form.password)) strength += 1;
+        if (/[^A-Za-z0-9]/.test(form.password)) strength += 1;
+        
+        setPasswordStrength(strength);
+    }, [form.password]);
 
     const validate = (): boolean => {
         const newErrors: Record<string, string> = {};
@@ -24,6 +37,8 @@ const RegisterPage: React.FC = () => {
         
         if (form.password.length < 6) {
             newErrors.password = 'Password must be at least 6 characters';
+        } else if (passwordStrength < 3) {
+            newErrors.password = 'Password is too weak';
         }
         
         if (form.password !== form.confirmPassword) {
@@ -83,6 +98,7 @@ const RegisterPage: React.FC = () => {
                         value={form.username}
                         onChange={handleInputChange}
                         className={styles.formInput}
+                        placeholder="Enter your username"
                     />
                     {errors.username && (
                         <Typography color="error" className={styles.error}>
@@ -101,6 +117,7 @@ const RegisterPage: React.FC = () => {
                         value={form.email}
                         onChange={handleInputChange}
                         className={styles.formInput}
+                        placeholder="Enter your email"
                     />
                     {errors.email && (
                         <Typography color="error" className={styles.error}>
@@ -119,6 +136,11 @@ const RegisterPage: React.FC = () => {
                         value={form.password}
                         onChange={handleInputChange}
                         className={styles.formInput}
+                        placeholder="Create a password"
+                    />
+                    <div 
+                        className={styles.passwordStrength} 
+                        style={{ '--strength': passwordStrength } as React.CSSProperties}
                     />
                     {errors.password && (
                         <Typography color="error" className={styles.error}>
@@ -137,6 +159,7 @@ const RegisterPage: React.FC = () => {
                         value={form.confirmPassword}
                         onChange={handleInputChange}
                         className={styles.formInput}
+                        placeholder="Confirm your password"
                     />
                     {errors.confirmPassword && (
                         <Typography color="error" className={styles.error}>
@@ -149,13 +172,17 @@ const RegisterPage: React.FC = () => {
                     type="submit" 
                     variant="contained" 
                     className={styles.submitButton}
+                    fullWidth
                 >
                     Register
                 </Button>
             </form>
             
             <Typography variant="body1" className={styles.authFooter}>
-                Already have an account? <a href="/login" className={styles.authLink}>Sign in</a>
+                Already have an account?{' '}
+                <a href="/login" className={styles.authLink}>
+                    Sign in
+                </a>
             </Typography>
         </div>
     );
