@@ -4,9 +4,13 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home } from '../pages/Home/Home';
 import { Weather } from '../pages/Weather/Weather';
 import { Introductory } from '../pages/Introductory/Introductory';
-import Login from '../pages/LoginPage';
-import { NotFound } from '../pages/NotFound';
 import { CountryIntro } from "../pages/CountryIntro/CountryIntro";
+
+import { LoginPage } from '../pages/Login/LoginPage';
+import { RegisterPage } from '../pages/Signin/RegisterPage';
+import { NotFound } from '../pages/NotFound';
+
+
 
 interface PrivateRouteProps {
   children: React.ReactElement;
@@ -22,18 +26,11 @@ export const AppRoutes: React.FC = () => {
     <Routes>
      
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
       <Route path="/introductory" element={<Introductory />} />
       <Route path="/CountryIntro" element={<CountryIntro />} />
-
-      <Route
-        path="/weather"
-        element={
-          <PrivateRoute>
-            <Weather />
-          </PrivateRoute>
-        }
-      />
+      <Route path="/weather" element={<Weather />}/>
+      <Route path="/login" element={<LoginPage />}/>
+      <Route path="/sign" element={<RegisterPage />}/>
 
 
       <Route path="*" element={<NotFound />} />

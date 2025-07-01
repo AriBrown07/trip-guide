@@ -42,6 +42,26 @@ const Navbar: React.FC = () => {
         >
           Weather
         </Button>
+
+
+        <Button
+          component={Link}
+          to="/login"
+          color="inherit"
+          variant={location.pathname === "/login" ? "outlined" : "text"}
+        >
+          Login
+        </Button>
+        <Button
+          component={Link}
+          to="/sign"
+          color="inherit"
+          variant={location.pathname === "/sign" ? "outlined" : "text"}
+        >
+          Sign in
+        </Button>
+
+
       </Toolbar>
     </AppBar>
   );
