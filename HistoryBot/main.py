@@ -1,26 +1,10 @@
-import asyncio
-from ollama import AsyncClient
-from typing import Dict
+from g4f.client import Client
 
-# словарь для перевода кодов нарушений в описания
-violation_codes: Dict[str, str] = {
-    'S1': 'Преступления с применением насилия',
-    'S2': 'Преступления без применения насилия',
-    'S3': 'Преступления, связанные с сексом',
-    'S4': 'Эксплуатация детей в сексуальных целях',
-    'S5': 'Клевета',
-    'S6': 'Специализированная консультация',
-    'S7': 'Конфиденциальность',
-    'S8': 'Интеллектуальная собственность',
-    'S9': 'Неразборчивое использование оружия',
-    'S10': 'Возбуждение ненависти',
-    'S11': 'Самоубийство и самоповреждение',
-    'S12': 'Сексуальный контент',
-    'S13': 'Выборы'
-}
-
+# Историческая системная роль
 HISTORICAL_PROMPT = """
-Ты — высококвалифицированный историк и рассказчик с глубокими знаниями в области мировой истории. Твоя задача — подробно и понятно рассказывать об исторических событиях, эпохах, важных личностях и местах, где эти события происходили. Твои ответы должны отвечать следующим требованиям:
+Ты — высококвалифицированный историк и рассказчик с глубокими знаниями в области мировой истории. Твоя задача — подробно и понятно рассказывать об исторических событиях, эпохах, важных личностях и местах, где эти события происходили. Ты работаешь в режиме бесконечного диалога: каждый новый вопрос пользователя ты воспринимаешь как продолжение предыдущего общения, учитывая контекст истории.
+
+Твои ответы должны отвечать следующим требованиям:
 
 1. Точность и достоверность. Используй только проверенные исторические факты и данные, избегай домыслов.
 2. Полнота и структура. Сначала кратко вводи в тему, обозначай ключевые моменты, затем подробно раскрывай детали — даты, причины, следствия, ключевых участников и места.
@@ -31,47 +15,29 @@ HISTORICAL_PROMPT = """
 7. Если вопрос общий или неясный, проси уточнить тему, период или регион.
 8. Добавляй интересные факты и культурные аспекты, чтобы лучше понять эпоху.
 9. Поддерживай структуру и избегай длинных списков.
+10. Всегда учитывай контекст предыдущих сообщений, если они есть, и продолжай диалог логично и последовательно.
 """
 
-async def check_safety(prompt: str) -> str:
-    """
-    асинхронно проверяет запрос через Llama Guard 3 на безопасность.
+client = Client()
 
-    :param prompt: входной запрос для проверки
-    :return: результат проверки безопасности
-    """
-    response = await AsyncClient().generate(model='llama-guard3:8b', prompt=prompt, system=HISTORICAL_PROMPT)
-    return response
+# История сообщений с системной ролью
+messages = [{"role": "system", "content": HISTORICAL_PROMPT}]
 
-async def generate_answer(prompt: str) -> str:
-    """
-    асинхронно генерирует ответ на запрос с проверкой безопасности.
+while True:
+    user_input = input("Ты: ")
 
-    :param prompt: входной запрос для ответа
-    :return: ответ или сообщение об отклонении
-    """
-    safety_status = await check_safety(prompt)
-    safety_status = safety_status['response']
+    messages.append({"role": "user", "content": user_input})
 
-    if safety_status == 'safe':
-        response = await AsyncClient().generate(model='llama3', prompt=prompt)
-        return response
-    
-    lines = safety_status.split('\n')
-    if 'unsafe' in lines[0]:
-        code = lines[1].strip() if len(lines) > 1 else 'Unknown'
-        reason = violation_codes.get(code, 'Неизвестное нарушение')
-        return f"⚠️ Запрос отклонён. Причина: {reason} ({code})"
-    return f"⚠️ Запрос отклонён. Причина: {safety_status}"
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=messages,
+            web_search=False
+        )
+        reply = response.choices[0].message.content
+        print(f"Историк: {reply}\n")
 
-async def main():
-    response = await generate_answer('причины второй мировой войны')
-    response = response['response']
-    print(response)
+        messages.append({"role": "assistant", "content": reply})
 
-async def test():
-    safety_status = await check_safety('причины второй мировой войны')
-    safety_status = safety_status['response']
-    print(safety_status)
-
-asyncio.run(main())
+    except Exception as e:
+        print(f"Ошибка: {e}")
