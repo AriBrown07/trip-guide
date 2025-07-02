@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../services/auth.service';
+import { authService } from '../../services/auth.service';
 import styles from './LoginPage.module.scss';
 
 const LoginPage: React.FC = () => {
@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await login(username, password);
+            await authService.login(username, password);
             navigate('/dashboard');
         } catch (error) {
             setError('Неверный логин или пароль');
