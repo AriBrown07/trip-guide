@@ -4,10 +4,10 @@ using System.Text;
 using System.Net.Http.Headers;
 using TripGuide.Api.Services.DeepSeek;
 using Microsoft.EntityFrameworkCore;
-using TripGuide.Api.Services; // Добавьте эту строку в начало файла
 using TripGuide.Data;
 
 
+AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(Directory.GetCurrentDirectory(), "..", "Databases"));
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();  // Исправлено: AddControllers()
 builder.Services.AddEndpointsApiExplorer();  // Исправлено: AddEndpointsApiExplorer()
 builder.Services.AddSwaggerGen();  // Исправлено: AddSwaggerGen()
-/*
- builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
- */
+
 
 
 // Настройка CORS
@@ -26,9 +23,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:5272")  // Добавлена закрывающая скобка
+        policy.WithOrigins("http://localhost:3000")  
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 
@@ -75,9 +73,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Регистрация сервисов приложения
-builder.Services.AddScoped<IAuthService, AuthService>();
-// Не нужно регистрировать IConfiguration повторно - он уже доступен через DI
 
 var app = builder.Build();
 
