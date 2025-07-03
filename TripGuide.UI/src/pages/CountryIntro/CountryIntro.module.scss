@@ -42,7 +42,7 @@ body, html {
   transform: translate(-50%, -50%);
   width: 80%; // Занимает 80% ширины изображения
   text-align: center;
-  font-size: 1.45rem;
+  font-size: 2.1rem;
   color: #5c3a21; // Цвет "состаренной" бумаги
   font-weight: 600;
   line-height: 1.6;
@@ -163,4 +163,120 @@ body, html {
   .categoriesPanel {
     max-height: none;
   }
+}
+
+/* Стили для кружочков на карте */
+.mapContainer {
+  position: relative;
+}
+
+.landmarkCircle {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: rgba(197, 17, 17, 0.6);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    background-color: rgba(197, 17, 17, 0.8);
+    box-shadow: 0 0 10px rgba(197, 17, 17, 0.5);
+  }
+}
+
+.circleInner {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 0%;
+  left: 0%;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.8;
+  justify-content: center;
+  align-items:center;
+}
+
+/* Стили для кнопки "Пройти тест" */
+.testButton {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 70%);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* Стили для кружков на карте */
+.mapContainer {
+  position: relative;
+}
+
+.landmarkCircle {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+  border: 4px solid white;
+  box-shadow: 0 0 0 3px #39280b, 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 0 4px #39280b, 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.circleInner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.landmarkImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Стили для кнопки "Пройти тест" */
+.testButton {
+  margin-top: 20px;
+  transition: all 0.3s ease !important;
+}
+
+.textBel {
+  position: absolute;
+  src: url('../../fonts/Huninn-Regular.ttf') format('ttf');
+   color: rgb(48, 33, 19);
+  font-size: 5.1rem;
+  top: 54%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  z-index: 1;
 }
