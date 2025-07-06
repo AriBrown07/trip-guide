@@ -50,7 +50,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-пше 
+
   &:hover {
     filter: drop-shadow(var(--primary-shadow));
   }
@@ -94,13 +94,54 @@
   height: var(--bot-button-size);
   z-index: 4;
 
-  &:hover {
-    transform: scale(0.93) translateY(1px);
-    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.2));
+  .botButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 
-  &:active {
-    transform: translateY(-4px);
+  .botButton:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+
+  .botButton::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+  }
+
+  .botButton::after {
+    background-color: #fff;
+  }
+
+  .botButton:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+  }
+
+  .botButton-animated {
+    animation: moveInBottom 5s ease-out;
+    animation-fill-mode: backwards;
+  }
+
+  @keyframes moveInBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
   }
 
   .botImage {
@@ -141,7 +182,7 @@
 }
 
 .planet1 {
-  position: absolute; 
+  position: absolute;
   left: -61%;
   top: -8.7%;
   z-index: 3;
@@ -170,22 +211,42 @@
 }
 
 .aboutButton {
-  color: var(--text-color);
-  padding: 8px 20px;
-  border-radius: 25px;
-  text-transform: none;
-  font-size: clamp(1rem, 2vw, 1.875rem);
-  font-weight: bold;
-  transition: all 0.3s ease;
-  margin-right: 32px;
-  white-space: nowrap;
-  background: transparent;
-  box-shadow: none;
-  border: none;
-
+  color: var(--text-color) !important;
+  padding: 8px 20px !important;
+  border-radius: 25px !important;
+  text-transform: none !important;
+  font-size: clamp(1rem, 2vw, 1.875rem) !important;
+  font-weight: bold !important;
+  transition: all 0.3s ease !important;
+  margin-right: 32px !important;
+  white-space: nowrap !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  position: relative !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1); 
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease-in-out, height 0.4s ease-in-out;
+    z-index: -1;
+  }
+  
   &:hover {
-    background-color: rgba(51, 51, 51, 0.089);
-    filter: drop-shadow(var(--primary-shadow));
+    
+    &::before {
+      width: 225%;
+      height: 225%;
+    }
   }
 }
 
@@ -211,10 +272,10 @@
 }
 
 .searchButton {
-  color: var(--text-color);
-  width: 42px;
-  height: 42px;
-  
+  color: var(--text-color) !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 40px !important;
 }
 
 .mapIcon {
