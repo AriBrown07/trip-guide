@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button, IconButton, Typography } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import AboutModal from "../Introductory/AboutModal";
 import styles from "./Home.module.scss";
 import pushpin from "../../pics/Home/emoji_pushpin.png";
 import botik from "../../pics/Home/image_bot.png";
@@ -8,7 +9,9 @@ import map from "../../pics/Home/icon_map.png";
 import GlobeComponent from '../../components/GlobeComponent/GlobeComponent';
 
 const Home: React.FC = () => {
+
   const progressValue = 40;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
 
@@ -44,7 +47,8 @@ const Home: React.FC = () => {
 
       {/* Верхняя панель с элементами управления */}
       <div className={styles.topPanel}>
-        <Button className={styles.aboutButton}>О нас</Button>
+        <Button className={styles.aboutButton} onClick={() => setIsModalOpen(true)}>О нас</Button>
+        <AboutModal open={isModalOpen} onClose={()=>setIsModalOpen(false)} />
 
         <input
           type="text"
@@ -52,9 +56,9 @@ const Home: React.FC = () => {
           placeholder="Поиск..."
         />
 
-        <Button>
+        <IconButton>
           <Search className={styles.searchButton} />
-        </Button>
+        </IconButton>
 
         <button className={styles.mapIcon}>
           <img src={map} alt="" className={styles.botImage} />
