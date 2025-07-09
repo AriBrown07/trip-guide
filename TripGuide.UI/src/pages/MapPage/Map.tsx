@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import CurrencyInput from 'react-currency-input-field';
+import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
 
 const App: React.FC = () => {
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
@@ -230,7 +231,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="map-container">
-        {/* <RoutePlanner /> */}
+        <RoutePlanner /> 
       </div>
     </div>
   );
