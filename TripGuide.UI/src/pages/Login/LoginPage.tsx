@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
         e.preventDefault();
         try {
             await authService.login(username, password);
-            navigate('/dashboard');
+            navigate('/');
         } catch (error) {
             setError('Неверный логин или пароль');
         }

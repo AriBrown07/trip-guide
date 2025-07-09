@@ -9,6 +9,7 @@ import { CountryIntro } from "../pages/CountryIntro/CountryIntro";
 import { LoginPage } from '../pages/Login/LoginPage';
 import { RegisterPage } from '../pages/Signin/RegisterPage';
 import { NotFound } from '../pages/NotFound';
+import { App } from '../pages/MapPage/Map';
 
 
 
@@ -31,6 +32,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/weather" element={<Weather />}/>
       <Route path="/login" element={<LoginPage />}/>
       <Route path="/sign" element={<RegisterPage />}/>
+       <Route path="/map" element={<App />}/>
 
 
       <Route path="*" element={<NotFound />} />

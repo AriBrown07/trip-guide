@@ -28,6 +28,14 @@ const Navbar: React.FC = () => {
         </Button>
         <Button
           component={Link}
+          to="/map"
+          color="inherit"
+          variant={location.pathname === "/" ? "outlined" : "text"}
+        >
+           Map
+        </Button>
+        <Button
+          component={Link}
           to="/"
           color="inherit"
           variant={location.pathname === "/" ? "outlined" : "text"}

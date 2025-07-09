@@ -1,0 +1,333 @@
+@import '~react-datepicker/dist/react-datepicker.css';
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sidebar {
+  width: 380px;
+  padding: 25px;
+  background: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto;
+}
+
+/* Стили для поиска */
+.search-container {
+  margin-bottom: 25px;
+  position: relative;
+  
+  .search-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      color: #6c757d;
+      font-size: 1rem;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      outline: none;
+      
+      &::placeholder {
+        color: #adb5bd;
+      }
+    }
+  }
+  
+  .search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    
+    .suggestion-item {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+      
+      &:hover {
+        background: #f0f4ff;
+      }
+      
+      &:last-child {
+        border-radius: 0 0 6px 6px;
+      }
+    }
+  }
+}
+
+.filter-group {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eaeaea;
+  
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #495057;
+    gap: 10px;
+    font-size: 1.1rem;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s;
+    
+    &:focus {
+      border-color: #4a6bff;
+      box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+      outline: none;
+    }
+  }
+}
+
+.icon {
+  color: #4a6bff;
+  font-size: 1.1rem;
+}
+
+/* Стили для календаря */
+.calendar-section {
+  .date-range-picker {
+    margin: 15px 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 10px;
+  }
+  
+  .custom-calendar {
+    border: none;
+    width: 100%;
+    
+    .react-datepicker__header {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+    
+    .react-datepicker__month-container {
+      width: 100%;
+    }
+    
+    .react-datepicker__day {
+      width: 2.2rem;
+      line-height: 2.2rem;
+      margin: 0.1rem;
+      border-radius: 50%;
+      transition: all 0.2s;
+      
+      &:hover {
+        background: #e6edff;
+      }
+      
+      &.in-range {
+        background: #e6edff;
+        color: #2c3e50;
+      }
+      
+      &.range-edge {
+        background: #4a6bff;
+        color: white;
+        font-weight: bold;
+      }
+    }
+    
+    .react-datepicker__current-month {
+      font-size: 1.1rem;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    
+    .react-datepicker__navigation {
+      top: 10px;
+      
+      &--previous {
+        left: 10px;
+      }
+      
+      &--next {
+        right: 10px;
+      }
+    }
+  }
+  
+  .date-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+    
+    .date-item {
+      background: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      flex: 1;
+      min-width: 120px;
+      
+      span {
+        display: block;
+        font-size: 0.9rem;
+        color: #6c757d;
+      }
+      
+      strong {
+        font-size: 1.1rem;
+        color: #2c3e50;
+      }
+      
+      &.highlight {
+        background: #4a6bff;
+        
+        span, strong {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+/* Стили для блока бюджета */
+.budget-input-container {
+  display: flex;
+  gap: 10px;
+  
+  .currency-select {
+    width: 90px;
+    flex-shrink: 0;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    padding-right: 30px;
+  }
+  
+  .currency-input {
+    flex-grow: 1;
+  }
+}
+
+/* Стили для радио-кнопок */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: normal;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    
+    &:hover {
+      background: #f0f4ff;
+    }
+    
+    input {
+      width: auto;
+      margin: 0;
+    }
+  }
+}
+
+/* Стили для выбранных мест */
+.selected-places {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  
+  .place-tag {
+    background: #e6edff;
+    color: #2c3e50;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    .remove-place {
+      background: none;
+      border: none;
+      color: #6c757d;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 0;
+      
+      &:hover {
+        color: #dc3545;
+      }
+    }
+  }
+}
+
+.no-places {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* Стили для исторических событий */
+.historical-events {
+  .events-timeline {
+    margin-top: 10px;
+    
+    .event-item {
+      display: flex;
+      padding: 8px 0;
+      border-bottom: 1px dashed #eaeaea;
+      
+      .event-date {
+        width: 90px;
+        color: #6c757d;
+        font-size: 0.9rem;
+      }
+      
+      .event-name {
+        flex-grow: 1;
+        color: #2c3e50;
+      }
+    }
+  }
+}
+
+.map-container {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  background: #f0f2f5;
+}
