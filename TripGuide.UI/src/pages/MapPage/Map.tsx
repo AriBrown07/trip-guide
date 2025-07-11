@@ -3,7 +3,13 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import CurrencyInput from 'react-currency-input-field';
-import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
+import RoutePlanner from "../../components/RoutePlanner/RoutePlanner";
+import YandexSearch from "../../components/YandexSearch/YandexSearch";
+
+interface SelectedPlace {
+  name: string;
+  coordinates: [number, number];
+}
 
 const App: React.FC = () => {
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
@@ -12,70 +18,39 @@ const App: React.FC = () => {
   const [hasChildren, setHasChildren] = useState<string>('Нет');
   const [currency, setCurrency] = useState<string>('BYN');
   const [purpose, setPurpose] = useState<string>('');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [selectedPlaces, setSelectedPlaces] = useState<string[]>([]);
-
-  const popularDestinations = [
-    'Минск', 'Брест', 'Гродно', 'Витебск', 'Гомель', 'Могилёв',
-    'Брестская крепость', 'Несвижский замок', 'Мирский замок',
-    'Беловежская пуща', 'Нарочь', 'Браславские озёра'
-  ];
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    if (query.length > 1) {
-      setSuggestions(
-        popularDestinations.filter(dest =>
-          dest.toLowerCase().includes(query.toLowerCase())
-        )
-      );
-    } else {
-      setSuggestions([]);
-    }
-  };
-
-  const togglePlaceSelection = (place: string) => {
-    setSelectedPlaces(prev =>
-      prev.includes(place)
-        ? prev.filter(p => p !== place)
-        : [...prev, place]
-    );
-  };
+  const [selectedPlaces, setSelectedPlaces] = useState<SelectedPlace[]>([]);
 
   return (
     <div className="app-container">
       <div className="sidebar">
-        {/* Поле поиска */}
         <div className="search-container">
-          <div className="search-input-container">
+          <YandexSearch 
+            onPlaceSelect={(place) => {
+              setSelectedPlaces([...selectedPlaces, place]);
+            }} 
+          />
+        </div>
 
-            <input
-              type="text"
-              placeholder="Куда вы хотите поехать?"
-              value={searchQuery}
-              onChange={(e) => handleSearch(e.target.value)}
-              className="search-input"
-            />
-          </div>
-          {suggestions.length > 0 && (
-            <div className="search-suggestions">
-              {suggestions.map((suggestion, index) => (
-                <div
-                  key={index}
-                  className="suggestion-item"
-                  onClick={() => {
-                    setSearchQuery(suggestion);
-                    setSuggestions([]);
-                    if (!selectedPlaces.includes(suggestion)) {
-                      setSelectedPlaces([...selectedPlaces, suggestion]);
-                    }
-                  }}
-                >
-                  {suggestion}
+        <div className="filter-group">
+          <label>Выбранные места</label>
+          {selectedPlaces.length > 0 ? (
+            <div className="selected-places">
+              {selectedPlaces.map((place, index) => (
+                <div key={index} className="place-tag">
+                  {place.name}
+                  <button
+                    onClick={() => setSelectedPlaces(
+                      selectedPlaces.filter((_, i) => i !== index)
+                    )}
+                    className="remove-place"
+                  >
+                    ×
+                  </button>
                 </div>
               ))}
             </div>
+          ) : (
+            <div className="no-places">Выберите места из поиска выше</div>
           )}
         </div>
 
@@ -190,28 +165,6 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Блок мест для посещения */}
-        <div className="filter-group">
-          <label>Выбранные места</label>
-          {selectedPlaces.length > 0 ? (
-            <div className="selected-places">
-              {selectedPlaces.map((place, index) => (
-                <div key={index} className="place-tag">
-                  {place}
-                  <button
-                    onClick={() => togglePlaceSelection(place)}
-                    className="remove-place"
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="no-places">Выберите места из поиска выше</div>
-          )}
-        </div>
-
         {/* Блок исторических событий */}
         <div className="filter-group historical-events">
           <label>Ближайшие события</label>
@@ -228,13 +181,14 @@ const App: React.FC = () => {
             ))}
           </div>
         </div>
+
+
       </div>
 
       <div className="map-container">
-        <RoutePlanner /> 
+        <RoutePlanner places={selectedPlaces} />
       </div>
     </div>
   );
 }
-
 export { App };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authService } from '../../services/auth.service';
+import { authService } from '../../services/Auth/auth.service';
 import { Button, Typography } from "@mui/material";
 import styles from "./Register.module.scss";
 import axios, { AxiosError } from 'axios';

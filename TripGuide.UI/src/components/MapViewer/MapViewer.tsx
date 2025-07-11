@@ -12,13 +12,17 @@ L.Icon.Default.mergeOptions({
 
 type Point = [number, number]; // [lat, lng]
 
-export default function MapViewer({ 
-  route, 
-  points 
-}: {
+interface MapPoint {
+  coordinates: Point;
+  name: string;
+}
+
+interface MapViewerProps {
   route: Point[];
-  points: Point[];
-}) {
+  points: MapPoint[];
+}
+
+export default function MapViewer({ route, points }: MapViewerProps) {
   return (
     <MapContainer 
       center={[53.9, 27.5]} 
@@ -34,8 +38,8 @@ export default function MapViewer({
 
       {/* Точки */}
       {points.map((point, idx) => (
-        <Marker key={idx} position={point}>
-          <Popup>Точка {idx + 1}</Popup>
+        <Marker key={idx} position={point.coordinates}>
+          <Popup>{point.name}</Popup>
         </Marker>
       ))}
     </MapContainer>
