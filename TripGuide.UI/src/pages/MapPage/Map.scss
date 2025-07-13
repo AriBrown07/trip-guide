@@ -14,68 +14,6 @@
   overflow-y: auto;
 }
 
-/* Стили для поиска */
-.search-container {
-  margin-bottom: 25px;
-  position: relative;
-  
-  .search-input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: white;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    
-    .search-icon {
-      position: absolute;
-      left: 15px;
-      color: #6c757d;
-      font-size: 1rem;
-    }
-    
-    .search-input {
-      width: 100%;
-      padding: 12px 15px 12px 40px;
-      border: none;
-      border-radius: 6px;
-      font-size: 1.1rem;
-      outline: none;
-      
-      &::placeholder {
-        color: #adb5bd;
-      }
-    }
-  }
-  
-  .search-suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border-radius: 0 0 6px 6px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    max-height: 200px;
-    overflow-y: auto;
-    
-    .suggestion-item {
-      padding: 10px 15px;
-      cursor: pointer;
-      transition: background 0.2s;
-      
-      &:hover {
-        background: #f0f4ff;
-      }
-      
-      &:last-child {
-        border-radius: 0 0 6px 6px;
-      }
-    }
-  }
-}
-
 .filter-group {
   margin-bottom: 25px;
   padding-bottom: 20px;
@@ -354,5 +292,186 @@
       background: #6c757d;
       cursor: not-allowed;
     }
+  }
+}
+
+
+
+/* Обновим стили для выбранных мест */
+.selected-places {
+  .place-tag {
+    background: #e6edff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .remove-place {
+      background: none;
+      border: none;
+      color: #6c757d;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0 0 0 8px;
+
+      &:hover {
+        color: #dc3545;
+      }
+    }
+  }
+}
+
+.route-planner {
+  .controls {
+    margin-bottom: 15px;
+    
+    .start-point-info {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      background-color: #e8f5e9;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .route-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      
+      .route-button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+        background-color: #4CAF50;
+        color: white;
+        
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          background-color: #cccccc;
+        }
+        
+        &.loading {
+          background-color: #FF9800;
+        }
+      }
+      
+      .clear-button {
+        background-color: #f44336;
+        
+        &:hover:not(:disabled) {
+          background-color: #d32f2f;
+        }
+      }
+    }
+  }
+  
+  .error-message {
+    color: #f44336;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #ffebee;
+    border-radius: 5px;
+  }
+  
+  .route-info {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    
+    p {
+      margin: 5px 0;
+      font-size: 15px;
+      
+      &.optimized-notice {
+        font-style: italic;
+        color: #4CAF50;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.yandex-search-container {
+  position: relative;
+  margin-bottom: 20px;
+
+  .search-input-container {
+    position: relative;
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      
+      &:focus {
+        border-color: #4a6bff;
+        box-shadow: 0 2px 12px rgba(74, 107, 255, 0.2);
+        outline: none;
+      }
+      
+      &::placeholder {
+        color: #9e9e9e;
+      }
+    }
+  }
+
+  .suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 4px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+
+    .suggestion-item {
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid #f5f5f5;
+      display: flex;
+      flex-direction: column;
+
+      &:last-child {
+        border-bottom: none;
+        border-radius: 0 0 8px 8px;
+      }
+
+      &:hover {
+        background-color: #f8f9ff;
+      }
+
+      .suggestion-subtitle {
+        font-size: 13px;
+        color: #757575;
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .error-message {
+    color: #ff5252;
+    font-size: 14px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #fff5f5;
+    border-radius: 4px;
   }
 }
