@@ -6,6 +6,7 @@ import styles from './CountryIntro.module.scss';
 import map from "../../pics/Belarus.png";
 import papyrus from "../../pics/papyrus.png";
 import touch from "../../pics/touch.png";
+import { Link } from 'react-router-dom';
 
 
 // Импортируем изображения для достопримечательностей
@@ -196,27 +197,29 @@ const CountryIntro: React.FC = () => {
 
 
 
-        {/* Кнопка "Пройти тест" */}
-        <Button
-          variant="contained"
-          fullWidth
-          onClick={handleTestClick}
-          className={styles.testButton}
-          sx={{
-            mt: 2,
-            py: 1.5,
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            background: 'linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%)',
-            '&:hover': {
-              background: 'linear-gradient(135deg, #6e45e2 0%, #88d3ce 70%)',
-              transform: 'translateY(-2px)',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
-            }
-          }}
-        >
-          Пройти тест
-        </Button>
+   {/* Кнопка "Пройти тест" с переходом на другую страницу */}
+  <Link to="/test-page" style={{ textDecoration: 'none', width: '100%' }}>
+  <Button
+    variant="contained"
+    fullWidth
+    className={styles.testButton}
+    sx={{
+      mt: 2,
+      py: 1.5,
+      fontSize: '1.1rem',
+      fontWeight: 'bold',
+      background: 'linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%)',
+      '&:hover': {
+        background: 'linear-gradient(135deg, #6e45e2 0%, #88d3ce 70%)',
+        transform: 'translateY(-2px)',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
+      }
+    }}
+  >
+    Пройти тест
+  </Button>
+</Link>
+
       </div>
     </main>
   );
