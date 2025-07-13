@@ -5,7 +5,7 @@ import { Home } from '../pages/Home/Home';
 import { Weather } from '../pages/Weather/Weather';
 import { Introductory } from '../pages/Introductory/Introductory';
 import { CountryIntro } from "../pages/CountryIntro/CountryIntro";
-
+import { TestPage } from "../pages/Test/TestPage";
 import { LoginPage } from '../pages/Login/LoginPage';
 import { RegisterPage } from '../pages/Signin/RegisterPage';
 import { NotFound } from '../pages/NotFound';
@@ -32,8 +32,8 @@ export const AppRoutes: React.FC = () => {
       <Route path="/weather" element={<Weather />}/>
       <Route path="/login" element={<LoginPage />}/>
       <Route path="/sign" element={<RegisterPage />}/>
-       <Route path="/map" element={<App />}/>
-
+      <Route path="/map" element={<App />}/>
+      <Route path="/test" element={<TestPage />}/>
 
       <Route path="*" element={<NotFound />} />
     </Routes>
