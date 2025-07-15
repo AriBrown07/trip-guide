@@ -153,8 +153,7 @@
         justify-content: center;
         transition: all 0.3s;
         position: relative;
-
-       
+        font-size: 0; /* Hide text initially for arrow buttons */
 
         &:first-child::before {
           content: "❮";
@@ -170,6 +169,17 @@
           color: #555;
           display: block;
           line-height: 1;
+        }
+        
+        &.show-results { 
+            font-size: 35px; 
+            width: auto; 
+            height: auto; 
+            padding: 20px 40px;
+            border-radius: 75px;
+            &::before {
+                content: none; 
+            }
         }
 
         &:hover:not(.disabled) {
@@ -190,10 +200,10 @@
           }
         }
 
-        &.show-results::before {
-          content: "✓";
-          font-size: 60px;
-          color: #4caf50;
+        &.show-results::before { 
+          content: "✓"; 
+          font-size: 60px; 
+          color: #4caf50; 
         }
       }
     }
@@ -266,6 +276,8 @@
       display: flex;
       justify-content: space-between;
       margin-top: 100px;
+      flex-wrap: wrap; 
+      gap: 20px; 
 
       .restart-btn {
         padding: 25px 50px;
@@ -275,12 +287,23 @@
         border: none;
         border-radius: 75px;
         cursor: pointer;
+        flex-grow: 1; 
+        text-align: center;
       }
 
       .test-selector {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px; 
+
+        h3 {
+            font-size: 35px;
+            margin: 0;
+        }
+
         .test-btn {
           padding: 20px 40px;
-          margin-left: 30px;
           font-size: 30px;
           background: #f5e5d0;
           border: 4px solid #dccab3;
@@ -289,6 +312,423 @@
 
           &.active {
             background: #dccab3;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* --- Media Queries --- */
+
+/* Tablet (e.g., max-width: 1024px) */
+@media (max-width: 1024px) {
+  .test-page {
+    padding: 15px;
+
+    .progress-indicator {
+      top: 15px;
+      right: 15px;
+      padding: 15px 30px;
+      font-size: 30px;
+      border-radius: 40px;
+    }
+
+    .test-container {
+      padding: 70px;
+      min-height: auto; /* Allow height to adjust */
+
+      .question-text {
+        font-size: 40px;
+        margin-bottom: 50px;
+        padding: 15px 40px;
+        border-radius: 60px;
+      }
+
+      .options-list {
+        gap: 30px;
+        margin-bottom: 70px;
+
+        .option-item {
+          padding-left: 90px;
+          min-height: 60px;
+
+          input[type="radio"] {
+            width: 50px;
+            height: 50px;
+          }
+
+          .radio-custom {
+            height: 50px;
+            width: 50px;
+            border: 4px solid #ddd;
+
+            &::after {
+              top: 10px;
+              left: 10px;
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          .option-text {
+            border: 3px solid #dccab3;
+            margin-left: 30px;
+            font-size: 35px;
+            padding: 20px 40px;
+            border-radius: 60px;
+          }
+        }
+      }
+
+      .navigation {
+        gap: 25px;
+
+        .nav-btn {
+          width: 100px;
+          height: 100px;
+
+          &:first-child::before,
+          &:last-child::before {
+            font-size: 60px;
+          }
+          &.show-results {
+            font-size: 28px;
+            padding: 15px 30px;
+          }
+        }
+      }
+    }
+
+    .results-container {
+      padding: 70px;
+      min-height: auto;
+      border-radius: 60px;
+
+      .results-title {
+        font-size: 45px;
+        margin-bottom: 40px;
+      }
+
+      .results-score {
+        font-size: 35px;
+        margin-bottom: 60px;
+      }
+
+      .questions-review {
+        .review-item {
+          margin-bottom: 60px;
+
+          h3 {
+            font-size: 35px;
+            margin-bottom: 25px;
+          }
+
+          .explanation {
+            font-size: 28px;
+            margin-bottom: 25px;
+          }
+
+          .review-options {
+            .review-option {
+              font-size: 28px;
+              padding: 20px 40px;
+              margin-bottom: 15px;
+              border-radius: 60px;
+              border: 3px solid #dccab3;
+            }
+          }
+        }
+      }
+
+      .test-navigation {
+        margin-top: 70px;
+        justify-content: center; /* Center items if they wrap */
+
+        .restart-btn {
+          padding: 20px 40px;
+          font-size: 28px;
+          border-radius: 60px;
+        }
+
+        .test-selector {
+            h3 {
+                font-size: 28px;
+            }
+          .test-btn {
+            padding: 15px 30px;
+            font-size: 25px;
+            border: 3px solid #dccab3;
+            border-radius: 60px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Mobile (e.g., max-width: 768px) */
+@media (max-width: 768px) {
+  .test-page {
+    padding: 10px;
+
+    .progress-indicator {
+      top: 10px;
+      right: 10px;
+      padding: 10px 20px;
+      font-size: 20px;
+      border-radius: 30px;
+    }
+
+    .test-container {
+      padding: 30px;
+
+      .question-text {
+        font-size: 28px; /* Significantly reduced for mobile */
+        margin-bottom: 30px;
+        padding: 10px 20px;
+        border-radius: 30px;
+        text-align: center; /* Center text on smaller screens */
+        display: block; /* Make it a block element to take full width */
+      }
+
+      .options-list {
+        gap: 15px;
+        margin-bottom: 40px;
+
+        .option-item {
+          padding-left: 60px;
+          min-height: 40px;
+
+          input[type="radio"] {
+            width: 35px;
+            height: 35px;
+          }
+
+          .radio-custom {
+            height: 35px;
+            width: 35px;
+            border: 3px solid #ddd;
+
+            &::after {
+              top: 7px;
+              left: 7px;
+              width: 15px;
+              height: 15px;
+            }
+          }
+
+          .option-text {
+            border: 2px solid #dccab3;
+            margin-left: 20px;
+            font-size: 22px; /* Significantly reduced for mobile */
+            padding: 15px 25px;
+            border-radius: 40px;
+          }
+        }
+      }
+
+      .navigation {
+        justify-content: center; /* Center buttons on mobile */
+        gap: 15px;
+
+        .nav-btn {
+          width: 70px;
+          height: 70px;
+
+          &:first-child::before,
+          &:last-child::before {
+            font-size: 40px;
+          }
+          &.show-results {
+            font-size: 20px;
+            padding: 10px 20px;
+          }
+        }
+      }
+    }
+
+    .results-container {
+      padding: 30px;
+      border-radius: 30px;
+
+      .results-title {
+        font-size: 30px;
+        margin-bottom: 25px;
+      }
+
+      .results-score {
+        font-size: 25px;
+        margin-bottom: 35px;
+      }
+
+      .questions-review {
+        .review-item {
+          margin-bottom: 35px;
+
+          h3 {
+            font-size: 25px;
+            margin-bottom: 15px;
+          }
+
+          .explanation {
+            font-size: 20px;
+            margin-bottom: 15px;
+          }
+
+          .review-options {
+            .review-option {
+              font-size: 20px;
+              padding: 15px 25px;
+              margin-bottom: 10px;
+              border-radius: 40px;
+              border: 2px solid #dccab3;
+            }
+          }
+        }
+      }
+
+      .test-navigation {
+        margin-top: 40px;
+        flex-direction: column; /* Stack buttons vertically on mobile */
+        align-items: center; /* Center them when stacked */
+
+        .restart-btn {
+          padding: 15px 30px;
+          font-size: 22px;
+          border-radius: 40px;
+          width: 80%; /* Make button wider */
+          margin-bottom: 20px; /* Space between restart and test selector */
+        }
+
+        .test-selector {
+            flex-direction: column; /* Stack test selection buttons */
+            align-items: center;
+            gap: 10px;
+            h3 {
+                font-size: 22px;
+            }
+          .test-btn {
+            padding: 10px 20px;
+            font-size: 20px;
+            border: 2px solid #dccab3;
+            border-radius: 40px;
+            margin-left: 0; /* Remove left margin for stacking */
+            width: 70%; /* Make test buttons wider */
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Small mobile devices (e.g., max-width: 480px) */
+@media (max-width: 480px) {
+  .test-page {
+    .test-container {
+      padding: 20px;
+
+      .question-text {
+        font-size: 24px;
+        margin-bottom: 20px;
+        padding: 8px 15px;
+      }
+
+      .options-list {
+        gap: 10px;
+
+        .option-item {
+          padding-left: 50px;
+          min-height: 35px;
+
+          input[type="radio"] {
+            width: 30px;
+            height: 30px;
+          }
+
+          .radio-custom {
+            height: 30px;
+            width: 30px;
+            border: 2px solid #ddd;
+
+            &::after {
+              top: 6px;
+              left: 6px;
+              width: 12px;
+              height: 12px;
+            }
+          }
+
+          .option-text {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin-left: 15px;
+          }
+        }
+      }
+
+      .navigation {
+        .nav-btn {
+          width: 60px;
+          height: 60px;
+
+          &:first-child::before,
+          &:last-child::before {
+            font-size: 35px;
+          }
+          &.show-results {
+            font-size: 18px;
+            padding: 8px 15px;
+          }
+        }
+      }
+    }
+
+    .results-container {
+      padding: 20px;
+
+      .results-title {
+        font-size: 26px;
+      }
+
+      .results-score {
+        font-size: 22px;
+      }
+
+      .questions-review {
+        .review-item {
+          h3 {
+            font-size: 22px;
+          }
+
+          .explanation {
+            font-size: 18px;
+          }
+
+          .review-options {
+            .review-option {
+              font-size: 18px;
+              padding: 10px 20px;
+            }
+          }
+        }
+      }
+
+      .test-navigation {
+        .restart-btn {
+          font-size: 20px;
+          padding: 10px 20px;
+          width: 90%;
+        }
+
+        .test-selector {
+            h3 {
+                font-size: 20px;
+            }
+          .test-btn {
+            font-size: 18px;
+            padding: 8px 15px;
+            width: 80%;
           }
         }
       }
