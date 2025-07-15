@@ -5,6 +5,7 @@ import { useState } from 'react';
 import CurrencyInput from 'react-currency-input-field';
 import RoutePlanner from "../../components/RoutePlanner/RoutePlanner";
 import YandexSearch from "../../components/YandexSearch/YandexSearch";
+import WelcomeBanner from './WelcomeBanner'; 
 
 interface SelectedPlace {
   name: string;
@@ -19,9 +20,14 @@ const App: React.FC = () => {
   const [currency, setCurrency] = useState<string>('BYN');
   const [purpose, setPurpose] = useState<string>('');
   const [selectedPlaces, setSelectedPlaces] = useState<SelectedPlace[]>([]);
+  const [showWelcomeBanner, setShowWelcomeBanner] = useState(true);
 
   return (
+    
     <div className="app-container">
+      {showWelcomeBanner && (
+        <WelcomeBanner onClose={() => setShowWelcomeBanner(false)} />
+      )}
       <div className="sidebar">
         <div className="search-container">
           <YandexSearch 
