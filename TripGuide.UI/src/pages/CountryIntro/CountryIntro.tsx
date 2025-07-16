@@ -6,6 +6,7 @@ import styles from './CountryIntro.module.scss';
 import map from "../../pics/Belarus.png";
 import papyrus from "../../pics/papyrus.png";
 import touch from "../../pics/touch.png";
+import { Link } from 'react-router-dom';
 
 
 // Импортируем изображения для достопримечательностей
@@ -147,64 +148,79 @@ const CountryIntro: React.FC = () => {
       </div>
 
       {/* Список категорий */}
-<div className={styles.categoriesPanel}>
-  {/* Верхняя часть — список и поиск */}
-  <div className={styles.categoriesContent}>
-    <div className={styles.searchBox}>
-      <Search className={styles.searchIcon} />
-      <TextField
-        fullWidth
-        variant="outlined"
-        placeholder="Поиск..."
-        size="small"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className={styles.searchInput}
-      />
-    </div>
-    <List className={styles.categoriesList}>
-      {filteredCategories.map((category) => (
-        <div key={category.name} className={styles.categoryItem}>
-          <ListItemButton 
-            onClick={() => toggleCategory(category.name)}
-            className={styles.categoryHeader}
-          >
-            <ListItemText primary={category.name} />
-            {openCategory === category.name ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-
-          <Collapse in={openCategory === category.name}>
-            <List className={styles.itemsList}>
-              {category.items.map((item) => (
-                <ListItem 
-                  key={item}
-                  disablePadding
-                >
-                  <ListItemButton
-                    className={styles.listItem}
-                    onClick={() => handleItemClick(item)}
-                    selected={selectedItem === item}
-                  >
-                    <ListItemText primary={item} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
+      <div className={styles.categoriesPanel}>
+        <div className={styles.searchBox}>
+          <Search className={styles.searchIcon} />
+          <TextField
+            fullWidth
+            variant="outlined"
+            placeholder="Поиск..."
+            size="small"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
         </div>
-      ))}
-    </List>
-  </div>
-</div>
-{/* кнопка пройти тест */}
-  <div className={styles.testButtonContainer}>
-    <Button
-      onClick={handleTestClick}
-      className={styles.testButton}
-    >
-      Пройти тест
-    </Button>
-  </div>
+        <List className={styles.categoriesList}>
+          {filteredCategories.map((category) => (
+            <div key={category.name} className={styles.categoryItem}>
+              <ListItemButton 
+                onClick={() => toggleCategory(category.name)}
+                className={styles.categoryHeader}
+              >
+                <ListItemText primary={category.name} />
+                {openCategory === category.name ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+
+              <Collapse in={openCategory === category.name}>
+                <List className={styles.itemsList}>
+                  {category.items.map((item) => (
+                    <ListItem 
+                      key={item}
+                      disablePadding
+                    >
+                      <ListItemButton
+                        className={styles.listItem}
+                        onClick={() => handleItemClick(item)}
+                        selected={selectedItem === item}
+                      >
+                        <ListItemText primary={item} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Collapse>
+            </div>
+          ))}
+        </List>
+         
+
+
+
+   {/* Кнопка "Пройти тест" с переходом на другую страницу */}
+  <Link to="/test-page" style={{ textDecoration: 'none', width: '100%' }}>
+  <Button
+    variant="contained"
+    fullWidth
+    className={styles.testButton}
+    sx={{
+      mt: 2,
+      py: 1.5,
+      fontSize: '1.1rem',
+      fontWeight: 'bold',
+      background: 'linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%)',
+      '&:hover': {
+        background: 'linear-gradient(135deg, #6e45e2 0%, #88d3ce 70%)',
+        transform: 'translateY(-2px)',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
+      }
+    }}
+  >
+    Пройти тест
+  </Button>
+</Link>
+
+      </div>
     </main>
   );
 };
