@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow-x: hidden;
-  font-family: 'Roboto', sans-serif; // Добавляем стандартный шрифт
+  font-family: 'Balsamiq Sans', cursive; // Добавляем стандартный шрифт
 }
 
 .mainContent {
@@ -34,24 +36,29 @@ body, html {
 }
 
 .overlayText {
-  font-family: 'Huninn';
-  src: url('../../fonts/Huninn-Regular.ttf') format('ttf');
   position: absolute;
   top: 50.5%;
   left: 50.5%;
   transform: translate(-50%, -50%);
-  width: 80%; // Занимает 80% ширины изображения
+  width: 80%; // ограничиваем ширину
+  max-width: 90%;
   text-align: center;
   font-size: 2.1rem;
   color: #5c3a21; // Цвет "состаренной" бумаги
   font-weight: 600;
   line-height: 1.6;
   padding: 15%;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  margin: 0 auto;
+
   img {
     max-height: 70px;
     margin-top: 1rem;
   }
 }
+
 
 .mapContainer {
   flex: 2;
@@ -115,28 +122,51 @@ body, html {
 // }
 
 .categoryHeader {
-    width: 100% !important;
     box-sizing: border-box !important;
-    padding: 12px 16px !important;
+    padding: 24px 32px !important;
     &:hover {
-        background: none;
+        transform: translateY(-2px);
+  }
+  :global(.MuiTypography-root) {
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #3c2415;
   }
 }
 
+
 .itemsList {
-    width: 100%;
-    padding: 0 !important;
-    overflow-y: auto;
+  width: 100%;
+  padding-left: 8px !important;
+  overflow-y: auto;
 }
 
 .listItem {
     width: 100%;
-    padding: 8px 16px 8px 32px !important;
-    font-size: 0.5rem !important;
+    padding: 16px 32px 16px 64px !important;
+    font-size: 1.5rem !important;
+    font-family: 'Balsamiq Sans', cursive !important;
+    position: relative;
     &:hover {
         background:none;
   }
+    :global(.MuiTypography-root) {
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3c2415;
+  }
+  &::before{
+    content: '•';
+        position: absolute;
+        left: 32px; 
+        color: #3c2415; 
+        font-size: 2rem; 
+        line-height: 1; 
+  }
 }
+
 
 .categoriesList, .itemsList {
   scroll-behavior: smooth;
@@ -150,19 +180,35 @@ body, html {
 //   padding-top: 1rem;
 //   border-top: 1px solid #ddd;
 // }
+/* Стили для кнопки "Пройти тест" */
+.testButton {
+  font-family: 'Balsamiq Sans', cursive !important;  
+  margin-top: 20px !important;
+  padding: 24px 48px !important;
+  font-size: 3rem !important;
+  background: #FAF1E0 !important;
+  color: #3c2415 !important;
+  border: none !important;
+  border-radius: 16px !important; 
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12) !important; 
+  text-transform: none !important;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
 
-@media (max-width: 900px) {
-  .contentWrapper {
-    flex-direction: column;
+  &:active {
+    transform: translateY(0);
   }
-  
-  .mapContainer {
-    height: 400px;
-  }
-  
-  .categoriesPanel {
-    max-height: none;
-  }
+}
+
+.testButtonContainer {
+  position:absolute;
+  bottom: 20px;
+  right: 65px;
 }
 
 /* Стили для кружочков на карте */
@@ -201,30 +247,7 @@ body, html {
   align-items:center;
 }
 
-/* Стили для кнопки "Пройти тест" */
-.testButton {
-  margin-top: 20px;
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: bold;
-  background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 70%);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-}
 
 /* Стили для кружков на карте */
 .mapContainer {
@@ -262,11 +285,9 @@ body, html {
   object-fit: cover;
 }
 
-/* Стили для кнопки "Пройти тест" */
-.testButton {
-  margin-top: 20px;
-  transition: all 0.3s ease !important;
-}
+
+
+
 
 .textBel {
   position: absolute;
@@ -279,4 +300,152 @@ body, html {
   width: 100%;
   text-align: center;
   z-index: 1;
+}
+
+@media (max-width: 1270px) {
+  .mainContent {
+    grid-template-columns: 1fr 1fr; 
+  }
+
+   .overlayText {
+    font-size: 1.5rem;
+    padding: 12%;
+  }
+
+  .textImage {
+    max-width: 60%;
+    max-height: 60%;
+  }
+
+  .testButton {
+    font-size: 1.4rem !important;
+    padding: 12px 24px !important;
+  }
+
+  .landmarkCircle {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 900px) {
+    .mainContent {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .textBox {
+    margin: 0 auto;
+    margin-top: 1rem;
+    max-width: 90%;
+  }
+
+  .textImage {
+    max-width: 80%;
+    max-height: 80%;
+  }
+
+  .overlayText {
+    font-size: 1.8rem;
+    width: 90%;
+    padding: 5%;
+  }
+
+  .mapContainer {
+    margin: 1rem auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .categoriesPanel {
+    margin: 1rem auto;
+    width: 90%;
+    height: auto;
+  }
+
+  .categoryHeader :global(.MuiTypography-root) {
+    font-size: 1.8rem;
+  }
+
+  .listItem :global(.MuiTypography-root) {
+    font-size: 1.1rem;
+  }
+
+  .testButtonContainer {
+    position: static;
+    text-align: center;
+    margin: 1rem auto;
+  }
+
+  .testButton {
+    font-size: 2rem !important;
+    padding: 16px 32px !important;
+  }
+
+  .landmarkCircle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .textBel {
+    font-size: 2.5rem;
+    top: 55%;
+    left: 50%;
+  }
+}
+
+ @media (max-width: 480px) {
+   .overlayText {
+    font-size: 1.3rem;
+  }
+
+  .textImage {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+    .testButton {
+    font-size: 1rem !important;
+    padding: 10px 20px !important;
+  }
+
+ 
+  .landmarkCircle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .categoryHeader :global(.MuiTypography-root) {
+    font-size: 1.5rem;
+  }
+
+  .listItem :global(.MuiTypography-root) {
+    font-size: 1rem;
+  }
+
+  .textBel {
+    font-size: 2rem;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 900px) {
+  .overlayText {
+    font-size: 1.2rem;
+    max-width: 80%;
+  }
+
+  .testButton {
+    font-size: 1rem !important;
+    padding: 12px 24px !important;
+  }
+
+  .textImage {
+    max-width: 80%;
+    max-height: 30vh;
+  }
+
+  .landmarkCircle {
+    width: 60px;
+    height: 60px;
+  }
 }
