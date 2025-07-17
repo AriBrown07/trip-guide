@@ -1,3 +1,4 @@
+// Font import for consistent typography
 @font-face {
   font-family: 'BalsamiqSans';
   src: url('./fonts/BalsamiqSans-Regular.ttf') format('truetype');
@@ -5,228 +6,292 @@
   font-display: swap;
 }
 
+// Enhanced Design System - CSS Custom Properties
 :root {
-  /* Цвета */
+  // Color palette - organized by usage
   --primary-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
   --text-color: #000;
   --progress-bar-color: #c8c290;
   --search-bg: #cad3d0;
-
-  /* Размеры */
-  --base-space: 16px;
-  --side-margin: 60px;
-  --botside-margin: 75px;
-  --bottom-margin: 60px;
-  --header-height: 60px;
-  --button-size: clamp(40px, 5vw, 60px);
-  --bot-button-size: clamp(80px, 10vw, 100px);
+  --notebook-bg: #e2e2e2;
+  --note-text-bg: rgba(255, 255, 255, 0.7);
+  --progress-container-bg: rgba(255, 255, 255, 0.3);
+  --hover-bg: rgba(0, 0, 0, 0.1);
+  
+  // Enhanced spacing system with more granular control
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 60px;
+  --space-xxl: 80px;
+  
+  // Responsive spacing that adapts better to different screen sizes
+  --responsive-padding: clamp(12px, 3vw, 60px);
+  --responsive-margin: clamp(16px, 4vw, 80px);
+  
+  // Component sizing - improved fluid scaling with better bot button scaling
+  --button-size: clamp(36px, 7vw, 60px);
+  --bot-button-size: clamp(60px, 12vw, 100px);
+  --search-width: clamp(180px, 30vw, 400px);
+  --map-icon-size: clamp(36px, 7vw, 60px);
+  
+  // Enhanced bot button scaling for different screen sizes
+  --bot-button-mobile-xs: clamp(45px, 10vw, 55px);
+  --bot-button-mobile-sm: clamp(50px, 11vw, 60px);
+  --bot-button-mobile: clamp(55px, 12vw, 65px);
+  --bot-button-tablet: clamp(65px, 9vw, 80px);
+  
+  // Layout dimensions with better mobile optimization
+  --header-height: clamp(45px, 7vh, 80px);
+  --progress-width: clamp(200px, 85vw, 800px);
+  --progress-height: clamp(28px, 5vw, 50px);
+  
+  // Notebook dimensions
+  --notebook-width: clamp(300px, 40vw, 500px);
+  --notebook-height: clamp(350px, 50vh, 600px);
+  
+  // Planet positioning - enhanced for better mobile experience
+  --planet-size: clamp(280px, 50vw, 600px);
+  --planet-offset-x: clamp(-140px, -25vw, -250px);
+  --planet-offset-y: clamp(-30px, -3vh, -100px);
+  
+  // Mobile-specific variables
+  --mobile-planet-size: clamp(240px, 65vw, 350px);
+  
+  // Main container dimensions
+  --main-container-padding: clamp(12px, 2vw, 24px);
+  --main-container-gap: clamp(16px, 3vw, 32px);
+  
+  // Bot-Progress spacing
+  --bot-progress-gap: clamp(12px, 2vw, 24px);
 }
 
+// Enhanced breakpoint system
+$breakpoints: (
+  'mobile-xs': 320px,   // Extra small mobile
+  'mobile-sm': 480px,   // Small mobile devices
+  'mobile': 600px,      // Standard mobile
+  'tablet': 768px,      // Tablet portrait
+  'tablet-lg': 1024px,  // Tablet landscape
+  'desktop': 1200px,    // Desktop
+  'desktop-lg': 1440px, // Large desktop
+  'desktop-xl': 1920px  // Extra large desktop
+);
+
+// Enhanced mixin for consistent media queries
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint #{$breakpoint} not found in $breakpoints.";
+  }
+}
+
+// Mobile-first breakpoint mixin
+@mixin mobile-only {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+// Base reset and typography
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+// Main container - enhanced responsive foundation
 .container {
   position: relative;
   width: 100vw;
   height: 100vh;
-  min-height: 600px;
+  min-height: 500px;
   background-image: url('../../pics/Home/background_home_sky.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
   font-family: 'BalsamiqSans', sans-serif;
+  
+  // Enhanced mobile optimization
+  @include mobile-only {
+    min-height: 480px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
-/* Общие стили для кнопок */
-.button {
+// Enhanced base button component
+%button-base {
   all: unset;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  border-radius: 8px;
+  
   &:hover {
     filter: drop-shadow(var(--primary-shadow));
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+  
+  // Enhanced focus states for better accessibility
+  &:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
+  }
+  
+  // Touch-friendly sizing on mobile
+  @include mobile-only {
+    min-width: 44px;
+    min-height: 44px;
   }
 }
 
-/* Кнопка pushpin */
+// Enhanced pushpin button
 .pushpinButton {
-  @extend .button;
-  top: var(--side-margin);
-  left: var(--side-margin);
+  @extend %button-base;
+  top: var(--responsive-padding);
+  left: var(--responsive-padding);
   width: var(--button-size);
   height: var(--button-size);
-  z-index: 5;
-
-  &:hover {
-    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.2));
-  }
-
-  &:active {
-    transform: translateY(4px);
-  }
-
+  z-index: 10;
+  
   .pushpinImage {
     width: 100%;
     height: auto;
     max-height: 100%;
   }
-
-  @media (max-width: 768px) {
-    left: 20px;
-    top: 20px;
+  
+  // Mobile positioning
+  @include mobile-only {
+    top: var(--space-sm);
+    left: var(--space-sm);
+  }
+  
+  // Tablet and desktop refinements
+  @include respond-to('tablet') {
+    top: var(--space-xl);
+    left: var(--space-xl);
   }
 }
 
-/* Кнопка бота */
-.botButton {
-  @extend .button;
-  bottom: var(--bottom-margin);
-  left: var(--botside-margin);
-  width: var(--bot-button-size);
-  height: var(--bot-button-size);
-  z-index: 4;
-
-  .botButton:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .botButton:active {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  }
-
-
-  .botButton::after {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all .4s;
-  }
-
-  .botButton::after {
-    background-color: #fff;
-  }
-
-  .botButton:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
-  }
-
-  .botButton-animated {
-    animation: moveInBottom 5s ease-out;
-    animation-fill-mode: backwards;
-  }
-
-  @keyframes moveInBottom {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-
-  .botImage {
-    height: 110px;
-    width: auto;
-    max-height: 110%;
-  }
-
-  @media (max-width: 768px) {
-    left: 20px;
-    bottom: 30px;
-  }
-}
-
-/* Планета */
+// Enhanced planet component with better mobile adaptation
 .planetWrapper {
-  position: relative; // Фиксированное позиционирование
-  left: 0;
-  top: 0;
-  width: 50vw; // Занимает 50% ширины экрана
-  height: 50vw;
+  position: absolute;
+  width: var(--planet-size);
+  height: var(--planet-size);
+  left: var(--planet-offset-x);
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
+  
+  // Enhanced mobile-specific adjustments
+  @include mobile-only {
+    --planet-size: var(--mobile-planet-size);
+    --planet-offset-x: clamp(-120px, -20vw, -150px);
+    left: var(--planet-offset-x);
+    top: 48%;
+  }
+  
+  // Small mobile devices
+  @media (max-width: 480px) {
+    --planet-size: clamp(200px, 70vw, 280px);
+    --planet-offset-x: clamp(-100px, -15vw, -120px);
+    top: 46%;
+  }
+  
+  // Tablet optimizations
+  @include respond-to('tablet') {
+    --planet-size: clamp(350px, 40vw, 550px);
+    --planet-offset-x: clamp(-180px, -18vw, -220px);
+  }
+  
+  // Desktop and larger screens
+  @include respond-to('desktop') {
+    --planet-size: clamp(450px, 35vw, 650px);
+    --planet-offset-x: clamp(-200px, -15vw, -250px);
+  }
 }
 
 .planet {
-  position: absolute;
-  width: 90%; // Размер относительно контейнера
-  height: 90%;
-  left: 10%; // Сдвиг от левого края
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  background: transparent;
-  box-shadow: none;
-  border: none;
   z-index: 2;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
 }
 
 .planet1 {
   position: absolute;
-  left: -61%;
-  top: -8.7%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   z-index: 3;
+  
+  > * {
+    width: 100%;
+    height: 100%;
+  }
 }
 
-/* Верхняя панель */
+// Enhanced top navigation panel - single line adaptation
 .topPanel {
   position: absolute;
-  top: 50px;
-  right: 80px;
+  top: var(--responsive-padding);
+  right: var(--responsive-padding);
   display: flex;
   align-items: center;
-  gap: 15px;
-  background-color: transparent;
-
-  @media (max-width: 1200px) {
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    width: 60%;
+  gap: var(--space-sm);
+  z-index: 10;
+  flex-wrap: nowrap; // Prevent wrapping
+  
+  // Mobile layout - keep single line
+  @include mobile-only {
+    top: var(--space-sm);
+    right: var(--space-sm);
+    gap: var(--space-xs);
+    max-width: calc(100vw - 80px);
   }
-
-  @media (max-width: 768px) {
-    width: 80%;
-    gap: var(--base-space);
+  
+  // Tablet and desktop: horizontal layout
+  @include respond-to('tablet') {
+    top: var(--space-xl);
+    right: var(--space-xxl);
+    gap: var(--space-md);
   }
 }
 
+// Enhanced about button
 .aboutButton {
   color: var(--text-color) !important;
-  padding: 8px 20px !important;
+  padding: var(--space-xs) var(--space-md) !important;
   border-radius: 25px !important;
   text-transform: none !important;
-  font-size: clamp(1rem, 2vw, 1.875rem) !important;
-  font-weight: bold !important;
+  font-size: clamp(0.875rem, 2.5vw, 1.25rem) !important;
+  font-weight: 600 !important;
   transition: all 0.3s ease !important;
-  margin-right: 32px !important;
   white-space: nowrap !important;
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
   position: relative !important;
   overflow: hidden !important;
-  z-index: 1 !important;
   
+  // Ripple effect on hover
   &::before {
     content: '';
     position: absolute;
@@ -235,197 +300,665 @@
     width: 0;
     height: 0;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.1); 
+    background-color: var(--hover-bg);
     transform: translate(-50%, -50%);
-    transition: width 0.4s ease-in-out, height 0.4s ease-in-out;
+    transition: width 0.4s ease, height 0.4s ease;
     z-index: -1;
   }
   
-  &:hover {
-    
-    &::before {
-      width: 225%;
-      height: 225%;
-    }
+  &:hover::before {
+    width: 200%;
+    height: 200%;
+  }
+  
+  // Mobile adjustments
+  @include mobile-only {
+    padding: var(--space-xs) var(--space-sm) !important;
+    font-size: clamp(0.8rem, 3vw, 1rem) !important;
   }
 }
 
+// Enhanced search field
 .searchField {
   background-color: var(--search-bg);
-  border-radius: 40px;
-  width: clamp(200px, 30vw, 400px);
+  border-radius: 30px;
+  width: var(--search-width);
   border: none;
   outline: none;
-  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
-  padding: 16px 24px;
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  padding: var(--space-sm) var(--space-md);
   color: var(--text-color);
   transition: all 0.3s ease;
-
+  font-family: inherit;
+  
   &:hover {
-    background-color: color-mix(in srgb, var(--search-bg) 85%, white);
+    background-color: color-mix(in srgb, var(--search-bg) 90%, white);
+    transform: translateY(-1px);
   }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    order: 1;
+  
+  &:focus {
+    background-color: color-mix(in srgb, var(--search-bg) 95%, white);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  // Mobile optimization
+  @include mobile-only {
+    width: clamp(120px, 30vw, 200px);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: clamp(0.8rem, 3vw, 1rem);
   }
 }
 
+// Enhanced search button
 .searchButton {
   color: var(--text-color) !important;
-  width: 42px !important;
-  height: 42px !important;
-  border-radius: 40px !important;
+  width: clamp(32px, 6vw, 42px) !important;
+  height: clamp(32px, 6vw, 42px) !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+  
+  &:hover {
+    background-color: var(--hover-bg) !important;
+  }
+  
+  // Mobile sizing
+  @include mobile-only {
+    width: clamp(28px, 6vw, 36px) !important;
+    height: clamp(28px, 6vw, 36px) !important;
+  }
 }
 
+// Enhanced map icon button with proper responsive scaling
 .mapIcon {
-  width: clamp(50px, 5vw, 76px);
-  height: clamp(40px, 4vw, 61px);
+  width: var(--map-icon-size);
+  height: var(--map-icon-size);
   background-color: var(--search-bg);
-  border-radius: 35%;
-  margin-left: 50px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
+  cursor: pointer;
   transition: all 0.3s ease;
-
+  
   &:hover {
     filter: drop-shadow(var(--primary-shadow));
+    transform: translateY(-2px);
   }
-
-  &:active {
-    transform: translateY(2px);
+  
+  img {
+    width: 60%;
+    height: auto;
   }
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    order: 2;
+  
+  // Mobile adjustments with proper scaling
+  @include mobile-only {
+    width: clamp(28px, 6vw, 36px);
+    height: clamp(28px, 6vw, 36px);
+    border-radius: 8px;
+  }
+  
+  // Extra small mobile devices
+  @media (max-width: 480px) {
+    width: clamp(24px, 5.5vw, 32px);
+    height: clamp(24px, 5.5vw, 32px);
+    border-radius: 6px;
+  }
+  
+  // Small mobile devices
+  @media (min-width: 481px) and (max-width: 767px) {
+    width: clamp(32px, 6.5vw, 40px);
+    height: clamp(32px, 6.5vw, 40px);
+    border-radius: 8px;
+  }
+  
+  // Tablet scaling
+  @include respond-to('tablet') {
+    width: clamp(40px, 5.5vw, 50px);
+    height: clamp(40px, 5.5vw, 50px);
+  }
+  
+  // Desktop scaling
+  @include respond-to('desktop') {
+    width: var(--map-icon-size);
+    height: var(--map-icon-size);
   }
 }
 
-.mapImage {
-  height: 50px;
-  width: auto;
-}
-
-/* Блокнот */
-.notebook {
+// MAIN CONTAINER - Enhanced responsive positioning
+.mainContainer {
   position: absolute;
-  top: 45%;
-  right: 10%;
+  top: 50%;
+  right: var(--main-container-padding);
   transform: translateY(-50%);
-  width: clamp(800px, 60vw, 100px);
-  height: clamp(600px, 72vh, 800px);
-  border-radius: 10px;
+  width: var(--notebook-width);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+  
+  // Mobile layout - CENTER the notebook
+  @include mobile-only {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    width: clamp(280px, 85vw, 350px);
+  }
+  
+  // Mobile landscape orientation - adjust positioning to avoid top panel
+  @media (max-width: 1023px) and (orientation: landscape) and (max-height: 600px) {
+    top: 65%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    width: clamp(200px, 30vw, 280px);
+    max-height: calc(100vh - 140px);
+  }
+  
+  // Common mobile landscape resolutions (like 915x412, 896x414, etc.)
+  @media (orientation: landscape) and (max-height: 450px) {
+    top: 70%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    width: clamp(180px, 25vw, 260px);
+    max-height: calc(100vh - 180px);
+  }
+  
+  // Small mobile landscape (like iPhone SE)
+  @media (max-width: 667px) and (orientation: landscape) and (max-height: 375px) {
+    top: 75%;
+    width: clamp(160px, 22vw, 220px);
+    max-height: calc(100vh - 140px);
+  }
+  
+  // Tablet layout - prevent overlap with other components
+  @include respond-to('tablet') {
+    right: var(--space-xl);
+    width: clamp(350px, 35vw, 450px);
+    // Add minimum distance from edges to prevent overlap
+    min-height: 0;
+    max-height: calc(100vh - 200px); // Ensure it doesn't exceed viewport
+  }
+  
+  // Desktop layout
+  @include respond-to('desktop') {
+    right: var(--space-xxl);
+    width: clamp(400px, 30vw, 500px);
+    max-height: calc(100vh - 240px); // Account for top/bottom panels
+  }
+  
+  // Additional breakpoint for intermediate screen sizes (768px - 1023px)
+  @media (min-width: 768px) and (max-width: 1023px) {
+    // Adjust positioning to prevent overlap with top panel
+    top: clamp(45%, 50%, 55%);
+    right: clamp(16px, 4vw, 60px);
+    width: clamp(320px, 38vw, 420px);
+    max-height: calc(100vh - 160px);
+  }
+  
+  // Small height screens - reduce notebook size
+  @media (max-height: 600px) and (min-width: 768px) {
+    top: 45%;
+    width: clamp(280px, 32vw, 380px);
+    max-height: calc(100vh - 120px);
+  }
+  
+  // Very small height screens
+  @media (max-height: 500px) and (min-width: 768px) {
+    top: 40%;
+    width: clamp(260px, 30vw, 350px);
+    max-height: calc(100vh - 100px);
+  }
+
+  
+  // NEW: Additional safety for very short screens regardless of width
+  @media (max-height: 450px) and (min-width: 768px) {
+    top: 75%;
+    width: clamp(220px, 25vw, 300px);
+    max-height: calc(100vh - 100px);
+  }
+  
+  // NEW: Ensure proper spacing on intermediate tablet sizes with constrained height
+  @media (min-width: 768px) and (max-width: 1023px) and (max-height: 560px) {
+    top: 45%;
+    right: clamp(20px, 5vw, 80px);
+    width: clamp(280px, 32vw, 380px);
+    max-height: calc(100vh - 130px);
+  }
+}
+
+// NOTEBOOK - Enhanced responsive sizing and overflow handling
+.notebook {
+  position: relative;
+  width: 100%;
+  height: var(--notebook-height);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 1024px) {
-    width: 220px;
-    height: 300px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  
+  // Mobile optimization - centered layout
+  @include mobile-only {
+    height: clamp(300px, 50vh, 420px);
+    max-height: calc(100vh - 180px); // Leave space for top/bottom panels
+  }
+  
+  // Mobile landscape - reduce height to fit properly
+  @media (max-width: 1023px) and (orientation: landscape) and (max-height: 600px) {
+    height: clamp(160px, 25vh, 220px);
+    max-height: calc(100vh - 140px);
+  }
+  
+  // Common mobile landscape resolutions (like 915x412)
+  @media (orientation: landscape) and (max-height: 450px) {
+    height: clamp(140px, 20vh, 180px);
+    max-height: calc(100vh - 180px);
+  }
+  
+  // Small mobile landscape
+  @media (max-width: 667px) and (orientation: landscape) and (max-height: 375px) {
+    height: clamp(120px, 18vh, 160px);
+    max-height: calc(100vh - 140px);
+  }
+  
+  // Tablet sizing - prevent overlap
+  @include respond-to('tablet') {
+    height: clamp(350px, 45vh, 500px);
+    max-height: calc(100vh - 200px);
+  }
+  
+  // Desktop sizing
+  @include respond-to('desktop') {
+    height: var(--notebook-height);
+    max-height: calc(100vh - 240px);
+  }
+  
+  // Intermediate screen sizes adjustments
+  @media (min-width: 768px) and (max-width: 1023px) {
+    height: clamp(320px, 40vh, 450px);
+    max-height: calc(100vh - 160px);
+  }
+  
+  // Small height screens
+  @media (max-height: 600px) and (min-width: 768px) {
+    height: clamp(280px, 35vh, 380px);
+    max-height: calc(100vh - 120px);
+  }
+  
+  // Very small height screens
+  @media (max-height: 500px) and (min-width: 768px) {
+    height: clamp(250px, 30vh, 320px);
+    max-height: calc(100vh - 100px);
   }
 
-  @media (max-width: 768px) {
-    display: none;
+  @media (min-width: 768px) and (max-height: 560px) {
+    height: clamp(200px, 25vh, 280px); // Reduced height to fit in available space
+    max-height: calc(100vh - 140px);
+    
+    // Even smaller for very short screens
+    @media (max-height: 480px) {
+      height: clamp(180px, 22vh, 240px);
+      max-height: calc(100vh - 120px);
+    }
   }
-
-  /* Шапка с изображением */
+  
+  // NEW: Additional height constraints for very short screens
+  @media (max-height: 450px) and (min-width: 768px) {
+    height: clamp(160px, 20vh, 200px);
+    max-height: calc(100vh - 100px);
+  }
+  
   .noteHeader {
     width: 100%;
-    height: 140px;
+    height: clamp(60px, 18%, 120px);
     background-image: url('../../pics/Home/head_notebook.png');
     background-size: cover;
     background-position: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    background-repeat: no-repeat;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     flex-shrink: 0;
+    background-color: #d4d4aa;
+    
+    // Mobile header sizing
+    @include mobile-only {
+      height: clamp(50px, 15%, 80px);
+    }
+    
+    // Mobile landscape - smaller header
+    @media (orientation: landscape) and (max-height: 600px) {
+      height: clamp(30px, 10%, 50px);
+    }
+    
+    // Small height screens
+    @media (max-height: 600px) and (min-width: 768px) {
+      height: clamp(45px, 15%, 70px);
+    }
 
-    @media (max-width: 1024px) {
-      height: 80px;
+    @media (min-width: 768px) and (max-height: 560px) {
+      height: clamp(35px, 12%, 60px);
+    }
+    
+    @media (max-height: 450px) and (min-width: 768px) {
+      height: clamp(30px, 10%, 50px);
     }
   }
-
-  /* Контейнер для текста */
+  
   .noteContent {
-    background-color: #e2e2e2;
-    padding: 20px;
+    background-color: var(--notebook-bg);
+    padding: var(--space-md);
     overflow-y: auto;
-    display: grid;
-    place-items: center;
-    width: 100%;
-    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 0; // Important for flex overflow
+    
+    // Mobile content padding
+    @include mobile-only {
+      padding: var(--space-sm);
+    }
+    
+    // Mobile landscape - reduce padding
+    @media (orientation: landscape) and (max-height: 600px) {
+      padding: var(--space-xs);
+    }
+    
+    // Small height screens
+    @media (max-height: 600px) and (min-width: 768px) {
+      padding: var(--space-sm);
+    }
 
-    @media (max-width: 1024px) {
-      padding: 15px;
+    @media (min-width: 768px) and (max-height: 560px) {
+      padding: var(--space-sm);
+    }
+    
+    @media (max-height: 450px) and (min-width: 768px) {
+      padding: var(--space-xs);
+    }
+    
+    // Custom scrollbar for modern look
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 2px;
     }
   }
-
-
+  
   .noteText {
     font-family: 'BalsamiqSans', sans-serif;
-    font-size: clamp(26px, 2.5vw, 40px);
-    line-height: 1.5;
+    font-size: clamp(0.875rem, 2.2vw, 1.5rem);
+    line-height: 1.6;
     color: #333;
     text-align: center;
     margin: 0;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
+    padding: var(--space-sm);
+    background-color: var(--note-text-bg);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
-    width: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    
+    // Mobile text sizing
+    @include mobile-only {
+      font-size: clamp(0.8rem, 3.5vw, 1.1rem);
+      line-height: 1.5;
+      padding: var(--space-xs);
+    }
+    
+    // Mobile landscape - smaller text
+    @media (orientation: landscape) and (max-height: 600px) {
+      font-size: clamp(0.7rem, 2vw, 0.9rem);
+      line-height: 1.3;
+      padding: clamp(4px, 0.8vw, 8px);
+    }
+    
+    // Very small screens
+    @media (max-width: 480px) {
+      font-size: clamp(0.75rem, 4vw, 1rem);
+      line-height: 1.4;
+    }
+    
+    // Small height screens
+    @media (max-height: 600px) and (min-width: 768px) {
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      line-height: 1.5;
+      padding: var(--space-xs);
+    }
 
-    @media (max-width: 1024px) {
-      font-size: 14px;
-      padding: 8px;
+    @media (min-width: 768px) and (max-height: 560px) {
+      font-size: clamp(0.8rem, 2vw, 1.1rem);
+      line-height: 1.4;
+      padding: var(--space-xs);
+    }
+    
+    @media (max-height: 450px) and (min-width: 768px) {
+      font-size: clamp(0.75rem, 1.8vw, 1rem);
+      line-height: 1.3;
+      padding: clamp(4px, 0.8vw, 8px);
     }
   }
 }
 
-/* Прогресс бар */
-.progressContainer {
+// BOTTOM PANEL - Repositioned to bottom of screen, independent of main container
+.bottomPanel {
   position: absolute;
-  bottom: var(--bottom-margin);
-  right: 200px;
-  width: min(80vw, 1150px);
-  height: clamp(40px, 5vw, 60px);
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 40px;
-  overflow: hidden;
-
-  @media (max-width: 1200px) {
-    width: 60vw;
-    right: 50%;
-    transform: translateX(50%);
+  bottom: var(--main-container-padding);
+  left: var(--main-container-padding);
+  right: var(--main-container-padding);
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--bot-progress-gap);
+  z-index: 5;
+  
+  // Mobile layout
+  @include mobile-only {
+    bottom: var(--space-sm);
+    left: var(--space-sm);
+    right: var(--space-sm);
+    gap: var(--space-sm);
   }
+  
+  // Tablet layout
+  @include respond-to('tablet') {
+    bottom: var(--space-xl);
+    left: var(--space-xl);
+    right: var(--space-xl);
+  }
+  
+  // Desktop layout
+  @include respond-to('desktop') {
+    bottom: var(--space-xxl);
+    left: var(--space-xxl);
+    right: var(--space-xxl);
+  }
+  
+  // Extra small screens - adjust layout
+  @media (max-width: 480px) {
+    gap: var(--space-xs);
+  }
+}
 
-  @media (max-width: 768px) {
-    width: 80vw;
-    height: 40px;
+// Enhanced bot button - positioning updated for new layout
+.botButton {
+  position: relative;
+  width: var(--bot-button-size);
+  height: var(--bot-button-size);
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  // Enhanced hover animations
+  &:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(-2px) scale(1.02);
+  }
+  
+  // Ripple effect using pseudo-element
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: -1;
+    transition: all 0.4s ease;
+    transform: scale(0);
+  }
+  
+  &:hover::after {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  
+  .botImage {
+    width: 90%;
+    height: auto;
+  }
+  
+  // Mobile sizing
+  @include mobile-only {
+    width: var(--bot-button-mobile);
+    height: var(--bot-button-mobile);
+  }
+  
+  // Extra small mobile devices
+  @media (max-width: 480px) {
+    width: var(--bot-button-mobile-xs);
+    height: var(--bot-button-mobile-xs);
+  }
+  
+  // Small mobile devices
+  @media (min-width: 481px) and (max-width: 767px) {
+    width: var(--bot-button-mobile-sm);
+    height: var(--bot-button-mobile-sm);
+  }
+  
+  // Tablet sizing
+  @include respond-to('tablet') {
+    width: var(--bot-button-tablet);
+    height: var(--bot-button-tablet);
+  }
+  
+  // Desktop sizing
+  @include respond-to('desktop') {
+    width: var(--bot-button-size);
+    height: var(--bot-button-size);
+  }
+}
+
+// Enhanced progress bar - positioning updated for new layout
+.progressContainer {
+  position: relative;
+  flex: 1;
+  height: var(--progress-height);
+  background-color: var(--progress-container-bg);
+  border-radius: 25px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  
+  // Mobile sizing
+  @include mobile-only {
+    height: clamp(24px, 5vw, 36px);
   }
 }
 
 .progressBar {
   height: 100%;
-  background-color: var(--progress-bar-color);
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, var(--progress-bar-color), #d4d49a);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 25px;
+  position: relative;
+  
+  // Subtle animation for modern feel
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
 }
 
+// Enhanced progress text
 .progressText {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   color: var(--text-color);
-  font-size: clamp(1rem, 3vw, 2.25rem);
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  font-size: clamp(0.875rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
   white-space: nowrap;
   font-family: 'BalsamiqSans', sans-serif;
+  z-index: 1;
+  
+  // Mobile text sizing
+  @include mobile-only {
+    font-size: clamp(0.75rem, 3vw, 1rem);
+  }
+}
 
-  @media (max-width: 768px) {
-    font-size: 1.25rem;
+// Existing animations and effects
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.botButton-animated {
+  animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// High DPI display optimizations
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .container {
+    background-size: cover;
+  }
+  
+  .noteHeader {
+    background-size: cover;
   }
 }
