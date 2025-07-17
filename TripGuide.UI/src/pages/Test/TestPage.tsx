@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import './TestPage.scss';
+import Result from './Result';
 
 interface Question {
   question: string;
@@ -9,11 +10,19 @@ interface Question {
   explanation?: string;
 }
 
+
 const TestPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
   const [showResults, setShowResults] = useState<boolean>(false);
   const [currentTest, setCurrentTest] = useState<number>(0);
+  const [showResultModal, setShowResultModal] = useState(true);
+
+
+  const navigate = useNavigate();
+  const handleClick = (link: string) => {
+    navigate(link);
+  };
 
   const tests: Question[][] = [
     // Тест 1: Полоцкое княжество
@@ -79,7 +88,7 @@ const TestPage: React.FC = () => {
         explanation: "Западная Двина была важным торговым путем для Полоцка."
       }
     ],
-   // Тест 2: Великое княжество Литовское
+    // Тест 2: Великое княжество Литовское
     [
       {
         question: "1. В каком году было основано Великое княжество Литовское?",
@@ -112,36 +121,36 @@ const TestPage: React.FC = () => {
         explanation: "Наибольшего расширения ВКЛ достигло в XV веке при Витовте."
       },
       {
-    question: "6. В каком году произошла битва на Немиге, упомянутая в «Слове о полку Игореве»?",
-    options: ["1067", "1127", "1237"],
-    correctAnswer: "1067",
-    explanation: "Битва на Немиге между полоцкими и киевскими князьями произошла в 1067 году и стала одним из крупнейших сражений Древней Руси."
-  },
-  {
-    question: "7. Какой город был первой столицей Великого княжества Литовского?",
-    options: ["Вильнюс", "Новогрудок", "Гродно"],
-    correctAnswer: "Новогрудок",
-    explanation: "Новогрудок стал первой столицей ВКЛ в XIII веке до переноса столицы в Вильнюс."
-  },
-  {
-    question: "8. Кто из белорусских первопечатников издал первую книгу на старобелорусском языке?",
-    options: ["Франциск Скорина", "Василий Тяпинский", "Сымон Будный"],
-    correctAnswer: "Франциск Скорина",
-    explanation: "Франциск Скорина в 1517 году издал в Праге «Псалтырь» - первую печатную книгу на старобелорусском языке."
-  },
-  {
-    question: "9. Как называлась первая конституция Великого княжества Литовского, принятая в 1588 году?",
-    options: ["Литовский устав", "Статут ВКЛ", "Радомская конституция"],
-    correctAnswer: "Статут ВКЛ",
-    explanation: "Третий Статут Великого княжества Литовского 1588 года был одним из самых прогрессивных правовых документов Европы того времени."
-  },
-  {
-    question: "10. Какое восстание на территории Беларуси произошло в 1794 году под руководством Тадеуша Костюшко?",
-    options: ["Восстание декабристов", "Калиновское восстание", "Восстание под предводительством Костюшко"],
-    correctAnswer: "Восстание под предводительством Костюшко",
-    explanation: "Восстание 1794 года было попыткой сохранить независимость Речи Посполитой после второго раздела."
-  }
-    
+        question: "6. В каком году произошла битва на Немиге, упомянутая в «Слове о полку Игореве»?",
+        options: ["1067", "1127", "1237"],
+        correctAnswer: "1067",
+        explanation: "Битва на Немиге между полоцкими и киевскими князьями произошла в 1067 году и стала одним из крупнейших сражений Древней Руси."
+      },
+      {
+        question: "7. Какой город был первой столицей Великого княжества Литовского?",
+        options: ["Вильнюс", "Новогрудок", "Гродно"],
+        correctAnswer: "Новогрудок",
+        explanation: "Новогрудок стал первой столицей ВКЛ в XIII веке до переноса столицы в Вильнюс."
+      },
+      {
+        question: "8. Кто из белорусских первопечатников издал первую книгу на старобелорусском языке?",
+        options: ["Франциск Скорина", "Василий Тяпинский", "Сымон Будный"],
+        correctAnswer: "Франциск Скорина",
+        explanation: "Франциск Скорина в 1517 году издал в Праге «Псалтырь» - первую печатную книгу на старобелорусском языке."
+      },
+      {
+        question: "9. Как называлась первая конституция Великого княжества Литовского, принятая в 1588 году?",
+        options: ["Литовский устав", "Статут ВКЛ", "Радомская конституция"],
+        correctAnswer: "Статут ВКЛ",
+        explanation: "Третий Статут Великого княжества Литовского 1588 года был одним из самых прогрессивных правовых документов Европы того времени."
+      },
+      {
+        question: "10. Какое восстание на территории Беларуси произошло в 1794 году под руководством Тадеуша Костюшко?",
+        options: ["Восстание декабристов", "Калиновское восстание", "Восстание под предводительством Костюшко"],
+        correctAnswer: "Восстание под предводительством Костюшко",
+        explanation: "Восстание 1794 года было попыткой сохранить независимость Речи Посполитой после второго раздела."
+      }
+
     ],
     // Тест 3: Речь Посполитая
     [
@@ -176,35 +185,35 @@ const TestPage: React.FC = () => {
         explanation: "Три раздела Речи Посполитой произошли в 1772, 1793 и 1795 годах."
       },
       {
-    question: "6. Какой белорусский город первым получил Магдебургское право?",
-    options: ["Брест", "Минск", "Полоцк"],
-    correctAnswer: "Брест",
-    explanation: "Брест получил Магдебургское право в 1390 году - первым из белорусских городов."
-  },
-  {
-    question: "7. В каком году была создана Белорусская Народная Республика?",
-    options: ["1917", "1918", "1919"],
-    correctAnswer: "1918",
-    explanation: "БНР была провозглашена 25 марта 1918 года как первая попытка создания белорусской государственности в XX веке."
-  },
-  {
-    question: "8. Как называлось партизанское соединение под руководством Василия Коржа?",
-    options: ["«Красный Октябрь»", "«За Родину»", "«Советская Белоруссия»"],
-    correctAnswer: "«Советская Белоруссия»",
-    explanation: "Соединение «Советская Белоруссия» под командованием В.З. Коржа было одним из первых партизанских отрядов в Великой Отечественной войне."
-  },
-  {
-    question: "9. В каком году Беларусь стала членом ООН?",
-    options: ["1945", "1950", "1991"],
-    correctAnswer: "1945",
-    explanation: "БССР была одной из стран-основательниц ООН в 1945 году наряду с СССР и УССР."
-  },
-  {
-    question: "10. Какой древний белорусский город называли «Северными Афинами» за его культурное значение?",
-    options: ["Полоцк", "Слуцк", "Несвиж"],
-    correctAnswer: "Полоцк",
-    explanation: "Полоцк в X-XII веках был крупным культурным и образовательным центром, за что получил это почетное название."
-  }
+        question: "6. Какой белорусский город первым получил Магдебургское право?",
+        options: ["Брест", "Минск", "Полоцк"],
+        correctAnswer: "Брест",
+        explanation: "Брест получил Магдебургское право в 1390 году - первым из белорусских городов."
+      },
+      {
+        question: "7. В каком году была создана Белорусская Народная Республика?",
+        options: ["1917", "1918", "1919"],
+        correctAnswer: "1918",
+        explanation: "БНР была провозглашена 25 марта 1918 года как первая попытка создания белорусской государственности в XX веке."
+      },
+      {
+        question: "8. Как называлось партизанское соединение под руководством Василия Коржа?",
+        options: ["«Красный Октябрь»", "«За Родину»", "«Советская Белоруссия»"],
+        correctAnswer: "«Советская Белоруссия»",
+        explanation: "Соединение «Советская Белоруссия» под командованием В.З. Коржа было одним из первых партизанских отрядов в Великой Отечественной войне."
+      },
+      {
+        question: "9. В каком году Беларусь стала членом ООН?",
+        options: ["1945", "1950", "1991"],
+        correctAnswer: "1945",
+        explanation: "БССР была одной из стран-основательниц ООН в 1945 году наряду с СССР и УССР."
+      },
+      {
+        question: "10. Какой древний белорусский город называли «Северными Афинами» за его культурное значение?",
+        options: ["Полоцк", "Слуцк", "Несвиж"],
+        correctAnswer: "Полоцк",
+        explanation: "Полоцк в X-XII веках был крупным культурным и образовательным центром, за что получил это почетное название."
+      }
 
     ]
   ];
@@ -252,109 +261,120 @@ const TestPage: React.FC = () => {
   const getAnswerClass = (questionIndex: number, option: string) => {
     if (!showResults) return '';
     const question = currentQuestions[questionIndex];
-    
+
     if (option === question.correctAnswer) return 'correct';
     if (option === selectedAnswers[questionIndex] && option !== question.correctAnswer) return 'incorrect';
     return '';
   };
 
   return (
-    <div className="test-page">
-      {!showResults ? (
-        <>
-          <div className="progress-indicator">
-            {currentQuestion + 1}/{currentQuestions.length}
-          </div>
-          
-          <div className="test-container">
-            <div className="question-text">
-              {currentQuestions[currentQuestion].question}
-            </div>
-            
-            <div className="options-list">
-              {currentQuestions[currentQuestion].options.map((option, index) => (
-                <label key={index} className={`option-item ${getAnswerClass(currentQuestion, option)}`}>
-                  <input
-                    type="radio"
-                    name={`question-${currentQuestion}`}
-                    value={option}
-                    checked={selectedAnswers[currentQuestion] === option}
-                    onChange={handleAnswerChange}
-                  />
-                  <span className="radio-custom"></span>
-                  <span className="option-text">{option}</span>
-                </label>
-              ))}
-            </div>
-            
-            <div className="navigation">
-              <button
-                className={`nav-btn ${currentQuestion === 0 ? 'disabled' : ''}`}
-                onClick={handlePrevQuestion}
-                disabled={currentQuestion === 0}
-              >
-                
-              </button>
-              <button
-                className={`nav-btn ${currentQuestion === currentQuestions.length - 1 ? 'show-results' : ''}`}
-                onClick={handleNextQuestion}
-              >
-                {currentQuestion === currentQuestions.length - 1 ? (
-                  "Показать результаты"
-                ) : (
-                  ""
-                )}
-              </button>
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="results-container">
-          <h2 className="results-title">Результаты теста</h2>
-          <p className="results-score">Вы ответили правильно на {calculateScore()} из {currentQuestions.length} вопросов</p>
-          
-          <div className="questions-review">
-            {currentQuestions.map((question, index) => (
-              <div key={index} className="review-item">
-                <h3>{question.question}</h3>
-                <p className="explanation">{question.explanation}</p>
-                <div className="review-options">
-                  {question.options.map((option, i) => (
-                    <div 
-                      key={i} 
-                      className={`review-option ${getAnswerClass(index, option)}`}
-                    >
-                      {option}
-                      {option === question.correctAnswer && <span> (Правильный ответ)</span>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="test-navigation">
-            <button className="restart-btn" onClick={handleRestart}>
-              Пройти тест заново
-            </button>
-            
-            <div className="test-selector">
-              <h3>Другие тесты:</h3>
-              {tests.map((_, index) => (
-                <button 
-                  key={index} 
-                  className={`test-btn ${currentTest === index ? 'active' : ''}`}
-                  onClick={() => handleChangeTest(index)}
-                >
-                  Тест {index + 1}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+    <>
 
-export {TestPage} ; 
+
+      <div className="test-page">
+        {!showResults ? (
+          <>
+            <div className="progress-indicator">
+              {currentQuestion + 1}/{currentQuestions.length}
+            </div>
+
+            <div className="test-container">
+              <div className="question-text">
+                {currentQuestions[currentQuestion].question}
+              </div>
+
+              <div className="options-list">
+                {currentQuestions[currentQuestion].options.map((option, index) => (
+                  <label key={index} className={`option-item ${getAnswerClass(currentQuestion, option)}`}>
+                    <input
+                      type="radio"
+                      name={`question-${currentQuestion}`}
+                      value={option}
+                      checked={selectedAnswers[currentQuestion] === option}
+                      onChange={handleAnswerChange}
+                    />
+                    <span className="radio-custom"></span>
+                    <span className="option-text">{option}</span>
+                  </label>
+                ))}
+              </div>
+
+              <div className="navigation">
+                <button
+                  className={`nav-btn ${currentQuestion === 0 ? 'disabled' : ''}`}
+                  onClick={handlePrevQuestion}
+                  disabled={currentQuestion === 0}
+                >
+                </button>
+                <button
+                  className={`nav-btn ${currentQuestion === currentQuestions.length - 1 ? 'show-results' : ''}`}
+                  onClick={handleNextQuestion}
+                >
+                  {currentQuestion === currentQuestions.length - 1 ? (
+                    "Показать результаты"
+                  ) : (
+                    ""
+                  )}
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (  
+          <div className="results-container">
+            {showResultModal && (
+              <Result onClose={() => setShowResultModal(false)} />
+            )}
+            <h2 className="results-title">Результаты теста</h2>
+            <p className="results-score">Вы ответили правильно на {calculateScore()} из {currentQuestions.length} вопросов</p>
+
+            <div className="questions-review">
+              {currentQuestions.map((question, index) => (
+                <div key={index} className="review-item">
+                  <h3>{question.question}</h3>
+                  <p className="explanation">{question.explanation}</p>
+                  <div className="review-options">
+                    {question.options.map((option, i) => (
+                      <div
+                        key={i}
+                        className={`review-option ${getAnswerClass(index, option)}`}
+                      >
+                        {option}
+                        {option === question.correctAnswer && <span> (Правильный ответ)</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="test-navigation">
+              <button className="restart-btn" onClick={handleRestart}>
+                Пройти тест заново
+              </button>
+
+              <div className="test-selector">
+                <h3>Другие тесты:</h3>
+                {tests.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`test-btn ${currentTest === index ? 'active' : ''}`}
+                    onClick={() => handleChangeTest(index)}
+                  >
+                    Тест {index + 1}
+                  </button>
+                ))}
+              </div>
+              <button
+                className="back-button"
+                onClick={() => handleClick('/CountryIntro')}
+              >
+                Назад
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+export { TestPage }; 
