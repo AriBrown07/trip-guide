@@ -71,8 +71,8 @@
 
 .highlighted-text {
   font-size: 49px;
-  font-weight: 700px;
-  color: #1976d2;
+  font-weight: 1000px;
+  color: #4f2d0b;
   margin-top: 15px;
   text-transform: uppercase;
 }
@@ -85,5 +85,24 @@
   .highlighted-text {
     font-size: 24px;
   }
+
+
+  /* Results.css */
+
+
+
+.result-image-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.result-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
 }
 
