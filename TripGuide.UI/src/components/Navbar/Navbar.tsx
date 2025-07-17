@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
   return (
     <AppBar position="static">
       <Toolbar className={styles.toolbar}>
+
         <Button
           component={Link}
           to="/Introductory"
@@ -18,6 +19,7 @@ const Navbar: React.FC = () => {
         >
           Introductory
         </Button>
+
         <Button
           component={Link}
           to="/CountryIntro"
@@ -28,10 +30,20 @@ const Navbar: React.FC = () => {
         </Button>
         <Button
           component={Link}
+          to="/map"
+          color="inherit"
+          variant={location.pathname === "/" ? "outlined" : "text"}
+        >
+
+           Map
+        </Button>
+        <Button
+          component={Link}
           to="/"
           color="inherit"
           variant={location.pathname === "/" ? "outlined" : "text"}
         >
+         
           Home
         </Button>
         <Button
@@ -43,15 +55,16 @@ const Navbar: React.FC = () => {
           Weather
         </Button>
 
-
         <Button
           component={Link}
           to="/login"
           color="inherit"
           variant={location.pathname === "/login" ? "outlined" : "text"}
         >
+          
           Login
         </Button>
+
         <Button
           component={Link}
           to="/sign"
@@ -61,6 +74,15 @@ const Navbar: React.FC = () => {
           Sign in
         </Button>
 
+        <Button
+          component={Link}
+          to="/test"
+          color="inherit"
+          variant={location.pathname === "/test" ? "outlined" : "text"}
+        >
+          Test
+        </Button>
+        
 
       </Toolbar>
     </AppBar>

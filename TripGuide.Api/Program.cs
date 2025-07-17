@@ -6,35 +6,43 @@ using TripGuide.Api.Services.DeepSeek;
 using Microsoft.EntityFrameworkCore;
 using TripGuide.Data;
 
-
-AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(Directory.GetCurrentDirectory(), "..", "Databases"));
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Добавление сервисов в контейнер DI
-builder.Services.AddControllers();  // Исправлено: AddControllers()
-builder.Services.AddEndpointsApiExplorer();  // Исправлено: AddEndpointsApiExplorer()
-builder.Services.AddSwaggerGen();  // Исправлено: AddSwaggerGen()
+// Настройка для продакшена
+if (!builder.Environment.IsDevelopment())
+{
+    builder.WebHost.UseUrls("http://*:5000;https://*:5001");
+}
 
+// Добавление сервисов
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 
+// Настройка Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "TripGuide API", Version = "v1" });
+});
 
 // Настройка CORS
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>()
+    ?? new[] { "http://localhost:3000", "https://host120720251742.of.by" };
+
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")  
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
     });
 });
 
-// Конфигурация HttpClient для DeepSeek
+// Настройка HttpClient для DeepSeek
 builder.Services.AddHttpClient<IDeepSeekClient, DeepSeekClient>((sp, client) =>
 {
     var config = sp.GetRequiredService<IConfiguration>().GetSection("DeepSeek");
-
     client.BaseAddress = new Uri(config["BaseUrl"]!);
     client.DefaultRequestHeaders.Authorization =
         new AuthenticationHeaderValue("Bearer", config["ApiKey"]);
@@ -42,7 +50,7 @@ builder.Services.AddHttpClient<IDeepSeekClient, DeepSeekClient>((sp, client) =>
         new MediaTypeWithQualityHeaderValue("application/json"));
 });
 
-// Конфигурация DbContext с политикой повторов
+// Настройка базы данных
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(
@@ -56,7 +64,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         });
 });
 
-// Настройка аутентификации JWT
+// Настройка аутентификации
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -73,24 +81,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-
 var app = builder.Build();
 
-// Конфигурация конвейера HTTP-запросов
+// Конфигурация конвейера запросов
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCors();
+else
+{
+    app.UseExceptionHandler("/error");
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
-
-// Важно: UseAuthentication ДО UseAuthorization!
+app.UseCors("AllowSpecificOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

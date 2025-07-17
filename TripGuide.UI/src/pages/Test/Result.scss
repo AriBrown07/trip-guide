@@ -1,0 +1,108 @@
+.welcome-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+  }
+
+ .welcome-content {
+    justify-content: center;
+    background-color: white;
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+
+  &.visible {
+
+    opacity: 1;
+  }
+    
+
+   
+
+    // Clear floats after images
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+}
+
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #777;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+.text-line {
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+  margin: 5px 0;
+}
+
+.highlighted-text {
+  font-size: 49px;
+  font-weight: 1000px;
+  color: #4f2d0b;
+  margin-top: 15px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .text-line {
+    font-size: 20px;
+  }
+
+  .highlighted-text {
+    font-size: 24px;
+  }
+
+
+  /* Results.css */
+
+
+
+.result-image-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.result-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+}
+
