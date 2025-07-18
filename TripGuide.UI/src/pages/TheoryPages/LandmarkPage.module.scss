@@ -1,0 +1,298 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  background-color: #5c3a21;
+  padding: 0.5rem 1rem;
+  display: flex;
+  text-align: center;
+  align-items: center !important;
+  position: relative;
+}
+
+.headerTitle {
+  flex: 1;
+  text-align: center;
+  color: #faf1e0 !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0rem;
+  position: relative;
+  overflow: hidden;
+  background-image: url('../../pics/vintage-map-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1000px rgba(255,255,255,.8);
+}
+
+.homeButton {
+  position: absolute;
+  left: 0.6rem;
+  z-index: 1;
+  
+  &:hover {
+    background-color: rgba(255,255,255,0.1) !important;
+  }
+}
+
+.homeIcon {
+  width: 35px;
+  height: 31px;
+}
+
+.titleBlock {
+  display: flex;
+  align-items: center;
+  margin-top: 7rem;
+  margin-left: 12rem;
+}
+.widertitleBlock {
+  display: flex;
+  align-items: center;
+  margin-top: 7rem;
+  margin-left: 2rem;
+}
+
+.titleText {
+  display: flex;
+  flex-direction: column;
+}
+
+.mapIcon {
+  height: 80px;
+  width: auto;
+  margin-right: 1.3rem;
+}
+
+.biggermapIcon {
+  height: 150px;
+  width: auto;
+  margin-right: 1.3rem;
+}
+
+.titleWrapper {
+  margin-top: 5rem;
+}
+
+.landmarkName {
+  padding-right: 15rem;
+  font-family: 'Huninn', 'Times New Roman', serif !important;
+  color: #5c3a21 !important;
+  font-size: 2.9rem !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+}
+
+.landmarkImage {
+  height: 100%;
+  width: 50%;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.textBlock {
+  flex: 1;
+  background-color: #faf1e0;
+  border-radius: 16px;
+  padding: 1rem;
+  padding-right: 0.5rem;
+  margin: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.landmarkTitle {
+  color: #3e2723 !important;
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  text-align: center;
+}
+
+.scrollableContent {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  
+  /* Стилизация скроллбара */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d7ccc8;
+    border-radius: 3px;
+  }
+}
+
+.paragraph {
+  font-size: 1.1rem !important;
+  line-height: 1.6 !important;
+  color: #5d4037 !important;
+  margin-bottom: 1rem !important;
+  text-align: justify;
+}
+
+.galleryWrapper {
+  width: 120%;
+  height: 45vh;
+  margin-top: -13rem;
+  margin-left: 26.7rem;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.imageContainer {
+  cursor: pointer;
+  transition: transform 0.3s;
+  flex-grow: 1;
+  max-width: 80%;
+}
+
+.arrowButton {
+  position: absolute;
+  top: 8rem;
+  background-color: rgba(255,255,255,.3) !important;
+  width: 40px;
+  height: 40px;
+  z-index: 2;
+  
+  &:first-of-type {
+    left: 2.5%;
+  }
+  
+  &:last-of-type {
+    right: 42.5%;
+  }
+}
+
+.arrowIcon {
+  color: #5c3a21;
+  font-size: 2rem !important;
+}
+
+.modal {
+  .MuiDialog-paper {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    max-width: 90vw;
+    width: auto;
+    overflow: visible;
+    background: transparent !important;
+  }
+  .MuiDialogContent-root {
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+}
+
+.backdrop {
+  background-color: rgba(0,0,0,0.8) !important;
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  color: transparent !important;
+  position: relative;
+  padding: 0;
+  & > div {
+    background-color: transparent !important;
+  }
+}
+
+.modalGallery {
+  color: transparent !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  &, & > * {
+    background-color: transparent !important;
+  }
+}
+
+.modalImage {
+  max-height:max-content;
+  max-width:max-content;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.modalArrow {
+  color: white !important;
+  background-color: rgba(0,0,0,0.5) !important;
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 768px) {
+  .arrowButton {
+    width: 30px;
+    height: 30px;
+    
+    &:first-of-type {
+      left: 5%;
+    }
+    
+    &:last-of-type {
+      right: 5%;
+    }
+  }
+  
+  .arrowIcon {
+    font-size: 1.5rem !important;
+  }
+  
+  .modalImage {
+    max-width: 90vw;
+    max-height: 60vh;
+  }
+  
+  .modalArrow {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerTitle {
+    font-size: 1.2rem !important;
+  }
+  
+  .landmarkImage {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    max-height: 30vh;
+  }
+  
+  .landmarkTitle {
+    font-size: 1.5rem !important;
+  }
+  
+  .paragraph {
+    font-size: 1rem !important;
+  }
+}
