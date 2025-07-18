@@ -10,7 +10,14 @@ import { LoginPage } from '../pages/Login/LoginPage';
 import { RegisterPage } from '../pages/Signin/RegisterPage';
 import { NotFound } from '../pages/NotFound';
 import { App } from '../pages/MapPage/Map';
-
+import { MirCastlePage } from '../pages/TheoryPages/Landmarks/MirCastlePage';
+import { NesvizhCastlePage } from '../pages/TheoryPages/Landmarks/NesvizhCastlePage';
+import { BrestFortressPage } from '../pages/TheoryPages/Landmarks/BrestFortressPage';
+import { SophiaCathedralPage } from '../pages/TheoryPages/Landmarks/SophiaCathedralPage';
+import { NarochPage } from '../pages/TheoryPages/Landmarks/NarochPage';
+import { PalacePage } from '../pages/TheoryPages/Landmarks/RaPPalacePage';
+import { HatynPage } from '../pages/TheoryPages/Landmarks/HatynPage';
+import { PushchaPage } from '../pages/TheoryPages/Landmarks/BelovezhskayaPushchaPage';
 
 
 interface PrivateRouteProps {
@@ -25,15 +32,24 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
 export const AppRoutes: React.FC = () => {
   return (
     <Routes>
-     
+
       <Route path="/" element={<Home />} />
       <Route path="/introductory" element={<Introductory />} />
       <Route path="/CountryIntro" element={<CountryIntro />} />
-      <Route path="/weather" element={<Weather />}/>
-      <Route path="/login" element={<LoginPage />}/>
-      <Route path="/sign" element={<RegisterPage />}/>
-      <Route path="/map" element={<App />}/>
-      <Route path="/test" element={<TestPage />}/>
+      <Route path="/weather" element={<Weather />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/sign" element={<RegisterPage />} />
+      <Route path="/map" element={<App />} />
+      <Route path="/test" element={<TestPage />} />
+
+      <Route path="/mir" element={<MirCastlePage />} />
+      <Route path="/nesvizh" element={<NesvizhCastlePage />} />
+      <Route path="/brest" element={<BrestFortressPage />} />
+      <Route path="/sophia" element={<SophiaCathedralPage />} />
+      <Route path="/naroch" element={<NarochPage />} />
+      <Route path="/palace" element={<PalacePage />} />
+      <Route path="/hatyn" element={<HatynPage />} />
+      <Route path="/pushcha" element={<PushchaPage />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
