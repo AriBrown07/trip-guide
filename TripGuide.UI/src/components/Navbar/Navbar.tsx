@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
   return (
     <AppBar position="static">
       <Toolbar className={styles.toolbar}>
+
         <Button
           component={Link}
           to="/Introductory"
@@ -18,6 +19,7 @@ const Navbar: React.FC = () => {
         >
           Introductory
         </Button>
+
         <Button
           component={Link}
           to="/CountryIntro"
@@ -28,10 +30,20 @@ const Navbar: React.FC = () => {
         </Button>
         <Button
           component={Link}
+          to="/map"
+          color="inherit"
+          variant={location.pathname === "/" ? "outlined" : "text"}
+        >
+
+           Map
+        </Button>
+        <Button
+          component={Link}
           to="/"
           color="inherit"
           variant={location.pathname === "/" ? "outlined" : "text"}
         >
+         
           Home
         </Button>
         <Button
@@ -42,14 +54,17 @@ const Navbar: React.FC = () => {
         >
           Weather
         </Button>
+
         <Button
           component={Link}
           to="/login"
           color="inherit"
           variant={location.pathname === "/login" ? "outlined" : "text"}
         >
+          
           Login
         </Button>
+
         <Button
           component={Link}
           to="/sign"
@@ -58,70 +73,17 @@ const Navbar: React.FC = () => {
         >
           Sign in
         </Button>
+
         <Button
           component={Link}
-          to="/mir"
+          to="/test"
           color="inherit"
-          variant={location.pathname === "/mir" ? "outlined" : "text"}
+          variant={location.pathname === "/test" ? "outlined" : "text"}
         >
-          Mir
+          Test
         </Button>
-        <Button
-          component={Link}
-          to="/nesvizh"
-          color="inherit"
-          variant={location.pathname === "/nesvizh" ? "outlined" : "text"}
-        >
-          Nesvizh
-        </Button>
-        <Button
-          component={Link}
-          to="/brest"
-          color="inherit"
-          variant={location.pathname === "/brest" ? "outlined" : "text"}
-        >
-          Brest
-        </Button>
-        <Button
-          component={Link}
-          to="/sophia"
-          color="inherit"
-          variant={location.pathname === "/sophia" ? "outlined" : "text"}
-        >
-          Sophia
-        </Button>
-        <Button
-          component={Link}
-          to="/naroch"
-          color="inherit"
-          variant={location.pathname === "/naroch" ? "outlined" : "text"}
-        >
-          Naroch
-        </Button>
-        <Button
-          component={Link}
-          to="/palace"
-          color="inherit"
-          variant={location.pathname === "/palace" ? "outlined" : "text"}
-        >
-          Palace
-        </Button>
-        <Button
-          component={Link}
-          to="/hatyn"
-          color="inherit"
-          variant={location.pathname === "/hatyn" ? "outlined" : "text"}
-        >
-          Hatyn
-        </Button>
-        <Button
-          component={Link}
-          to="/pushcha"
-          color="inherit"
-          variant={location.pathname === "/pushcha" ? "outlined" : "text"}
-        >
-          Pushcha
-        </Button>
+        
+
       </Toolbar>
     </AppBar>
   );
