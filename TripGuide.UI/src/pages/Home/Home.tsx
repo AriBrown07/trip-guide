@@ -43,6 +43,8 @@ const Home: React.FC = () => {
 
       {/* Main Container - Only for notebook, positioned to the right */}
       <div className={styles.mainContainer}>
+
+        <GlobeComponent />
         {/* Notebook - Positioned to the right side */}
         <div className={styles.notebook}>
           <div className={styles.noteHeader} />
