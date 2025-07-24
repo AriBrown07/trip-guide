@@ -356,3 +356,133 @@
     }
   }
 }
+
+@media (max-width: 1270px) {
+  .sidebar {
+    width: 320px;
+    padding: 20px;
+  }
+
+  .search-input {
+    font-size: 1rem;
+    padding: 10px 12px 10px 36px;
+  }
+
+  .filter-group label {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .map-container {
+    height: calc(100vh - 400px); // примерная высота для карты
+  }
+
+  .calendar-section .date-summary {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .budget-input-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-input {
+    font-size: 0.95rem;
+  }
+
+  .search-container .search-icon {
+    font-size: 0.9rem;
+    left: 10px;
+  }
+
+  .calendar-section .react-datepicker__day {
+    width: 2rem;
+    line-height: 2rem;
+  }
+
+  .filter-group label {
+    font-size: 0.95rem;
+  }
+
+  .controls button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  .sidebar {
+    padding: 15px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .sidebar {
+    padding: 10px;
+  }
+
+  .search-container {
+    margin-bottom: 15px;
+  }
+
+  .search-input {
+    font-size: 0.9rem;
+    padding: 8px 12px 8px 32px;
+  }
+
+  .filter-group label {
+    font-size: 0.9rem;
+    gap: 6px;
+  }
+
+  .date-summary .date-item {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+
+    span {
+      font-size: 0.8rem;
+    }
+
+    strong {
+      font-size: 1rem;
+    }
+  }
+
+  .radio-group label {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+
+  .selected-places .place-tag {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+
+  .map-container {
+    height: calc(100vh - 350px);
+  }
+
+  .controls {
+    top: 10px;
+    left: 10px;
+
+    button {
+      font-size: 0.85rem;
+      padding: 6px 10px;
+    }
+  }
+}
+
