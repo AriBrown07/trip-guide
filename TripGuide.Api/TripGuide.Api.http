@@ -1,4 +1,4 @@
-@TripGuide.Api_HostAddress = https://api.host120720251742.of.by
+@TripGuide.Api_HostAddress = https://api.map-history.com
 
 GET {{TripGuide.Api_HostAddress}}/weatherforecast/
 Accept: application/json

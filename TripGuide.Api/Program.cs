@@ -54,8 +54,8 @@ builder.Services.AddSwaggerGen(c =>
 var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>()
     ?? new[] {
         "http://localhost:3000",
-        "https://host120720251742.of.by", // Добавлен фронтенд
-        "https://api.host120720251742.of.by"
+        "https://map-history.com", // Добавлен фронтенд
+        "https://api.map-history.com"
     };
 
 builder.Services.AddCors(options =>
