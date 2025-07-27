@@ -7,6 +7,7 @@ import RoutePlanner from "../../components/RoutePlanner/RoutePlanner";
 import YandexSearch from "../../components/YandexSearch/YandexSearch";
 import WelcomeBanner from './WelcomeBanner'; 
 
+
 interface SelectedPlace {
   name: string;
   coordinates: [number, number];
@@ -21,14 +22,25 @@ const App: React.FC = () => {
   const [purpose, setPurpose] = useState<string>('');
   const [selectedPlaces, setSelectedPlaces] = useState<SelectedPlace[]>([]);
   const [showWelcomeBanner, setShowWelcomeBanner] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
   return (
-    
+    <>
+      {/* ← Кнопка‑бургер */}
+      <button
+        className="burger-button"
+        onClick={() => setIsSidebarOpen(open => !open)}
+        aria-label="Toggle sidebar"
+      >
+        ☰
+      </button>
+
     <div className="app-container">
       {showWelcomeBanner && (
         <WelcomeBanner onClose={() => setShowWelcomeBanner(false)} />
       )}
-      <div className="sidebar">
+      
+       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="search-container">
           <YandexSearch 
             onPlaceSelect={(place) => {
@@ -195,6 +207,7 @@ const App: React.FC = () => {
         <RoutePlanner places={selectedPlaces} />
       </div>
     </div>
+    </>
   );
 }
 export { App };

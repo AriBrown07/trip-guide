@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://api.host120720251742.of.by/api/auth';
+const API_URL = 'https://api.map-history.com/api/auth';
 
 export const authService = {
     register: async (data: { username: string; password: string; email: string }) => {
