@@ -8,7 +8,7 @@ import { CountryIntro } from "../pages/CountryIntro/CountryIntro";
 import { TestPage } from "../pages/Test/TestPage";
 import { LoginPage } from '../pages/Login/LoginPage';
 import { RegisterPage } from '../pages/Signin/RegisterPage';
-import { NotFound } from '../pages/NotFound';
+import  NotFound  from '../pages/NotFound/NotFound';
 import { App } from '../pages/MapPage/Map';
 import { MirCastlePage } from '../pages/TheoryPages/Landmarks/MirCastlePage';
 import { NesvizhCastlePage } from '../pages/TheoryPages/Landmarks/NesvizhCastlePage';
@@ -18,7 +18,9 @@ import { NarochPage } from '../pages/TheoryPages/Landmarks/NarochPage';
 import { PalacePage } from '../pages/TheoryPages/Landmarks/RaPPalacePage';
 import { HatynPage } from '../pages/TheoryPages/Landmarks/HatynPage';
 import { PushchaPage } from '../pages/TheoryPages/Landmarks/BelovezhskayaPushchaPage';
-
+import Folk from '../pages/ExstraInform/Folk';
+import Independence from '../pages/ExstraInform/Independence';
+import Victory from '../pages/ExstraInform/Victory';
 
 interface PrivateRouteProps {
   children: React.ReactElement;
@@ -52,6 +54,9 @@ export const AppRoutes: React.FC = () => {
       <Route path="/pushcha" element={<PushchaPage />} />
 
       <Route path="*" element={<NotFound />} />
+      <Route path="/folk" element={<Folk />} />
+      <Route path="/independence" element={<Independence />} />
+      <Route path="/victory" element={<Victory />} />
     </Routes>
   );
 };

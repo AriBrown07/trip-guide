@@ -298,14 +298,16 @@ const App: React.FC = () => {
             <label>Ближайшие события</label>
             <div className="events-timeline">
               {[
-                { date: '2023-09-17', event: 'День народного единства' },
-                { date: '2023-07-03', event: 'День Независимости' },
-                { date: '2023-05-09', event: 'День Победы' }
+                { date: '2023-09-17', event: 'День народного единства', url: '/folk' },
+                { date: '2023-07-03', event: 'День Независимости', url: '/independence' },
+                { date: '2023-05-09', event: 'День Победы', url: '/victory' }
               ].map((item) => (
-                <div key={item.date} className="event-item">
-                  <span className="event-date">{new Date(item.date).toLocaleDateString('ru-RU')}</span>
-                  <span className="event-name">{item.event}</span>
-                </div>
+                <a href={item.url} key={item.date} className="event-item-link">
+                  <div className="event-item">
+                    <span className="event-date">{new Date(item.date).toLocaleDateString('ru-RU')}</span>
+                    <span className="event-name">{item.event}</span>
+                  </div>
+                </a>
               ))}
             </div>
           </div>

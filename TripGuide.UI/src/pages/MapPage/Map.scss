@@ -851,3 +851,34 @@
     }
   }
 }
+.filter-group.historical-events {
+  .events-timeline {
+    .event-item-link {
+      text-decoration: none; // Убираем подчеркивание
+      color: inherit; // Наследуем цвет текста от родителя
+      display: block; // Чтобы ссылка занимала всю ширину контейнера
+
+      &:hover, &:focus {
+        .event-item {
+          background-color: rgba(0, 0, 0, 0.05); // Легкий эффект при наведении
+          transition: background-color 0.2s ease; // Плавное изменение
+        }
+      }
+
+      .event-item {
+        padding: 8px 12px; // Отступы для удобного клика
+        border-radius: 4px; // Скругление углов
+
+        .event-date {
+          display: inline-block;
+          width: 100px; // Фиксированная ширина для дат
+          color: #666;
+        }
+
+        .event-name {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
