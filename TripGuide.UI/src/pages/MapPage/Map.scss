@@ -756,3 +756,98 @@
     display: flex !important;
   }
 }
+
+/* Стили для готовых маршрутов */
+.predefined-routes {
+  .routes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .route-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+    &:hover {
+      border-color: #4a6bff;
+      box-shadow: 0 2px 10px rgba(74, 107, 255, 0.15);
+    }
+
+    &.active {
+      border-color: #4a6bff;
+      background-color: #f0f4ff;
+    }
+
+    h4 {
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      color: #2c3e50;
+    }
+
+    .route-description {
+      margin: 0 0 10px 0;
+      font-size: 0.85rem;
+      color: #6c757d;
+      line-height: 1.4;
+    }
+
+    .route-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+
+      .duration {
+        color: #4a6bff;
+        font-weight: 500;
+      }
+
+      .places-count {
+        color: #6c757d;
+      }
+    }
+  }
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .predefined-routes {
+    .route-card {
+      padding: 12px;
+
+      h4 {
+        font-size: 0.95rem;
+      }
+
+      .route-description {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .predefined-routes {
+    .route-card {
+      padding: 10px;
+
+      h4 {
+        font-size: 0.9rem;
+      }
+
+      .route-description {
+        font-size: 0.75rem;
+      }
+
+      .route-meta {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
