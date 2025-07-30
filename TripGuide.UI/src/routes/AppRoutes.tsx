@@ -8,9 +8,8 @@ import { CountryIntro } from "../pages/CountryIntro/CountryIntro";
 import { TestPage } from "../pages/Test/TestPage";
 import { LoginPage } from '../pages/Login/LoginPage';
 import { RegisterPage } from '../pages/Signin/RegisterPage';
-import { NotFound } from '../pages/NotFound';
+import  NotFound  from '../pages/NotFound/NotFound';
 import { App } from '../pages/MapPage/Map';
-//theory pages
 import { MirCastlePage } from '../pages/TheoryPages/Landmarks/MirCastlePage';
 import { NesvizhCastlePage } from '../pages/TheoryPages/Landmarks/NesvizhCastlePage';
 import { BrestFortressPage } from '../pages/TheoryPages/Landmarks/BrestFortressPage';
@@ -19,14 +18,9 @@ import { NarochPage } from '../pages/TheoryPages/Landmarks/NarochPage';
 import { PalacePage } from '../pages/TheoryPages/Landmarks/RaPPalacePage';
 import { HatynPage } from '../pages/TheoryPages/Landmarks/HatynPage';
 import { PushchaPage } from '../pages/TheoryPages/Landmarks/BelovezhskayaPushchaPage';
-import { PolockPage } from '../pages/TheoryPages/Events/FirstMentionOfPolock';
-import { KolasPage } from '../pages/TheoryPages/People/YakubKolasPage';
-import { BudnyPage } from '../pages/TheoryPages/People/SymonBudnyPage';
-import { GusovskyPage } from '../pages/TheoryPages/People/MykolaGusovskyPage';
-import { KupallePage } from '../pages/TheoryPages/Culture/KupallePage';
-import { NemigaPage } from '../pages/TheoryPages/Events/NemigaPage';
-import { SkarynaPage } from '../pages/TheoryPages/People/SkarynaPage';
-
+import Folk from '../pages/ExstraInform/Folk';
+import Independence from '../pages/ExstraInform/Independence';
+import Victory from '../pages/ExstraInform/Victory';
 
 interface PrivateRouteProps {
   children: React.ReactElement;
@@ -49,9 +43,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/sign" element={<RegisterPage />} />
       <Route path="/map" element={<App />} />
       <Route path="/test" element={<TestPage />} />
-{/* theory pages */}
-      <Route path="/kolas" element={<KolasPage />} />
-      <Route path="/polock" element={<PolockPage />} />
+
       <Route path="/mir" element={<MirCastlePage />} />
       <Route path="/nesvizh" element={<NesvizhCastlePage />} />
       <Route path="/brest" element={<BrestFortressPage />} />
@@ -60,13 +52,11 @@ export const AppRoutes: React.FC = () => {
       <Route path="/palace" element={<PalacePage />} />
       <Route path="/hatyn" element={<HatynPage />} />
       <Route path="/pushcha" element={<PushchaPage />} />
-      <Route path="/budny" element={<BudnyPage />} />
-      <Route path="/gusovsky" element={<GusovskyPage />} />
-      <Route path="/kupalle" element={<KupallePage />} />
-      <Route path="/nemiga" element={<NemigaPage  />} />
-      <Route path="/skaryna" element={<SkarynaPage />} />
 
       <Route path="*" element={<NotFound />} />
+      <Route path="/folk" element={<Folk />} />
+      <Route path="/independence" element={<Independence />} />
+      <Route path="/victory" element={<Victory />} />
     </Routes>
   );
 };
