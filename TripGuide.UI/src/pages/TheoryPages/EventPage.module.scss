@@ -1,0 +1,162 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  width: 100%;
+  background-color: #5c3a21;
+  padding: 0.5rem 1rem;
+  display: flex;
+  text-align: center;
+  align-items: center !important;
+  position: relative;
+}
+
+.headerTitle {
+  flex: 1;
+  text-align: center;
+  color: #faf1e0 !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+.homeButton {
+  position: absolute;
+  left: 0.6rem;
+  z-index: 1;
+  &:hover {
+    background-color: rgba(255,255,255,0.1) !important;
+  }
+}
+
+.homeIcon {
+  width: 35px;
+  height: 31px;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0rem;
+  position: relative;
+  overflow: hidden;
+  background-image: url('../../pics/vintage-map-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1000px rgba(255,255,255,.8);
+}
+
+/* Стили для ленты времени */
+.timelineContainer {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 3;
+}
+
+.timelineWrapper {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: visible;
+  position: relative;
+  z-index: 2;
+//   background-color: #faf1e0;
+  scrollbar-width: none;
+  padding: 10px 0;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem;
+  min-width: max-content;
+}
+
+.timelineEvent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.timelineMarker {
+  width: 40px;
+  height: 40px;
+  background-color: #5c3a21;
+  color: white;
+//   border-radius: 10px/10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.2);
+    background-color: #3e2723;
+  }
+}
+
+.textBlock {
+  flex: 1;
+  background-color: #faf1e0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  padding-right: 0.5rem;
+  margin: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.scrollableContent {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 1rem;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d7ccc8;
+    border-radius: 3px;
+  }
+}
+
+.paragraph {
+  font-size: 1.1rem !important;
+  line-height: 1.6 !important;
+  color: #5d4037 !important;
+  margin-bottom: 1rem !important;
+  text-align: justify;
+}
+
+.figureName {
+  color: #3e2723 !important;
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.figureDates {
+  color: #5d4037 !important;
+  font-size: 1.2rem !important;
+  margin-bottom: 1.5rem !important;
+}
