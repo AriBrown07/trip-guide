@@ -85,11 +85,19 @@ const Navbar: React.FC = () => {
 
         <Button
           component={Link}
-          to="/mir"
+          to="/kolas"
           color="inherit"
-          variant={location.pathname === "/mir" ? "outlined" : "text"}
+          variant={location.pathname === "/kolas" ? "outlined" : "text"}
         >
-          Mir
+          Kolas
+        </Button>
+        <Button
+          component={Link}
+          to="/polock"
+          color="inherit"
+          variant={location.pathname === "/polock" ? "outlined" : "text"}
+        >
+          Polock
         </Button>
         <Button
           component={Link}
@@ -101,53 +109,20 @@ const Navbar: React.FC = () => {
         </Button>
         <Button
           component={Link}
-          to="/brest"
-          color="inherit"
-          variant={location.pathname === "/brest" ? "outlined" : "text"}
-        >
-          Brest
-        </Button>
-        <Button
-          component={Link}
-          to="/sophia"
-          color="inherit"
-          variant={location.pathname === "/sophia" ? "outlined" : "text"}
-        >
-          Sophia
-        </Button>
-        <Button
-          component={Link}
-          to="/naroch"
-          color="inherit"
-          variant={location.pathname === "/naroch" ? "outlined" : "text"}
-        >
-          Naroch
-        </Button>
-        <Button
-          component={Link}
-          to="/palace"
-          color="inherit"
-          variant={location.pathname === "/palace" ? "outlined" : "text"}
-        >
-          Palace
-        </Button>
-        <Button
-          component={Link}
-          to="/hatyn"
-          color="inherit"
-          variant={location.pathname === "/hatyn" ? "outlined" : "text"}
-        >
-          Hatyn
-        </Button>
-        <Button
-          component={Link}
           to="/pushcha"
           color="inherit"
           variant={location.pathname === "/pushcha" ? "outlined" : "text"}
         >
           Pushcha
         </Button>
-
+        <Button
+          component={Link}
+          to="/kupalle"
+          color="inherit"
+          variant={location.pathname === "/kupalle" ? "outlined" : "text"}
+        >
+          Kupalle
+        </Button>
 
       </Toolbar>
     </AppBar>

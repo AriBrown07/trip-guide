@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Typography, Button, IconButton, Dialog, DialogContent, Box } from '@mui/material';
-import { ChevronLeft, ChevronRight, Close } from '@mui/icons-material';
+import { Typography, IconButton, Dialog, DialogContent, Box } from '@mui/material';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import styles from '../LandmarkPage.module.scss';
 import hatyn1 from '../../../pics/hatyn-1.jpeg';
 import hatyn2 from '../../../pics/hatyn-2.jpg';
