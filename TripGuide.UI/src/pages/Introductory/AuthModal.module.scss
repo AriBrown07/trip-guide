@@ -1,0 +1,224 @@
+// AuthModal.module.scss
+.backdrop {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalPaper {
+  border-radius: 16px;
+  box-shadow: 0 24px 38px rgba(0, 0, 0, 0.14), 0 9px 46px rgba(0, 0, 0, 0.12), 0 11px 15px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  margin: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.modalTitle {
+  padding: 16px 24px 8px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: none;
+  min-height: 48px;
+}
+
+.closeButton {
+  color: #666;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.modalContent {
+  padding: 0 24px 24px;
+  
+  .MuiTabs-root {
+    margin-bottom: 24px;
+    
+    .MuiTab-root {
+      font-weight: 600;
+      text-transform: none;
+      font-size: 16px;
+      color: #666;
+      
+      &.Mui-selected {
+        color: #1976d2;
+      }
+    }
+    
+    .MuiTabs-indicator {
+      background-color: #1976d2;
+      height: 3px;
+      border-radius: 2px;
+    }
+  }
+}
+
+.tabTitle {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formRow {
+  display: flex;
+  gap: 16px;
+  
+  .formGroup {
+    flex: 1;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formLabel {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.formInput {
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  
+  &:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+  }
+  
+  &:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+  }
+  
+  &::placeholder {
+    color: #999;
+  }
+}
+
+.passwordStrengthContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.passwordStrength {
+  height: 4px;
+  background-color: #e1e5e9;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  &[data-strength="0"]::after,
+  &[data-strength="1"]::after {
+    width: 20%;
+    background-color: #f44336;
+  }
+  
+  &[data-strength="2"]::after {
+    width: 40%;
+    background-color: #ff9800;
+  }
+  
+  &[data-strength="3"]::after {
+    width: 60%;
+    background-color: #2196f3;
+  }
+  
+  &[data-strength="4"]::after {
+    width: 80%;
+    background-color: #4caf50;
+  }
+  
+  &[data-strength="5"]::after {
+    width: 100%;
+    background-color: #4caf50;
+  }
+}
+
+.passwordStrengthText {
+  color: #666;
+  font-size: 12px;
+  align-self: flex-start;
+}
+
+.error {
+  font-size: 12px;
+  margin-top: 4px;
+  color: #f44336;
+}
+
+.submitButton {
+  margin-top: 16px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  box-shadow: 0 4px 14px rgba(25, 118, 210, 0.25);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.35);
+    transform: translateY(-1px);
+  }
+  
+  &:disabled {
+    background: #cccccc;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .modalPaper {
+    margin: 8px;
+    max-width: calc(100vw - 16px);
+  }
+  
+  .modalContent {
+    padding: 0 16px 16px;
+  }
+  
+  .formRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .tabTitle {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+}
