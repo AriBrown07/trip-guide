@@ -90,7 +90,7 @@ const CountryIntro: React.FC = () => {
         {/* Отдельные кружки для каждой достопримечательности */}
         <div className={styles.landmarkCircle} 
           style={{ left: '60%', top: '29%' }}
-          onClick={() => handleLandmarkClick('/Sophia_Cathedral')}
+          onClick={() => handleLandmarkClick('/sophia')}
           title="Софийский собор">
           <div className={styles.circleInner}>
             <img src={Sophia_Cathedral} alt="Софийский собор" className={styles.landmarkImage} />
@@ -99,7 +99,7 @@ const CountryIntro: React.FC = () => {
 
         <div className={styles.landmarkCircle} 
           style={{ left: '24%', top: '52%' }}
-          onClick={() => handleLandmarkClick('/mir-castle')}
+          onClick={() => handleLandmarkClick('/mir')}
           title="Мирский замок">
           <div className={styles.circleInner}>
             <img src={mirImage} alt="Мирский замок" className={styles.landmarkImage} />
@@ -108,7 +108,7 @@ const CountryIntro: React.FC = () => {
 
         <div className={styles.landmarkCircle} 
           style={{ left: '17%', top: '66%' }}
-          onClick={() => handleLandmarkClick('/brestskua_krepost')}
+          onClick={() => handleLandmarkClick('/brest')}
           title="Брестская крепость">
           <div className={styles.circleInner}>
             <img src={brestImage} alt="Брестская крепость" className={styles.landmarkImage} />
@@ -118,7 +118,7 @@ const CountryIntro: React.FC = () => {
 
         <div className={styles.landmarkCircle} 
           style={{ left: '68%', top: '70%' }}
-          onClick={() => handleLandmarkClick('/bel')}
+          onClick={() => handleLandmarkClick('/palace')}
           title="Дворец Румянцевых-Паскевичей">
           <div className={styles.circleInner}>
             <img src={castleImage} alt="Дворец Румянцевых-Паскевичей" className={styles.landmarkImage} />
@@ -127,7 +127,7 @@ const CountryIntro: React.FC = () => {
        
        <div className={styles.landmarkCircle} 
           style={{ left: '43%', top: '36%' }}
-          onClick={() => handleLandmarkClick('/bel')}
+          onClick={() => handleLandmarkClick('/naroch')}
           title="Нарочь ">
           <div className={styles.circleInner}>
             <img src={Naroch} alt="Нарочь" className={styles.landmarkImage} />
@@ -136,7 +136,7 @@ const CountryIntro: React.FC = () => {
        
        <div className={styles.landmarkCircle} 
           style={{ left: '60%', top: '43%' }}
-          onClick={() => handleLandmarkClick('/bel')}
+          onClick={() => handleLandmarkClick('/hatyn')}
           title="Хатынь">
           <div className={styles.circleInner}>
             <img src={Khatyn} alt="Хатынь" className={styles.landmarkImage} />
