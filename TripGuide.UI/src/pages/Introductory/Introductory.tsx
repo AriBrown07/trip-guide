@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Typography, Button, IconButton } from "@mui/material";
 import styles from "./Introductory.module.scss";
 import AboutModal from "./AboutModal";
+import AuthModal from "./AuthModal";
 
 import vkIcon from "../../pics/vkLogo.png";
 import tgIcon from "../../pics/tgLogo.png";
@@ -10,14 +11,17 @@ import instIcon from "../../pics/instLogo.png";
 import logo from "../../pics/logo.png";
 
 const Introductory: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const navigate = useNavigate();
+  
   const handleClick = (link: string) => {
     navigate(link);
   };
+  
   return (
     <div className={styles.container}>
-      {/* Шапка */}
+
       <header className={styles.header}>
         <div className={styles.logoContainer}>
           <img src={logo} alt="МарHistory" className={styles.logoImage} />
@@ -33,9 +37,15 @@ const Introductory: React.FC = () => {
         </div>
         
         <nav className={styles.nav}>
-          <Button className={styles.navButton} onClick={() => handleClick('/')}>Главная</Button>
-          <Button className={styles.navButton} onClick={() => setIsModalOpen(true)}>О нас</Button>
-          <Button className={styles.navButton}>Авторизация</Button>
+          <Button className={styles.navButton} onClick={() => handleClick('/')}>
+            Главная
+          </Button>
+          <Button className={styles.navButton} onClick={() => setIsAboutModalOpen(true)}>
+            О нас
+          </Button>
+          <Button className={styles.navButton} onClick={() => setIsAuthModalOpen(true)}>
+            Авторизация
+          </Button>
           
           <div className={styles.socialIconsHeader}>
             <a href="https://vk.com" className={styles.socialLink} target="_blank" rel="noopener noreferrer">
@@ -49,13 +59,22 @@ const Introductory: React.FC = () => {
             </a>
           </div>
         </nav>
-        <AboutModal open={isModalOpen} onClose={()=>setIsModalOpen(false)} />
+        
+
+        <AboutModal 
+          open={isAboutModalOpen} 
+          onClose={() => setIsAboutModalOpen(false)} 
+        />
+        <AuthModal 
+          open={isAuthModalOpen} 
+          onClose={() => setIsAuthModalOpen(false)} 
+        />
       </header>
 
-      {/* Разделительная линия */}
+
       <div className={styles.divider}></div>
 
-      {/* Основной контент */}
+
       <main className={styles.mainContent}>
         <div className={styles.textBlock}>
           <Typography variant="h1" className={styles.title}>
