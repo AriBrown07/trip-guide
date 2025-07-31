@@ -22,6 +22,23 @@ const CountryIntro: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  // Объект с маршрутами для каждого элемента
+  const itemRoutes = {
+    'Франциск Скорина': '/skorina',
+    'Якуб Колас': '/kolas',
+    'Василь Быков': '/bykov',
+    'Максим Богданович': '/bogdanovich',
+    'Образование ВКЛ': '/vkl',
+    'Битва под Грюнвальдом': '/grunwald',
+    'Восстание Калиновского': '/kalinovsky',
+    'Несвижский замок': '/nesvizh',
+    'Мирский замок': '/mir-castle',
+    'Беловежская пуща': '/belovezhskaya-pushcha',
+    'Купалье': '/kupalye',
+    'Масленица': '/maslenitsa',
+    'Слуцкие пояса': '/slutsk-belts'
+  };
+
   const categories = [
     {
       name: 'Личности',
@@ -47,7 +64,10 @@ const CountryIntro: React.FC = () => {
 
   const handleItemClick = (itemName: string) => {
     setSelectedItem(itemName);
-    console.log(`Выбрано: ${itemName}`);
+    const route = itemRoutes[itemName as keyof typeof itemRoutes];
+    if (route) {
+      navigate(route);
+    }
   };
 
   const handleLandmarkClick = (link: string) => {
@@ -59,7 +79,7 @@ const CountryIntro: React.FC = () => {
   };
 
   const handleBackClick = () => {
-    navigate('/map'); // Здесь укажите нужный путь
+    navigate('/map');
   };
 
   const filteredCategories = categories.map(category => ({
