@@ -45,9 +45,9 @@ export const AppRoutes: React.FC = () => {
   return (
     <Routes>
 
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Introductory/>} />
       <Route path="/introductory" element={<Introductory />} />
-      <Route path="/CountryIntro" element={<CountryIntro />} />
+      <Route path="/home" element={<CountryIntro />} />
       <Route path="/weather" element={<Weather />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/sign" element={<RegisterPage />} />

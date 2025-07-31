@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography, Button, Box, TextField, List, ListItem, Collapse, ListItemButton, ListItemText } from '@mui/material';
-import { ExpandMore, ExpandLess, Search } from '@mui/icons-material';
+import { ExpandMore, ExpandLess, Search, ArrowBack } from '@mui/icons-material';
 import styles from './CountryIntro.module.scss';
 import map from "../../pics/Belarus.png";
+import map1 from "../../pics/Home/icon_map.png";
 import papyrus from "../../pics/papyrus.png";
 import touch from "../../pics/touch.png";
-
 
 // Импортируем изображения для достопримечательностей
 import Sophia_Cathedral from './image/Sophia_Cathedral.png';
@@ -58,15 +58,28 @@ const CountryIntro: React.FC = () => {
     navigate('/test');
   };
 
+  const handleBackClick = () => {
+    navigate('/main'); // Здесь укажите нужный путь
+  };
+
   const filteredCategories = categories.map(category => ({
     ...category,
-    items: category.items.filter(item => 
-      item.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    items: category.items.filter(item =>
+      item.toLowerCase().includes(searchTerm.toLowerCase()))
   }));
 
   return (
     <main className={styles.mainContent}>
+      {/* Кнопка назад */}
+      <div className={styles.backButtonCont}>
+        <Button
+          className={styles.backButton}
+          onClick={handleBackClick}
+        >
+          <img src={map1} className={styles.map1} alt="map icon" />
+        </Button>
+      </div>
+
       <div className={styles.textBox}>
         <img
           src={papyrus}
@@ -74,21 +87,21 @@ const CountryIntro: React.FC = () => {
           className={styles.textImage}
         />
         <div className={styles.overlayText}>
-          Нажмите на любую<br/>иконку, расположенную<br/>на мини-стране, чтобы<br/>узнать больше об<br/>изображенной на ней<br/>достопримечательности<br/>
+          Нажмите на любую<br />иконку, расположенную<br />на мини-стране, чтобы<br />узнать больше об<br />изображенной на ней<br />достопримечательности<br />
           <img src={touch} alt="тык" />
         </div>
-        </div>
+      </div>
 
       {/* Карта с интерактивными кружочками */}
       <div className={styles.mapContainer}>
-        <img 
+        <img
           src={map}
-          alt="Карта Беларуси" 
+          alt="Карта Беларуси"
           className={styles.mapImage}
         />
-        
+
         {/* Отдельные кружки для каждой достопримечательности */}
-        <div className={styles.landmarkCircle} 
+        <div className={styles.landmarkCircle}
           style={{ left: '60%', top: '29%' }}
           onClick={() => handleLandmarkClick('/sophia')}
           title="Софийский собор">
@@ -97,7 +110,7 @@ const CountryIntro: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.landmarkCircle} 
+        <div className={styles.landmarkCircle}
           style={{ left: '24%', top: '52%' }}
           onClick={() => handleLandmarkClick('/mir')}
           title="Мирский замок">
@@ -106,7 +119,7 @@ const CountryIntro: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.landmarkCircle} 
+        <div className={styles.landmarkCircle}
           style={{ left: '17%', top: '66%' }}
           onClick={() => handleLandmarkClick('/brest')}
           title="Брестская крепость">
@@ -114,9 +127,8 @@ const CountryIntro: React.FC = () => {
             <img src={brestImage} alt="Брестская крепость" className={styles.landmarkImage} />
           </div>
         </div>
-      
 
-        <div className={styles.landmarkCircle} 
+        <div className={styles.landmarkCircle}
           style={{ left: '68%', top: '70%' }}
           onClick={() => handleLandmarkClick('/palace')}
           title="Дворец Румянцевых-Паскевичей">
@@ -124,17 +136,17 @@ const CountryIntro: React.FC = () => {
             <img src={castleImage} alt="Дворец Румянцевых-Паскевичей" className={styles.landmarkImage} />
           </div>
         </div>
-       
-       <div className={styles.landmarkCircle} 
+
+        <div className={styles.landmarkCircle}
           style={{ left: '43%', top: '36%' }}
           onClick={() => handleLandmarkClick('/naroch')}
-          title="Нарочь ">
+          title="Нарочь">
           <div className={styles.circleInner}>
             <img src={Naroch} alt="Нарочь" className={styles.landmarkImage} />
           </div>
         </div>
-       
-       <div className={styles.landmarkCircle} 
+
+        <div className={styles.landmarkCircle}
           style={{ left: '60%', top: '43%' }}
           onClick={() => handleLandmarkClick('/hatyn')}
           title="Хатынь">
@@ -147,64 +159,64 @@ const CountryIntro: React.FC = () => {
       </div>
 
       {/* Список категорий */}
-<div className={styles.categoriesPanel}>
-  {/* Верхняя часть — список и поиск */}
-  <div className={styles.categoriesContent}>
-    <div className={styles.searchBox}>
-      <Search className={styles.searchIcon} />
-      <TextField
-        fullWidth
-        variant="outlined"
-        placeholder="Поиск..."
-        size="small"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className={styles.searchInput}
-      />
-    </div>
-    <List className={styles.categoriesList}>
-      {filteredCategories.map((category) => (
-        <div key={category.name} className={styles.categoryItem}>
-          <ListItemButton 
-            onClick={() => toggleCategory(category.name)}
-            className={styles.categoryHeader}
-          >
-            <ListItemText primary={category.name} />
-            {openCategory === category.name ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-
-          <Collapse in={openCategory === category.name}>
-            <List className={styles.itemsList}>
-              {category.items.map((item) => (
-                <ListItem 
-                  key={item}
-                  disablePadding
+      <div className={styles.categoriesPanel}>
+        {/* Верхняя часть — список и поиск */}
+        <div className={styles.categoriesContent}>
+          <div className={styles.searchBox}>
+            <Search className={styles.searchIcon} />
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Поиск..."
+              size="small"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={styles.searchInput}
+            />
+          </div>
+          <List className={styles.categoriesList}>
+            {filteredCategories.map((category) => (
+              <div key={category.name} className={styles.categoryItem}>
+                <ListItemButton
+                  onClick={() => toggleCategory(category.name)}
+                  className={styles.categoryHeader}
                 >
-                  <ListItemButton
-                    className={styles.listItem}
-                    onClick={() => handleItemClick(item)}
-                    selected={selectedItem === item}
-                  >
-                    <ListItemText primary={item} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
+                  <ListItemText primary={category.name} />
+                  {openCategory === category.name ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+
+                <Collapse in={openCategory === category.name}>
+                  <List className={styles.itemsList}>
+                    {category.items.map((item) => (
+                      <ListItem
+                        key={item}
+                        disablePadding
+                      >
+                        <ListItemButton
+                          className={styles.listItem}
+                          onClick={() => handleItemClick(item)}
+                          selected={selectedItem === item}
+                        >
+                          <ListItemText primary={item} />
+                        </ListItemButton>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Collapse>
+              </div>
+            ))}
+          </List>
         </div>
-      ))}
-    </List>
-  </div>
-</div>
-{/* кнопка пройти тест */}
-  <div className={styles.testButtonContainer}>
-    <Button
-      onClick={handleTestClick}
-      className={styles.testButton}
-    >
-      Пройти тест
-    </Button>
-  </div>
+      </div>
+      {/* кнопка пройти тест */}
+      <div className={styles.testButtonContainer}>
+        <Button
+          onClick={handleTestClick}
+          className={styles.testButton}
+        >
+          Пройти тест
+        </Button>
+      </div>
     </main>
   );
 };

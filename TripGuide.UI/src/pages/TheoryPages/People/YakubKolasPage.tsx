@@ -7,6 +7,7 @@ import homeIcon from '../../../pics/homelogo.png';
 import pic1 from '../../../pics/kolas-1.jpg';
 import pic2 from '../../../pics/kolas-2.jpg';
 import pic3 from '../../../pics/kolas-3.jpg';
+import { Link } from 'react-router-dom';
 
 const KolasPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -34,60 +35,60 @@ const KolasPage = () => {
   const timelineEvents = [
     {
       letter: 'А',
-        events: [
+      events: [
         {
-            title: "Жорес Алфёров",
-            link: "/none",
+          title: "Жорес Алфёров",
+          link: "/none",
         },
         {
-            title: "Светлана Алексиевич",
-            link: "/none",
+          title: "Светлана Алексиевич",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Б',
-        events: [
+      events: [
         {
-            title: "Симон Будный",
-            link: "/budny",
+          title: "Симон Будный",
+          link: "/budny",
         },
         {
-            title: "Максим Богданович",
-            link: "/bogdanovich",
+          title: "Максим Богданович",
+          link: "/bogdanovich",
         },
-        ],
+      ],
     },
     {
-        letter: "В",
-        events: [
+      letter: "В",
+      events: [
         {
-            title: "Валентий Ванькович",
-            link: "/none",
+          title: "Валентий Ванькович",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Г',
-        events: [
+      events: [
         {
-            title: "Микола Гусовский",
-            link: "/gusovsky",
+          title: "Микола Гусовский",
+          link: "/gusovsky",
         },
-        ],
+      ],
     },
     {
       letter: 'Д',
-        events: [
+      events: [
         {
-            title: "Игнат Домейко",
-            link: "/none",
+          title: "Игнат Домейко",
+          link: "/none",
         },
         {
-            title: "Винцент Дунин-Марцинкевич",
-            link: "/none",
+          title: "Винцент Дунин-Марцинкевич",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Е',
@@ -100,21 +101,21 @@ const KolasPage = () => {
     // },
     {
       letter: 'Ж',
-        events: [
+      events: [
         {
-            title: "Дмитрий Жилунович",
-            link: "/none",
+          title: "Дмитрий Жилунович",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'З',
-        events: [
+      events: [
         {
-            title: "Михась Зарецкий",
-            link: "/none",
+          title: "Михась Зарецкий",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'И',
@@ -127,42 +128,42 @@ const KolasPage = () => {
     // },
     {
       letter: 'К',
-        events: [
+      events: [
         {
-            title: "Якуб Колас",
-            link: "/kolas",
+          title: "Якуб Колас",
+          link: "/kolas",
         },
         {
-            title: "Янка Купала",
-            link: "/kupala",
+          title: "Янка Купала",
+          link: "/kupala",
         },
         {
-            title: "Кастусь Калиновский",
-            link: "/kalinowski",
+          title: "Кастусь Калиновский",
+          link: "/kalinowski",
         },
         {
-            title: "Владимир Короткевич",
-            link: "/none",
+          title: "Владимир Короткевич",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Л',
-        events: [
+      events: [
         {
-            title: "Михась Лыньков",
-            link: "/none",
+          title: "Михась Лыньков",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'М',
-        events: [
+      events: [
         {
-            title: "Петр Машеров",
-            link: "/none",
+          title: "Петр Машеров",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Н',
@@ -175,21 +176,21 @@ const KolasPage = () => {
     // },
     {
       letter: 'О',
-        events: [
+      events: [
         {
-            title: "Наполеон Орда",
-            link: "/orda",
+          title: "Наполеон Орда",
+          link: "/orda",
         },
-        ],
+      ],
     },
     {
       letter: 'П',
-        events: [
+      events: [
         {
-            title: "Ефросинья Полоцкая",
-            link: "/none",
+          title: "Ефросинья Полоцкая",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Р',
@@ -202,29 +203,29 @@ const KolasPage = () => {
     // },
     {
       letter: 'С',
-        events: [
+      events: [
         {
-            title: "Франциск Скорина",
-            link: "/skaryna",
+          title: "Франциск Скорина",
+          link: "/skaryna",
         },
         {
-            title: "Михаил Савицкий",
-            link: "/none",
+          title: "Михаил Савицкий",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Т',
-        events: [
+      events: [
         {
-            title: "Тётка (Алоиза Пашкевич)",
-            link: "/none",
+          title: "Тётка (Алоиза Пашкевич)",
+          link: "/none",
         },
         {
-            title: "Максим Танк",
-            link: "/tank",
+          title: "Максим Танк",
+          link: "/tank",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'У',
@@ -246,39 +247,39 @@ const KolasPage = () => {
     // },
     {
       letter: 'Х',
-        events: [
+      events: [
         {
-            title: "Иван Хруцкий",
-            link: "/none",
+          title: "Иван Хруцкий",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Ц',
-        events: [
+      events: [
         {
-            title: "Виталий Цвирко",
-            link: "/none",
+          title: "Виталий Цвирко",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Ч',
-        events: [
+      events: [
         {
-            title: "Михась Чарот",
-            link: "/none",
+          title: "Михась Чарот",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Ш',
-        events: [
+      events: [
         {
-            title: "Марк Шагал",
-            link: "/none",
+          title: "Марк Шагал",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Э',
@@ -308,7 +309,7 @@ const KolasPage = () => {
     //     ],
     // },
   ];
-  
+
   const scrollTimeline = (direction: 'left' | 'right') => {
     if (timelineRef.current) {
       timelineRef.current.scrollBy({
@@ -322,9 +323,11 @@ const KolasPage = () => {
     <div className={styles.container}>
       {/* Шапка */}
       <header className={styles.header}>
-        <IconButton className={styles.homeButton} aria-label="На главную">
-          <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
-        </IconButton>
+        <Link to="/home">
+          <IconButton className={styles.homeButton} aria-label="На главную">
+            <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
+          </IconButton>
+        </Link>
         <Typography variant="h1" className={styles.headerTitle}>
           Исторические личности Беларуси
         </Typography>
@@ -334,55 +337,55 @@ const KolasPage = () => {
       <main className={styles.mainContent}>
         {/* Горизонтальная лента времени */}
         <div className={styles.timelineContainer}>
-          <IconButton 
-            className={styles.timelineArrow} 
+          <IconButton
+            className={styles.timelineArrow}
             onClick={() => scrollTimeline('left')}
           >
             <ChevronLeft />
           </IconButton>
-          
+
           <div className={styles.timelineWrapper} ref={timelineRef}>
             <div className={styles.timeline}>
-                {timelineEvents.map((event, index) => (
+              {timelineEvents.map((event, index) => (
                 <Tooltip
-                    key={index}
-                    title={
+                  key={index}
+                  title={
                     <Box sx={{ p: 1 }}>
-                        {event.events.map((item, itemIndex) => (
-                        <Box 
-                            key={itemIndex} 
-                            sx={{ 
+                      {event.events.map((item, itemIndex) => (
+                        <Box
+                          key={itemIndex}
+                          sx={{
                             mb: 1,
                             cursor: item.link ? "pointer" : "default",
-                            "&:hover": { 
-                                backgroundColor: item.link ? "rgba(0, 0, 0, 0.05)" : "transparent" 
+                            "&:hover": {
+                              backgroundColor: item.link ? "rgba(0, 0, 0, 0.05)" : "transparent"
                             },
-                            }}
-                            onClick={(e) => {
+                          }}
+                          onClick={(e) => {
                             e.stopPropagation(); // Чтобы не срабатывал клик по маркеру
                             if (item.link) navigate(item.link);
-                            }}
+                          }}
                         >
-                            <Typography variant="body2" sx={{ fontFamily: "Huninn", fontWeight: "bold", color: "#5c3a21" }}>
+                          <Typography variant="body2" sx={{ fontFamily: "Huninn", fontWeight: "bold", color: "#5c3a21" }}>
                             {item.title}
-                            </Typography>
+                          </Typography>
                         </Box>
-                        ))}
+                      ))}
                     </Box>
-                    }
-                    placement="bottom"
-                    arrow
+                  }
+                  placement="bottom"
+                  arrow
                 >
-                    <div className={styles.timelineMarker}>
+                  <div className={styles.timelineMarker}>
                     {event.letter}
-                    </div>
+                  </div>
                 </Tooltip>
-                ))}
+              ))}
             </div>
           </div>
-          
-          <IconButton 
-            className={styles.timelineArrow} 
+
+          <IconButton
+            className={styles.timelineArrow}
             onClick={() => scrollTimeline('right')}
           >
             <ChevronRight />
@@ -396,68 +399,68 @@ const KolasPage = () => {
               <ChevronLeft />
             </IconButton>
             <div className={styles.imageContainer} onClick={openModal}>
-                <img 
-                src={images[currentImageIndex].src} 
+              <img
+                src={images[currentImageIndex].src}
                 alt={images[currentImageIndex].alt}
                 className={styles.figureImage}
-                />
+              />
             </div>
             <IconButton onClick={() => setCurrentImageIndex(prev => (prev === images.length - 1 ? 0 : prev + 1))}>
               <ChevronRight />
             </IconButton>
           </div>
 
-            {/* Модальное окно для полноэкранного просмотра */}
-            <Dialog
-                open={isModalOpen}
-                onClose={closeModal}
-                maxWidth="lg"
-                sx={{
-                '& .MuiDialog-paper': {
-                    backgroundColor: 'transparent',
-                    boxShadow: 'none',
-                    maxWidth: '100vw',
-                    overflow: 'visible',
-                },
-                '& .MuiDialogContent-root': {
-                    padding: 0,
-                    backgroundColor: 'transparent',
-                }
-                }}
-                BackdropProps={{
-                sx: {
-                    backgroundColor: 'rgba(0,0,0,0.8)',
-                    backdropFilter: 'blur(4px)',
-                }
-                }}
-            >
-                <DialogContent className={styles.modalContent}>
-                
-                <Box className={styles.modalGallery}>
-                    <IconButton 
-                    className={styles.modalArrow}
-                    onClick={handlePrev}
-                    aria-label="Предыдущее фото"
-                    >
-                    <ChevronLeft />
-                    </IconButton>
-                    <div className={styles.modalImage}>
-                    <img 
-                    src={images[currentImageIndex].src} 
+          {/* Модальное окно для полноэкранного просмотра */}
+          <Dialog
+            open={isModalOpen}
+            onClose={closeModal}
+            maxWidth="lg"
+            sx={{
+              '& .MuiDialog-paper': {
+                backgroundColor: 'transparent',
+                boxShadow: 'none',
+                maxWidth: '100vw',
+                overflow: 'visible',
+              },
+              '& .MuiDialogContent-root': {
+                padding: 0,
+                backgroundColor: 'transparent',
+              }
+            }}
+            BackdropProps={{
+              sx: {
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                backdropFilter: 'blur(4px)',
+              }
+            }}
+          >
+            <DialogContent className={styles.modalContent}>
+
+              <Box className={styles.modalGallery}>
+                <IconButton
+                  className={styles.modalArrow}
+                  onClick={handlePrev}
+                  aria-label="Предыдущее фото"
+                >
+                  <ChevronLeft />
+                </IconButton>
+                <div className={styles.modalImage}>
+                  <img
+                    src={images[currentImageIndex].src}
                     alt={images[currentImageIndex].alt}
                     className={styles.modalImage}
-                    /></div>
-                    
-                    <IconButton 
-                    className={styles.modalArrow}
-                    onClick={handleNext}
-                    aria-label="Следующее фото"
-                    >
-                    <ChevronRight />
-                    </IconButton>
-                </Box>
-                </DialogContent>
-            </Dialog>
+                  /></div>
+
+                <IconButton
+                  className={styles.modalArrow}
+                  onClick={handleNext}
+                  aria-label="Следующее фото"
+                >
+                  <ChevronRight />
+                </IconButton>
+              </Box>
+            </DialogContent>
+          </Dialog>
 
           <div className={styles.textBlock}>
             <Typography variant="h2" className={styles.figureName}>
@@ -477,7 +480,7 @@ const KolasPage = () => {
                 с ранних лет привил племяннику любовь к чтению. В 12-летнем возрасте Мицкевич впервые
                 познакомился с белорусской литературой. Она произвела на него большое впечатление.
               </Typography>
-              
+
               <Typography variant="body1" className={styles.paragraph}>
                 Константин окончил сначала народную школу, а затем, в 1902 году, Несвижскую учительскую семинарию.
                 Во время учёбы увлекся художественной литературой: читал как русских классиков, так белорусских и
@@ -487,7 +490,7 @@ const KolasPage = () => {
                 1906 года. Съезд разогнала полиция. А Мицкевичу запретили заниматься учительской деятельностью. Но вопреки
                 указу он вплоть до 1912 года работал нелегально. Позже события этих лет легли в основу романа «На ростанях».
               </Typography>
-              
+
               <Typography variant="body1" className={styles.paragraph}>
                 В 1906-1907 годах в деревне Смолярня открыл частную школу. В 1907 переехал в Вильню, где работал
                 заведующим отдела литературы в “Нашай Ніве”, но по указанию полиции уволился оттуда и покинул город.
@@ -527,7 +530,7 @@ const KolasPage = () => {
                 защиты мира. В последние годы Якуб Колас много болел. За 10 лет он 26 раз перенес воспаление легких. Но все равно
                 продолжал создавать новые произведения и умер за рабочим столом 13 августа 1956 года от сердечно-сосудистой
                 недостаточности. Похоронен на Военном кладбище в Минске, недалеко от могилы Янки Купалы.
-              </Typography>              
+              </Typography>
             </div>
           </div>
         </div>

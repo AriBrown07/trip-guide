@@ -37,7 +37,7 @@ const Introductory: React.FC = () => {
         </div>
         
         <nav className={styles.nav}>
-          <Button className={styles.navButton} onClick={() => handleClick('/')}>
+          <Button className={styles.navButton} onClick={() => handleClick('/home')}>
             Главная
           </Button>
           <Button className={styles.navButton} onClick={() => setIsAboutModalOpen(true)}>

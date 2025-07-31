@@ -7,11 +7,12 @@ import nesvizhCastle2 from '../../../pics/nesvizh2.jpg';
 import nesvizhCastle3 from '../../../pics/nesvizh3.jpeg';
 import homeIcon from '../../../pics/homelogo.png';
 import mapIcon from '../../../pics/mapicon.png';
+import { Link } from 'react-router-dom';
 
 const NesvizhCastlePage: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const images = [
     { id: 1, src: nesvizhCastle1, alt: 'Несвижский замок вид 1' },
     { id: 2, src: nesvizhCastle2, alt: 'Несвижский замок вид 2' },
@@ -32,18 +33,20 @@ const NesvizhCastlePage: React.FC = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <IconButton className={styles.homeButton} aria-label="На главную">
-          <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
-        </IconButton>
+        <Link to="/home">
+          <IconButton className={styles.homeButton} aria-label="На главную">
+            <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
+          </IconButton>
+        </Link>
         <Typography variant="h1" className={styles.headerTitle}>
           Достопримечательности Беларуси
         </Typography>
       </header>
 
       <main className={styles.mainContent}>
-            <div className={styles.titleBlock}>
-            <img src={mapIcon} alt="Иконка замка" className={styles.mapIcon} />
-            <div className={styles.titleText}>
+        <div className={styles.titleBlock}>
+          <img src={mapIcon} alt="Иконка замка" className={styles.mapIcon} />
+          <div className={styles.titleText}>
             <Typography variant="h2" className={styles.landmarkName}>
               Несвижский
             </Typography>
@@ -51,84 +54,84 @@ const NesvizhCastlePage: React.FC = () => {
               Замок
             </Typography>
           </div></div>
-          {/* Галерея */}
-          <div className={styles.galleryWrapper}>
-            <IconButton 
-              className={styles.arrowButton} 
-              onClick={handlePrev}
-              aria-label="Предыдущее фото"
-            >
-              <ChevronLeft className={styles.arrowIcon} />
-            </IconButton>
-            
-            <div className={styles.imageContainer} onClick={openModal}>
-              <img 
-                src={images[currentImageIndex].src} 
-                alt={images[currentImageIndex].alt}
-                className={styles.landmarkImage}
-              />
-            </div>
-            
-            <IconButton 
-              className={styles.arrowButton} 
-              onClick={handleNext}
-              aria-label="Следующее фото"
-            >
-              <ChevronRight className={styles.arrowIcon} />
-            </IconButton>
+        {/* Галерея */}
+        <div className={styles.galleryWrapper}>
+          <IconButton
+            className={styles.arrowButton}
+            onClick={handlePrev}
+            aria-label="Предыдущее фото"
+          >
+            <ChevronLeft className={styles.arrowIcon} />
+          </IconButton>
+
+          <div className={styles.imageContainer} onClick={openModal}>
+            <img
+              src={images[currentImageIndex].src}
+              alt={images[currentImageIndex].alt}
+              className={styles.landmarkImage}
+            />
           </div>
 
-      {/* Модальное окно для полноэкранного просмотра */}
-      <Dialog
-        open={isModalOpen}
-        onClose={closeModal}
-        maxWidth="lg"
-        sx={{
-          '& .MuiDialog-paper': {
-            backgroundColor: 'transparent',
-            boxShadow: 'none',
-            maxWidth: '100vw',
-            overflow: 'visible',
-          },
-          '& .MuiDialogContent-root': {
-            padding: 0,
-            backgroundColor: 'transparent',
-          }
-        }}
-        BackdropProps={{
-          sx: {
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            backdropFilter: 'blur(4px)',
-          }
-        }}
-      >
-        <DialogContent className={styles.modalContent}>
-          
-          <Box className={styles.modalGallery}>
-            <IconButton 
-              className={styles.modalArrow}
-              onClick={handlePrev}
-              aria-label="Предыдущее фото" >
-              <ChevronLeft />
-            </IconButton>
-            <div className={styles.modalImage}>
-            <img 
-              src={images[currentImageIndex].src} 
-              alt={images[currentImageIndex].alt}
-              className={styles.modalImage}
-            /></div>
-            <IconButton 
-              className={styles.modalArrow}
-              onClick={handleNext}
-              aria-label="Следующее фото" >
-              <ChevronRight />
-            </IconButton>
-          </Box>
-        </DialogContent>
-      </Dialog>
-      
+          <IconButton
+            className={styles.arrowButton}
+            onClick={handleNext}
+            aria-label="Следующее фото"
+          >
+            <ChevronRight className={styles.arrowIcon} />
+          </IconButton>
+        </div>
+
+        {/* Модальное окно для полноэкранного просмотра */}
+        <Dialog
+          open={isModalOpen}
+          onClose={closeModal}
+          maxWidth="lg"
+          sx={{
+            '& .MuiDialog-paper': {
+              backgroundColor: 'transparent',
+              boxShadow: 'none',
+              maxWidth: '100vw',
+              overflow: 'visible',
+            },
+            '& .MuiDialogContent-root': {
+              padding: 0,
+              backgroundColor: 'transparent',
+            }
+          }}
+          BackdropProps={{
+            sx: {
+              backgroundColor: 'rgba(0,0,0,0.8)',
+              backdropFilter: 'blur(4px)',
+            }
+          }}
+        >
+          <DialogContent className={styles.modalContent}>
+
+            <Box className={styles.modalGallery}>
+              <IconButton
+                className={styles.modalArrow}
+                onClick={handlePrev}
+                aria-label="Предыдущее фото" >
+                <ChevronLeft />
+              </IconButton>
+              <div className={styles.modalImage}>
+                <img
+                  src={images[currentImageIndex].src}
+                  alt={images[currentImageIndex].alt}
+                  className={styles.modalImage}
+                /></div>
+              <IconButton
+                className={styles.modalArrow}
+                onClick={handleNext}
+                aria-label="Следующее фото" >
+                <ChevronRight />
+              </IconButton>
+            </Box>
+          </DialogContent>
+        </Dialog>
+
         <div className={styles.textBlock}>
-          
+
           <div className={styles.scrollableContent}>
             <Typography variant="body1" className={styles.paragraph}>
               По одной из версий, в XIII в. хозяином земли, на которой стоит замок, был

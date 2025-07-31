@@ -7,6 +7,7 @@ import homeIcon from '../../../pics/homelogo.png';
 import pic1 from '../../../pics/budny-1.png';
 import pic2 from '../../../pics/budny-2.jpeg';
 import pic3 from '../../../pics/budny-3.jpg';
+import { Link } from 'react-router-dom';
 
 const BudnyPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -34,60 +35,60 @@ const BudnyPage = () => {
   const timelineEvents = [
     {
       letter: 'А',
-        events: [
+      events: [
         {
-            title: "Жорес Алфёров",
-            link: "/none",
+          title: "Жорес Алфёров",
+          link: "/none",
         },
         {
-            title: "Светлана Алексиевич",
-            link: "/none",
+          title: "Светлана Алексиевич",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Б',
-        events: [
+      events: [
         {
-            title: "Симон Будный",
-            link: "/budny",
+          title: "Симон Будный",
+          link: "/budny",
         },
         {
-            title: "Максим Богданович",
-            link: "/bogdanovich",
+          title: "Максим Богданович",
+          link: "/bogdanovich",
         },
-        ],
+      ],
     },
     {
-        letter: "В",
-        events: [
+      letter: "В",
+      events: [
         {
-            title: "Валентий Ванькович",
-            link: "/none",
+          title: "Валентий Ванькович",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Г',
-        events: [
+      events: [
         {
-            title: "Микола Гусовский",
-            link: "/gusovsky",
+          title: "Микола Гусовский",
+          link: "/gusovsky",
         },
-        ],
+      ],
     },
     {
       letter: 'Д',
-        events: [
+      events: [
         {
-            title: "Игнат Домейко",
-            link: "/none",
+          title: "Игнат Домейко",
+          link: "/none",
         },
         {
-            title: "Винцент Дунин-Марцинкевич",
-            link: "/none",
+          title: "Винцент Дунин-Марцинкевич",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Е',
@@ -100,21 +101,21 @@ const BudnyPage = () => {
     // },
     {
       letter: 'Ж',
-        events: [
+      events: [
         {
-            title: "Дмитрий Жилунович",
-            link: "/none",
+          title: "Дмитрий Жилунович",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'З',
-        events: [
+      events: [
         {
-            title: "Михась Зарецкий",
-            link: "/none",
+          title: "Михась Зарецкий",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'И',
@@ -127,42 +128,42 @@ const BudnyPage = () => {
     // },
     {
       letter: 'К',
-        events: [
+      events: [
         {
-            title: "Якуб Колас",
-            link: "/kolas",
+          title: "Якуб Колас",
+          link: "/kolas",
         },
         {
-            title: "Янка Купала",
-            link: "/kupala",
+          title: "Янка Купала",
+          link: "/kupala",
         },
         {
-            title: "Кастусь Калиновский",
-            link: "/kalinowski",
+          title: "Кастусь Калиновский",
+          link: "/kalinowski",
         },
         {
-            title: "Владимир Короткевич",
-            link: "/none",
+          title: "Владимир Короткевич",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Л',
-        events: [
+      events: [
         {
-            title: "Михась Лыньков",
-            link: "/none",
+          title: "Михась Лыньков",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'М',
-        events: [
+      events: [
         {
-            title: "Петр Машеров",
-            link: "/none",
+          title: "Петр Машеров",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Н',
@@ -175,21 +176,21 @@ const BudnyPage = () => {
     // },
     {
       letter: 'О',
-        events: [
+      events: [
         {
-            title: "Наполеон Орда",
-            link: "/orda",
+          title: "Наполеон Орда",
+          link: "/orda",
         },
-        ],
+      ],
     },
     {
       letter: 'П',
-        events: [
+      events: [
         {
-            title: "Ефросинья Полоцкая",
-            link: "/none",
+          title: "Ефросинья Полоцкая",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Р',
@@ -202,29 +203,29 @@ const BudnyPage = () => {
     // },
     {
       letter: 'С',
-        events: [
+      events: [
         {
-            title: "Франциск Скорина",
-            link: "/skaryna",
+          title: "Франциск Скорина",
+          link: "/skaryna",
         },
         {
-            title: "Михаил Савицкий",
-            link: "/none",
+          title: "Михаил Савицкий",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Т',
-        events: [
+      events: [
         {
-            title: "Тётка (Алоиза Пашкевич)",
-            link: "/none",
+          title: "Тётка (Алоиза Пашкевич)",
+          link: "/none",
         },
         {
-            title: "Максим Танк",
-            link: "/tank",
+          title: "Максим Танк",
+          link: "/tank",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'У',
@@ -246,39 +247,39 @@ const BudnyPage = () => {
     // },
     {
       letter: 'Х',
-        events: [
+      events: [
         {
-            title: "Иван Хруцкий",
-            link: "/none",
+          title: "Иван Хруцкий",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Ц',
-        events: [
+      events: [
         {
-            title: "Виталий Цвирко",
-            link: "/none",
+          title: "Виталий Цвирко",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Ч',
-        events: [
+      events: [
         {
-            title: "Михась Чарот",
-            link: "/none",
+          title: "Михась Чарот",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Ш',
-        events: [
+      events: [
         {
-            title: "Марк Шагал",
-            link: "/none",
+          title: "Марк Шагал",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Э',
@@ -322,9 +323,11 @@ const BudnyPage = () => {
     <div className={styles.container}>
       {/* Шапка */}
       <header className={styles.header}>
-        <IconButton className={styles.homeButton} aria-label="На главную">
-          <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
-        </IconButton>
+        <Link to="/home">
+          <IconButton className={styles.homeButton} aria-label="На главную">
+            <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
+          </IconButton>
+        </Link>
         <Typography variant="h1" className={styles.headerTitle}>
           Исторические личности Беларуси
         </Typography>
@@ -334,55 +337,55 @@ const BudnyPage = () => {
       <main className={styles.mainContent}>
         {/* Горизонтальная лента времени */}
         <div className={styles.timelineContainer}>
-          <IconButton 
-            className={styles.timelineArrow} 
+          <IconButton
+            className={styles.timelineArrow}
             onClick={() => scrollTimeline('left')}
           >
             <ChevronLeft />
           </IconButton>
-          
+
           <div className={styles.timelineWrapper} ref={timelineRef}>
             <div className={styles.timeline}>
-                {timelineEvents.map((event, index) => (
+              {timelineEvents.map((event, index) => (
                 <Tooltip
-                    key={index}
-                    title={
+                  key={index}
+                  title={
                     <Box sx={{ p: 1 }}>
-                        {event.events.map((item, itemIndex) => (
-                        <Box 
-                            key={itemIndex} 
-                            sx={{ 
+                      {event.events.map((item, itemIndex) => (
+                        <Box
+                          key={itemIndex}
+                          sx={{
                             mb: 1,
                             cursor: item.link ? "pointer" : "default",
-                            "&:hover": { 
-                                backgroundColor: item.link ? "rgba(0, 0, 0, 0.05)" : "transparent" 
+                            "&:hover": {
+                              backgroundColor: item.link ? "rgba(0, 0, 0, 0.05)" : "transparent"
                             },
-                            }}
-                            onClick={(e) => {
+                          }}
+                          onClick={(e) => {
                             e.stopPropagation(); // Чтобы не срабатывал клик по маркеру
                             if (item.link) navigate(item.link);
-                            }}
+                          }}
                         >
-                            <Typography variant="body2" sx={{ fontFamily: "Huninn", fontWeight: "bold", color: "#5c3a21" }}>
+                          <Typography variant="body2" sx={{ fontFamily: "Huninn", fontWeight: "bold", color: "#5c3a21" }}>
                             {item.title}
-                            </Typography>
+                          </Typography>
                         </Box>
-                        ))}
+                      ))}
                     </Box>
-                    }
-                    placement="bottom"
-                    arrow
+                  }
+                  placement="bottom"
+                  arrow
                 >
-                    <div className={styles.timelineMarker}>
+                  <div className={styles.timelineMarker}>
                     {event.letter}
-                    </div>
+                  </div>
                 </Tooltip>
-                ))}
+              ))}
             </div>
           </div>
-          
-          <IconButton 
-            className={styles.timelineArrow} 
+
+          <IconButton
+            className={styles.timelineArrow}
             onClick={() => scrollTimeline('right')}
           >
             <ChevronRight />
@@ -396,68 +399,68 @@ const BudnyPage = () => {
               <ChevronLeft />
             </IconButton>
             <div className={styles.imageContainer} onClick={openModal}>
-                <img 
-                src={images[currentImageIndex].src} 
+              <img
+                src={images[currentImageIndex].src}
                 alt={images[currentImageIndex].alt}
                 className={styles.figureImage}
-                />
+              />
             </div>
             <IconButton onClick={() => setCurrentImageIndex(prev => (prev === images.length - 1 ? 0 : prev + 1))}>
               <ChevronRight />
             </IconButton>
           </div>
 
-            {/* Модальное окно для полноэкранного просмотра */}
-            <Dialog
-                open={isModalOpen}
-                onClose={closeModal}
-                maxWidth="lg"
-                sx={{
-                '& .MuiDialog-paper': {
-                    backgroundColor: 'transparent',
-                    boxShadow: 'none',
-                    maxWidth: '100vw',
-                    overflow: 'visible',
-                },
-                '& .MuiDialogContent-root': {
-                    padding: 0,
-                    backgroundColor: 'transparent',
-                }
-                }}
-                BackdropProps={{
-                sx: {
-                    backgroundColor: 'rgba(0,0,0,0.8)',
-                    backdropFilter: 'blur(4px)',
-                }
-                }}
-            >
-                <DialogContent className={styles.modalContent}>
-                
-                <Box className={styles.modalGallery}>
-                    <IconButton 
-                    className={styles.modalArrow}
-                    onClick={handlePrev}
-                    aria-label="Предыдущее фото"
-                    >
-                    <ChevronLeft />
-                    </IconButton>
-                    <div className={styles.modalImage}>
-                    <img 
-                    src={images[currentImageIndex].src} 
+          {/* Модальное окно для полноэкранного просмотра */}
+          <Dialog
+            open={isModalOpen}
+            onClose={closeModal}
+            maxWidth="lg"
+            sx={{
+              '& .MuiDialog-paper': {
+                backgroundColor: 'transparent',
+                boxShadow: 'none',
+                maxWidth: '100vw',
+                overflow: 'visible',
+              },
+              '& .MuiDialogContent-root': {
+                padding: 0,
+                backgroundColor: 'transparent',
+              }
+            }}
+            BackdropProps={{
+              sx: {
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                backdropFilter: 'blur(4px)',
+              }
+            }}
+          >
+            <DialogContent className={styles.modalContent}>
+
+              <Box className={styles.modalGallery}>
+                <IconButton
+                  className={styles.modalArrow}
+                  onClick={handlePrev}
+                  aria-label="Предыдущее фото"
+                >
+                  <ChevronLeft />
+                </IconButton>
+                <div className={styles.modalImage}>
+                  <img
+                    src={images[currentImageIndex].src}
                     alt={images[currentImageIndex].alt}
                     className={styles.modalImage}
-                    /></div>
-                    
-                    <IconButton 
-                    className={styles.modalArrow}
-                    onClick={handleNext}
-                    aria-label="Следующее фото"
-                    >
-                    <ChevronRight />
-                    </IconButton>
-                </Box>
-                </DialogContent>
-            </Dialog>
+                  /></div>
+
+                <IconButton
+                  className={styles.modalArrow}
+                  onClick={handleNext}
+                  aria-label="Следующее фото"
+                >
+                  <ChevronRight />
+                </IconButton>
+              </Box>
+            </DialogContent>
+          </Dialog>
 
           <div className={styles.textBlock}>
             <Typography variant="h2" className={styles.figureName}>
@@ -472,7 +475,7 @@ const BudnyPage = () => {
                 в культуре и истории Беларуси. Он был духовным писателем Речи Посполитой и церковным
                 реформатором, придерживался сначала кальвинистских, а затем социанских взглядов.
               </Typography>
-              
+
               <Typography variant="body1" className={styles.paragraph}>
                 Симон Будный являлся одним из наиболее образованных людей своей эпохи: закончил Ягеллонский
                 университет, учился в Швейцарии и Италии. Он был одним из немногих интеллектуалов, занимавшихся
@@ -480,7 +483,7 @@ const BudnyPage = () => {
                 реформаторскими. С 1562 года он начал издавать свои сочинения на многих языках (белорусском,
                 польском, латинском) главным образом с целью пропаганды своего учения.
               </Typography>
-              
+
               <Typography variant="body1" className={styles.paragraph}>
                 В Несвиже Симон Будный основал типографию, где в 1562 году издал «Катехизис» - книгу, в которой
                 высказал свои философские, религиозные, политические и педагогические взгляды. Позже он перевел

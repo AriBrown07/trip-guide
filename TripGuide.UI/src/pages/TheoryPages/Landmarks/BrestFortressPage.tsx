@@ -7,6 +7,7 @@ import brestFort2 from '../../../pics/brest-2.jpg';
 import brestFort3 from '../../../pics/brest-3.png';
 import homeIcon from '../../../pics/homelogo.png';
 import mapIcon from '../../../pics/mapicon.png';
+import { Link } from 'react-router-dom';
 
 const BrestFortressPage: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -32,9 +33,11 @@ const BrestFortressPage: React.FC = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
+        <Link to="/home">
         <IconButton className={styles.homeButton} aria-label="На главную">
           <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
         </IconButton>
+        </Link>
         <Typography variant="h1" className={styles.headerTitle}>
           Достопримечательности Беларуси
         </Typography>

@@ -7,6 +7,7 @@ import hatyn2 from '../../../pics/hatyn-2.jpg';
 import hatyn3 from '../../../pics/hatyn-3.jpg';
 import homeIcon from '../../../pics/homelogo.png';
 import mapIcon from '../../../pics/mapicon.png';
+import { Link } from 'react-router-dom';
 
 const HatynPage: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -32,9 +33,11 @@ const HatynPage: React.FC = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
+         <Link to="/home">
         <IconButton className={styles.homeButton} aria-label="На главную">
           <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
         </IconButton>
+        </Link>
         <Typography variant="h1" className={styles.headerTitle}>
           Достопримечательности Беларуси
         </Typography>

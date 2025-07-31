@@ -6,6 +6,7 @@ import styles from '../PeopleAndCulturePage.module.scss';
 import homeIcon from '../../../pics/homelogo.png';
 import pic1 from '../../../pics/kupalle-1.jpg';
 import pic2 from '../../../pics/kupalle-2.jpg';
+import { Link } from 'react-router-dom';
 
 const KupallePage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -29,7 +30,7 @@ const KupallePage = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-const timelineEvents = [
+  const timelineEvents = [
     // {
     //   letter: 'А',
     //     events: [
@@ -41,39 +42,39 @@ const timelineEvents = [
     // },
     {
       letter: 'Б',
-        events: [
+      events: [
         {
-            title: "Богач",
-            link: "/none",
+          title: "Богач",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
-        letter: "В",
-        events: [
+      letter: "В",
+      events: [
         {
-            title: "Вербное воскресенье",
-            link: "/none",
+          title: "Вербное воскресенье",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Г',
-        events: [
+      events: [
         {
-            title: "Громницы",
-            link: "/none",
+          title: "Громницы",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Д',
-        events: [
+      events: [
         {
-            title: "Деды",
-            link: "/none",
+          title: "Деды",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Е',
@@ -95,12 +96,12 @@ const timelineEvents = [
     // },
     {
       letter: 'З',
-        events: [
+      events: [
         {
-            title: "Зажинки",
-            link: "/none",
+          title: "Зажинки",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'И',
@@ -113,92 +114,92 @@ const timelineEvents = [
     // },
     {
       letter: 'К',
-        events: [
+      events: [
         {
-            title: "Коляды",
-            link: "/none",
+          title: "Коляды",
+          link: "/none",
         },
         {
-            title: "Купалье",
-            link: "/kupalle",
+          title: "Купалье",
+          link: "/kupalle",
         },
-        ],
+      ],
     },
     {
       letter: 'Л',
-        events: [
+      events: [
         {
-            title: "Ляльник",
-            link: "/none",
+          title: "Ляльник",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'М',
-        events: [
+      events: [
         {
-            title: "Масленица",
-            link: "/none",
+          title: "Масленица",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Н',
-        events: [
+      events: [
         {
-            title: "Новый Год",
-            link: "/none",
+          title: "Новый Год",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'О',
-        events: [
+      events: [
         {
-            title: "День Октябрьской революции",
-            link: "/none",
+          title: "День Октябрьской революции",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'П',
-        events: [
+      events: [
         {
-            title: "Покров",
-            link: "/none",
+          title: "Покров",
+          link: "/none",
         },
         {
-            title: "Пасха",
-            link: "/none",
+          title: "Пасха",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Р',
-        events: [
+      events: [
         {
-            title: "Радуница",
-            link: "/none",
+          title: "Радуница",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'С',
-        events: [
+      events: [
         {
-            title: "Сорочины",
-            link: "/none",
+          title: "Сорочины",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Т',
-        events: [
+      events: [
         {
-            title: "Толока",
-            link: "/none",
+          title: "Толока",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'У',
@@ -264,12 +265,12 @@ const timelineEvents = [
     // },
     {
       letter: 'Щ',
-        events: [
+      events: [
         {
-            title: "Щедрый вечер",
-            link: "/none",
+          title: "Щедрый вечер",
+          link: "/none",
         },
-        ],
+      ],
     },
     // {
     //   letter: 'Э',
@@ -282,23 +283,23 @@ const timelineEvents = [
     // },
     {
       letter: 'Ю',
-        events: [
+      events: [
         {
-            title: "Юрьев день",
-            link: "/none",
+          title: "Юрьев день",
+          link: "/none",
         },
-        ],
+      ],
     },
     {
       letter: 'Я',
-        events: [
+      events: [
         {
-            title: "Яблочный Спас",
-            link: "/none",
+          title: "Яблочный Спас",
+          link: "/none",
         },
-        ],
+      ],
     },
-];
+  ];
 
   const scrollTimeline = (direction: 'left' | 'right') => {
     if (timelineRef.current) {
@@ -313,9 +314,11 @@ const timelineEvents = [
     <div className={styles.container}>
       {/* Шапка */}
       <header className={styles.header}>
-        <IconButton className={styles.homeButton} aria-label="На главную">
-          <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
-        </IconButton>
+        <Link to="/home">
+          <IconButton className={styles.homeButton} aria-label="На главную">
+            <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
+          </IconButton>
+        </Link>
         <Typography variant="h1" className={styles.headerTitle}>
           Культура Беларуси
         </Typography>
@@ -325,55 +328,55 @@ const timelineEvents = [
       <main className={styles.mainContent}>
         {/* Горизонтальная лента времени */}
         <div className={styles.timelineContainer}>
-          <IconButton 
-            className={styles.timelineArrow} 
+          <IconButton
+            className={styles.timelineArrow}
             onClick={() => scrollTimeline('left')}
           >
             <ChevronLeft />
           </IconButton>
-          
+
           <div className={styles.timelineWrapper} ref={timelineRef}>
             <div className={styles.timeline}>
-                {timelineEvents.map((event, index) => (
+              {timelineEvents.map((event, index) => (
                 <Tooltip
-                    key={index}
-                    title={
+                  key={index}
+                  title={
                     <Box sx={{ p: 1 }}>
-                        {event.events.map((item, itemIndex) => (
-                        <Box 
-                            key={itemIndex} 
-                            sx={{ 
+                      {event.events.map((item, itemIndex) => (
+                        <Box
+                          key={itemIndex}
+                          sx={{
                             mb: 1,
                             cursor: item.link ? "pointer" : "default",
-                            "&:hover": { 
-                                backgroundColor: item.link ? "rgba(0, 0, 0, 0.05)" : "transparent" 
+                            "&:hover": {
+                              backgroundColor: item.link ? "rgba(0, 0, 0, 0.05)" : "transparent"
                             },
-                            }}
-                            onClick={(e) => {
+                          }}
+                          onClick={(e) => {
                             e.stopPropagation(); // Чтобы не срабатывал клик по маркеру
                             if (item.link) navigate(item.link);
-                            }}
+                          }}
                         >
-                            <Typography variant="body2" sx={{ fontFamily: "Huninn", fontWeight: "bold", color: "#5c3a21" }}>
+                          <Typography variant="body2" sx={{ fontFamily: "Huninn", fontWeight: "bold", color: "#5c3a21" }}>
                             {item.title}
-                            </Typography>
+                          </Typography>
                         </Box>
-                        ))}
+                      ))}
                     </Box>
-                    }
-                    placement="bottom"
-                    arrow
+                  }
+                  placement="bottom"
+                  arrow
                 >
-                    <div className={styles.timelineMarker}>
+                  <div className={styles.timelineMarker}>
                     {event.letter}
-                    </div>
+                  </div>
                 </Tooltip>
-                ))}
+              ))}
             </div>
           </div>
-          
-          <IconButton 
-            className={styles.timelineArrow} 
+
+          <IconButton
+            className={styles.timelineArrow}
             onClick={() => scrollTimeline('right')}
           >
             <ChevronRight />
@@ -387,68 +390,68 @@ const timelineEvents = [
               <ChevronLeft />
             </IconButton>
             <div className={styles.imageContainer} onClick={openModal}>
-                <img 
-                src={images[currentImageIndex].src} 
+              <img
+                src={images[currentImageIndex].src}
                 alt={images[currentImageIndex].alt}
                 className={styles.figureImage}
-                />
+              />
             </div>
             <IconButton onClick={() => setCurrentImageIndex(prev => (prev === images.length - 1 ? 0 : prev + 1))}>
               <ChevronRight />
             </IconButton>
           </div>
 
-            {/* Модальное окно для полноэкранного просмотра */}
-            <Dialog
-                open={isModalOpen}
-                onClose={closeModal}
-                maxWidth="lg"
-                sx={{
-                '& .MuiDialog-paper': {
-                    backgroundColor: 'transparent',
-                    boxShadow: 'none',
-                    maxWidth: '100vw',
-                    overflow: 'visible',
-                },
-                '& .MuiDialogContent-root': {
-                    padding: 0,
-                    backgroundColor: 'transparent',
-                }
-                }}
-                BackdropProps={{
-                sx: {
-                    backgroundColor: 'rgba(0,0,0,0.8)',
-                    backdropFilter: 'blur(4px)',
-                }
-                }}
-            >
-                <DialogContent className={styles.modalContent}>
-                
-                <Box className={styles.modalGallery}>
-                    <IconButton 
-                    className={styles.modalArrow}
-                    onClick={handlePrev}
-                    aria-label="Предыдущее фото"
-                    >
-                    <ChevronLeft />
-                    </IconButton>
-                    <div className={styles.modalImage}>
-                    <img 
-                    src={images[currentImageIndex].src} 
+          {/* Модальное окно для полноэкранного просмотра */}
+          <Dialog
+            open={isModalOpen}
+            onClose={closeModal}
+            maxWidth="lg"
+            sx={{
+              '& .MuiDialog-paper': {
+                backgroundColor: 'transparent',
+                boxShadow: 'none',
+                maxWidth: '100vw',
+                overflow: 'visible',
+              },
+              '& .MuiDialogContent-root': {
+                padding: 0,
+                backgroundColor: 'transparent',
+              }
+            }}
+            BackdropProps={{
+              sx: {
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                backdropFilter: 'blur(4px)',
+              }
+            }}
+          >
+            <DialogContent className={styles.modalContent}>
+
+              <Box className={styles.modalGallery}>
+                <IconButton
+                  className={styles.modalArrow}
+                  onClick={handlePrev}
+                  aria-label="Предыдущее фото"
+                >
+                  <ChevronLeft />
+                </IconButton>
+                <div className={styles.modalImage}>
+                  <img
+                    src={images[currentImageIndex].src}
                     alt={images[currentImageIndex].alt}
                     className={styles.modalImage}
-                    /></div>
-                    
-                    <IconButton 
-                    className={styles.modalArrow}
-                    onClick={handleNext}
-                    aria-label="Следующее фото"
-                    >
-                    <ChevronRight />
-                    </IconButton>
-                </Box>
-                </DialogContent>
-            </Dialog>
+                  /></div>
+
+                <IconButton
+                  className={styles.modalArrow}
+                  onClick={handleNext}
+                  aria-label="Следующее фото"
+                >
+                  <ChevronRight />
+                </IconButton>
+              </Box>
+            </DialogContent>
+          </Dialog>
 
           <div className={styles.textBlock}>
             <Typography variant="h2" className={styles.figureName}>
@@ -460,12 +463,12 @@ const timelineEvents = [
                 "сердитое", "горячее", "кипящее гневом", "ярое" – именно так предки представляли солнце и
                 его чудодейственную силу. Во время праздника люди благодарили и почитаемые могущественные стихии – Огонь, Воду, Землю.
               </Typography>
-              
+
               <Typography variant="body1" className={styles.paragraph}>
                 С распространением христианства к Купалью был приурочен день рождения Иоанна Крестителя.
                 Созвучие слов "купало" и "купать", "погружать в воду" в народном сознании привело к смешению в названии праздника – Иван Купала.
               </Typography>
-              
+
               <Typography variant="body1" className={styles.paragraph}>
                 В обрядах белорусского Купалья тесно переплелись древние языческие и более поздние христианские традиции.
                 И сегодня по православному календарю праздник отмечают в ночь с 6 на 7 июля, по католическому – 24 июня.
@@ -477,8 +480,8 @@ const timelineEvents = [
                 ходят ведьмы, колдуны и духи, которые стремятся навредить человеку, растения и звери разговаривают,
                 а солнце на рассвете "играет". Увидеть эти чудеса, понять язык зверей и птиц можно с помощью цветка
                 папоротника, по поверьям зацветающего всего на миг раз в году. Он давал сверхъестественную способност
-                 видеть будущее и находить скрытые сокровища мира, но заполучить его мог только очень смелый человек.
-                 Поиск "папараць-кветкі" – один из самых таинственных ритуалов купальской ночи.
+                видеть будущее и находить скрытые сокровища мира, но заполучить его мог только очень смелый человек.
+                Поиск "папараць-кветкі" – один из самых таинственных ритуалов купальской ночи.
               </Typography>
             </div>
           </div>
