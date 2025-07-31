@@ -27,10 +27,8 @@ export default function MapViewer({ route, points }: MapViewerProps) {
   const updateMap = useCallback(() => {
     if (!mapInstance.current || !geoObjects.current) return;
 
-    // Очищаем все объекты
     geoObjects.current.removeAll();
 
-    // Добавляем маршрут
     if (route.length > 1) {
       const polyline = new window.ymaps.Polyline(
         route,
@@ -40,7 +38,6 @@ export default function MapViewer({ route, points }: MapViewerProps) {
       geoObjects.current.add(polyline);
     }
 
-    // Добавляем точки
     points.forEach((point) => {
       const placemark = new window.ymaps.Placemark(
         point.coordinates,
@@ -50,7 +47,6 @@ export default function MapViewer({ route, points }: MapViewerProps) {
       geoObjects.current.add(placemark);
     });
 
-    // Автомасштабирование
     if (geoObjects.current.getLength() > 0) {
       mapInstance.current.setBounds(
         geoObjects.current.getBounds(),
@@ -59,7 +55,7 @@ export default function MapViewer({ route, points }: MapViewerProps) {
     }
   }, [route, points]);
 
-  // Инициализация карты (выполняется один раз)
+  // Инициализация карты
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return;
 
@@ -78,15 +74,42 @@ export default function MapViewer({ route, points }: MapViewerProps) {
 
     const initMap = () => {
       window.ymaps.ready(() => {
-        // Создаем карту только если ее еще нет
         if (!mapInstance.current) {
           mapInstance.current = new window.ymaps.Map(mapRef.current, {
             center: [53.9, 27.5],
             zoom: 8,
-            controls: ['zoomControl', 'typeSelector', 'fullscreenControl']
+            controls: [
+              'zoomControl',
+              new window.ymaps.control.TypeSelector({
+                options: {
+                  float: 'right',
+                  position: { right: 75, top: 10 } // typeSelector сдвинут на 50px от правого края
+                }
+              })
+            ]
           });
 
-          // Создаем коллекцию для всех объектов
+          // Создаем свою кнопку с домиком
+          const homeButton = new window.ymaps.control.Button({
+            data: {
+              content: '<div style="cursor: pointer; font-size: 20px">🏠</div>',
+              title: 'На главную'
+            },
+            options: {
+              float: 'right',
+              position: { right: 10, top: 10 } 
+            }
+          });
+
+          // Добавляем обработчик клика
+          homeButton.events.add('click', () => {
+            window.location.href = '/home'; 
+          });
+
+          // Добавляем кнопку на карту
+          mapInstance.current.controls.add(homeButton);
+
+          // Инициализация геообъектов
           geoObjects.current = new window.ymaps.GeoObjectCollection();
           mapInstance.current.geoObjects.add(geoObjects.current);
         }
@@ -105,7 +128,6 @@ export default function MapViewer({ route, points }: MapViewerProps) {
     };
   }, [updateMap]);
 
-  // Обновление данных на карте
   useEffect(() => {
     if (mapInstance.current) {
       updateMap();

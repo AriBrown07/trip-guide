@@ -366,7 +366,7 @@ const TestPage: React.FC = () => {
               </div>
               <button
                 className="back-button"
-                onClick={() => handleClick('/CountryIntro')}
+                onClick={() => handleClick('/home')}
               >
                 Назад
               </button>

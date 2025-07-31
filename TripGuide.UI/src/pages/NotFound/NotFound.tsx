@@ -36,7 +36,7 @@ const NotFound: React.FC = () => {
                   Вернуться назад
                 </button>
                 
-                <button className="btn btn--secondary" onClick={() => window.location.href = '/'}>
+                <button className="btn btn--secondary" onClick={() => window.location.href = '/home'}>
                   <Home size={20} />
                   На главную
                 </button>
