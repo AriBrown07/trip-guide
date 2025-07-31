@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Typography, Button, IconButton, Dialog, DialogContent, Box } from '@mui/material';
 import { ChevronLeft, ChevronRight, Close } from '@mui/icons-material';
 import styles from '../LandmarkPage.module.scss';
@@ -6,8 +6,8 @@ import pushcha1 from '../../../pics/pushcha-1.jpg';
 import pushcha2 from '../../../pics/pushcha-2.jpg';
 import pushcha3 from '../../../pics/pushcha-3.jpg';
 import homeIcon from '../../../pics/homelogo.png';
-import mapIcon from '../../../pics/mapicon.png';
 import { Link } from 'react-router-dom';
+
 
 const PushchaPage: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -30,6 +30,59 @@ const PushchaPage: React.FC = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const dragRef = useRef(false);
+
+  const handleMouseDown = () => {
+    dragRef.current = false;
+  };
+
+  const handleMouseMove = () => {
+    dragRef.current = true;
+  };
+
+  const handleClick = () => {
+    if (!dragRef.current) {
+      window.open('/map');
+    }
+  };
+
+
+
+  useEffect(() => {
+    const loadYandexMaps = () => {
+      if (window.ymaps) {
+        initMap();
+      } else {
+        const script = document.createElement('script');
+        script.src = 'https://api-maps.yandex.ru/2.1/?apikey=3562d98a-f820-4a49-9f8b-5c0b232b10b9&lang=ru_RU';
+        script.onload = () => window.ymaps.ready(initMap);
+        document.body.appendChild(script);
+      }
+    };
+
+    const initMap = () => {
+      const center = [52.583333, 23.933333]; // координаты Беловежской пущи
+      const map = new window.ymaps.Map(mapContainerRef.current, {
+        center,
+        zoom: 10,
+        controls: ['zoomControl']
+      });
+
+      const placemark = new window.ymaps.Placemark(center, {
+        balloonContent: 'Беловежская пуща'
+      }, {
+        preset: 'islands#blueIcon'
+      });
+
+      map.geoObjects.add(placemark);
+    };
+
+    loadYandexMaps();
+  }, []);
+
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -44,41 +97,37 @@ const PushchaPage: React.FC = () => {
       </header>
 
       <main className={styles.mainContent}>
-        <div className={styles.titleBlock}>
-          <img src={mapIcon} alt="" className={styles.mapIcon} />
-          <div className={styles.titleText}>
-            <Typography variant="h2" className={styles.landmarkName}>
-              Беловежская
-            </Typography>
-            <Typography variant="h2" className={styles.landmarkName}>
-              Пуща
-            </Typography>
-          </div></div>
-        {/* Галерея */}
-        <div className={styles.galleryWrapper}>
-          <IconButton
-            className={styles.arrowButton}
-            onClick={handlePrev}
-            aria-label="Предыдущее фото"
-          >
-            <ChevronLeft className={styles.arrowIcon} />
-          </IconButton>
+        <div className={styles.contentRow}>
+          <div className={styles.mapWrapper} ref={mapContainerRef} 
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onClick={handleClick} />
 
-          <div className={styles.imageContainer} onClick={openModal}>
-            <img
-              src={images[currentImageIndex].src}
-              alt={images[currentImageIndex].alt}
-              className={styles.landmarkImage}
-            />
+          <div className={styles.galleryWrapper}>
+            <IconButton
+              className={styles.arrowButton}
+              onClick={handlePrev}
+              aria-label="Предыдущее фото"
+            >
+              <ChevronLeft className={styles.arrowIcon} />
+            </IconButton>
+
+            <div className={styles.imageContainer} onClick={openModal}>
+              <img
+                src={images[currentImageIndex].src}
+                alt={images[currentImageIndex].alt}
+                className={styles.landmarkImage}
+              />
+            </div>
+
+            <IconButton
+              className={styles.arrowButton}
+              onClick={handleNext}
+              aria-label="Следующее фото"
+            >
+              <ChevronRight className={styles.arrowIcon} />
+            </IconButton>
           </div>
-
-          <IconButton
-            className={styles.arrowButton}
-            onClick={handleNext}
-            aria-label="Следующее фото"
-          >
-            <ChevronRight className={styles.arrowIcon} />
-          </IconButton>
         </div>
 
         {/* Модальное окно для полноэкранного просмотра */}

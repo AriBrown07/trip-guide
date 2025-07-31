@@ -36,16 +36,16 @@
   background-image: url('../../pics/vintage-map-bg.jpg');
   background-size: cover;
   background-position: center;
-  box-shadow: inset 0 0 0 1000px rgba(255,255,255,.8);
+  box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, .8);
 }
 
 .homeButton {
   position: absolute;
   left: 0.6rem;
   z-index: 1;
-  
+
   &:hover {
-    background-color: rgba(255,255,255,0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
   }
 }
 
@@ -54,57 +54,69 @@
   height: 31px;
 }
 
-.titleBlock {
+
+.contentRow {
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-top: 7rem;
-  margin-left: 12rem;
+  gap: 2rem;
+  height: 500px;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  // Добавляем, чтобы внутренние блоки сжимались
+  min-width: 0;
 }
-.widertitleBlock {
+
+.mapWrapper {
+  width: 45%;
+  height: 100%; // Исправлено с 110% на 100%
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+  margin-left: 0;
+  min-width: 0; // Важно для сжатия flex-элементов
+  flex-shrink: 1; // Позволяет сжиматься
+}
+
+.galleryWrapper {
+  width: 45%;
+  height: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-top: 7rem;
-  margin-left: 2rem;
+  position: relative;
+  margin: 0;
+  min-width: 0; // Чтобы не выходили из области
+  flex-shrink: 1; // Позволяет сжиматься
 }
 
-.titleText {
+.imageContainer {
+
+  
+
+  cursor: pointer;
+  transition: transform 0.3s;
+  max-width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-}
-
-.mapIcon {
-  height: 80px;
-  width: auto;
-  margin-right: 1.3rem;
-}
-
-.biggermapIcon {
-  height: 150px;
-  width: auto;
-  margin-right: 1.3rem;
-}
-
-.titleWrapper {
-  margin-top: 5rem;
-}
-
-.landmarkName {
-  padding-right: 15rem;
-  font-family: 'Huninn', 'Times New Roman', serif !important;
-  color: #5c3a21 !important;
-  font-size: 2.9rem !important;
-  font-weight: 700 !important;
-  line-height: 1.1 !important;
+  justify-content: center;
+  align-items: center;
+  max-height: 100%;
 }
 
 .landmarkImage {
-  height: 100%;
-  width: 50%;
-  max-width: 100%;
+  height: 100%; // Изменено с 120% на 100% чтобы не выходило за границы
+  width: auto;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-height: 550px;
+  max-width: 100%;
 }
+
 
 .textBlock {
   flex: 1;
@@ -114,7 +126,7 @@
   padding-right: 0.5rem;
   margin: 1rem;
   margin-top: 1rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -132,11 +144,11 @@
   flex: 1;
   overflow-y: auto;
   padding-right: 0.5rem;
-  
-  /* Стилизация скроллбара */
+
   &::-webkit-scrollbar {
     width: 6px;
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: #d7ccc8;
     border-radius: 3px;
@@ -151,38 +163,20 @@
   text-align: justify;
 }
 
-.galleryWrapper {
-  width: 120%;
-  height: 45vh;
-  margin-top: -13rem;
-  margin-left: 26.7rem;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  z-index: 2;
-}
-
-.imageContainer {
-  cursor: pointer;
-  transition: transform 0.3s;
-  flex-grow: 1;
-  max-width: 80%;
-}
-
 .arrowButton {
   position: absolute;
-  top: 8rem;
-  background-color: rgba(255,255,255,.3) !important;
+  top: 2%;
+  background-color: rgba(255, 255, 255, .3) !important;
   width: 40px;
   height: 40px;
   z-index: 2;
-  
+
   &:first-of-type {
-    left: 2.5%;
+    left: 7.5%;
   }
-  
+
   &:last-of-type {
-    right: 42.5%;
+    right: 7.5%;
   }
 }
 
@@ -200,6 +194,7 @@
     overflow: visible;
     background: transparent !important;
   }
+
   .MuiDialogContent-root {
     padding: 0 !important;
     background: transparent !important;
@@ -208,7 +203,7 @@
 }
 
 .backdrop {
-  background-color: rgba(0,0,0,0.8) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
   backdrop-filter: blur(4px);
 }
 
@@ -216,7 +211,8 @@
   color: transparent !important;
   position: relative;
   padding: 0;
-  & > div {
+
+  &>div {
     background-color: transparent !important;
   }
 }
@@ -228,71 +224,73 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  &, & > * {
+
+  &,
+  &>* {
     background-color: transparent !important;
   }
 }
 
 .modalImage {
-  max-height:max-content;
-  max-width:max-content;
+  max-height: max-content;
+  max-width: max-content;
   object-fit: contain;
   border-radius: 12px;
 }
 
 .modalArrow {
   color: white !important;
-  background-color: rgba(0,0,0,0.5) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
   width: 50px;
   height: 50px;
 }
 
 @media (max-width: 768px) {
-  .arrowButton {
-    width: 30px;
-    height: 30px;
-    
-    &:first-of-type {
-      left: 5%;
-    }
-    
-    &:last-of-type {
-      right: 5%;
-    }
-  }
-  
-  .arrowIcon {
-    font-size: 1.5rem !important;
-  }
-  
-  .modalImage {
-    max-width: 90vw;
-    max-height: 60vh;
-  }
-  
-  .modalArrow {
-    width: 40px;
-    height: 40px;
-  }
-}
 
-@media (max-width: 768px) {
-  .headerTitle {
-    font-size: 1.2rem !important;
+  .mainContent {
+    position: relative;
   }
-  
-  .landmarkImage {
-    max-width: 100%;
+
+  .container {
+    height: 140%;
+  }
+
+  .contentRow {
+    display: flex;
+    /* убедись, что есть */
+    flex-direction: column;
+    height: auto;
+    gap: 1.5rem;
+    margin-top: 28rem;
+    margin-bottom: 2rem;
+  }
+
+  .textBlock {
+    max-width: 90%;
+    margin: 0 1rem 1rem 1rem;
+    position: absolute;
+    top: 2rem;
+    max-height: 20rem;
+  }
+
+  .galleryWrapper {
+    order: 1;
     width: 100%;
     height: auto;
-    max-height: 30vh;
+    margin: 0 1rem 1rem 1rem;
   }
-  
-  .landmarkTitle {
-    font-size: 1.5rem !important;
+
+  .mapWrapper {
+    order: 2;
+    width: 90%;
+    height: 300px;
+    margin: 0 1rem 0 1rem;
   }
-  
-  .paragraph {
-    font-size: 1rem !important;
+
+  .landmarkImage {
+    height: auto;
+    max-height: none;
+    width: 100%;
+    border-radius: 12px;
   }
 }
