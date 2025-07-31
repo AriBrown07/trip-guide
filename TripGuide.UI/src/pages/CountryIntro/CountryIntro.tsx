@@ -59,7 +59,7 @@ const CountryIntro: React.FC = () => {
   };
 
   const handleBackClick = () => {
-    navigate('/main'); // Здесь укажите нужный путь
+    navigate('/map'); // Здесь укажите нужный путь
   };
 
   const filteredCategories = categories.map(category => ({
