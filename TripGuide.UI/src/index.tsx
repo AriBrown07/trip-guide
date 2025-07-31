@@ -5,6 +5,12 @@ import reportWebVitals from "./reportWebVitals";
 import { App } from "./App";
 import { BrowserRouter } from "react-router-dom";
 
+window.addEventListener('error', (e) => {
+  if (e.message === 'Script error.') {
+    e.preventDefault();
+  }
+});
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

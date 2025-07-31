@@ -24,6 +24,11 @@
   font-size: 1.5rem !important;
   font-weight: 600 !important;
   margin: 0 !important;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem !important;
+    padding: 16px;
+  }
 }
 
 .mainContent {
@@ -245,7 +250,7 @@
   height: 50px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   .mainContent {
     position: relative;
@@ -266,7 +271,7 @@
   }
 
   .textBlock {
-    max-width: 90%;
+    max-width: 95%;
     margin: 0 1rem 1rem 1rem;
     position: absolute;
     top: 2rem;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Typography, Button, IconButton, Dialog, DialogContent, Box } from '@mui/material';
-import { ChevronLeft, ChevronRight, Close } from '@mui/icons-material';
+import { Typography, IconButton, Dialog, DialogContent, Box } from '@mui/material';
+import { ChevronLeft, ChevronRight} from '@mui/icons-material';
 import styles from '../LandmarkPage.module.scss';
 import pushcha1 from '../../../pics/pushcha-1.jpg';
 import pushcha2 from '../../../pics/pushcha-2.jpg';
@@ -44,7 +44,7 @@ const PushchaPage: React.FC = () => {
 
   const handleClick = () => {
     if (!dragRef.current) {
-      window.open('/map');
+      window.location.href = '/map';
     }
   };
 
@@ -56,29 +56,45 @@ const PushchaPage: React.FC = () => {
         initMap();
       } else {
         const script = document.createElement('script');
-        script.src = 'https://api-maps.yandex.ru/2.1/?apikey=3562d98a-f820-4a49-9f8b-5c0b232b10b9&lang=ru_RU';
+        script.src =
+          'https://api-maps.yandex.ru/2.1/?apikey=3562d98a-f820-4a49-9f8b-5c0b232b10b9&lang=ru_RU';
         script.onload = () => window.ymaps.ready(initMap);
         document.body.appendChild(script);
       }
     };
-
+  
     const initMap = () => {
-      const center = [52.583333, 23.933333]; // координаты Беловежской пущи
+      const center = [52.572606, 23.801718]; 
       const map = new window.ymaps.Map(mapContainerRef.current, {
         center,
-        zoom: 10,
+        zoom: 15,
         controls: ['zoomControl']
       });
-
-      const placemark = new window.ymaps.Placemark(center, {
-        balloonContent: 'Беловежская пуща'
-      }, {
-        preset: 'islands#blueIcon'
+  
+      // Инициализируем поиск без панели
+      const searchControl = new window.ymaps.control.SearchControl({
+        options: {
+          provider: 'yandex#search',
+          noPlacemark: true,
+          resultsPerPage: 1
+        }
       });
-
-      map.geoObjects.add(placemark);
+  
+      // Выполняем поиск
+      searchControl.search('Музей природы Беловежской пущи').then(() => {
+        const results = searchControl.getResultsArray();
+        if (results.length > 0) {
+          const org = results[0];
+  
+         
+  
+         
+          map.setCenter(org.geometry.getCoordinates(), 16);
+  
+        }
+      });
     };
-
+  
     loadYandexMaps();
   }, []);
 

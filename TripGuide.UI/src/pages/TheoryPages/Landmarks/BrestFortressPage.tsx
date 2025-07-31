@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Typography, Button, IconButton, Dialog, DialogContent, Box } from '@mui/material';
 import { ChevronLeft, ChevronRight, Close } from '@mui/icons-material';
 import styles from '../LandmarkPage.module.scss';
@@ -6,13 +6,12 @@ import brestFort1 from '../../../pics/brest-1.jpg';
 import brestFort2 from '../../../pics/brest-2.jpg';
 import brestFort3 from '../../../pics/brest-3.png';
 import homeIcon from '../../../pics/homelogo.png';
-import mapIcon from '../../../pics/mapicon.png';
 import { Link } from 'react-router-dom';
 
 const BrestFortressPage: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const images = [
     { id: 1, src: brestFort1, alt: 'Брестская крепость вид 1' },
     { id: 2, src: brestFort2, alt: 'Брестская крепость вид 2' },
@@ -30,13 +29,83 @@ const BrestFortressPage: React.FC = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const dragRef = useRef(false);
+
+  const handleMouseDown = () => {
+    dragRef.current = false;
+  };
+
+  const handleMouseMove = () => {
+    dragRef.current = true;
+  };
+
+  const handleClick = () => {
+    if (!dragRef.current) {
+      window.location.href = '/map';
+    }
+  };
+
+
+
+  useEffect(() => {
+  const loadYandexMaps = () => {
+    if (window.ymaps) {
+      initMap();
+    } else {
+      const script = document.createElement('script');
+      script.src =
+        'https://api-maps.yandex.ru/2.1/?apikey=3562d98a-f820-4a49-9f8b-5c0b232b10b9&lang=ru_RU';
+      script.onload = () => window.ymaps.ready(initMap);
+      document.body.appendChild(script);
+    }
+  };
+
+  const initMap = () => {
+    const center = [52.091815, 23.68594]; 
+    const map = new window.ymaps.Map(mapContainerRef.current, {
+      center,
+      zoom: 15,
+      controls: ['zoomControl']
+    });
+
+    // Инициализируем поиск без панели
+    const searchControl = new window.ymaps.control.SearchControl({
+      options: {
+        provider: 'yandex#search',
+        noPlacemark: true,
+        resultsPerPage: 1
+      }
+    });
+
+    // Выполняем поиск
+    searchControl.search('Брестская крепость-герой').then(() => {
+      const results = searchControl.getResultsArray();
+      if (results.length > 0) {
+        const org = results[0];
+
+        
+
+       
+        map.setCenter(org.geometry.getCoordinates(), 16);
+
+      }
+    });
+  };
+
+  loadYandexMaps();
+}, []);
+
+
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <Link to="/home">
-        <IconButton className={styles.homeButton} aria-label="На главную">
-          <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
-        </IconButton>
+          <IconButton className={styles.homeButton} aria-label="На главную" >
+            <img src={homeIcon} alt="На главную" className={styles.homeIcon} />
+          </IconButton>
         </Link>
         <Typography variant="h1" className={styles.headerTitle}>
           Достопримечательности Беларуси
@@ -44,97 +113,93 @@ const BrestFortressPage: React.FC = () => {
       </header>
 
       <main className={styles.mainContent}>
-            <div className={styles.titleBlock}>
-            <img src={mapIcon} alt="" className={styles.mapIcon} />
-            <div className={styles.titleText}>
-            <Typography variant="h2" className={styles.landmarkName}>
-              Брестская
-            </Typography>
-            <Typography variant="h2" className={styles.landmarkName}>
-              Крепость
-            </Typography>
-          </div></div>
-          {/* Галерея */}
+        <div className={styles.contentRow}>
+          <div className={styles.mapWrapper} ref={mapContainerRef}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onClick={handleClick} />
+
           <div className={styles.galleryWrapper}>
-            <IconButton 
-              className={styles.arrowButton} 
+            <IconButton
+              className={styles.arrowButton}
               onClick={handlePrev}
               aria-label="Предыдущее фото"
             >
               <ChevronLeft className={styles.arrowIcon} />
             </IconButton>
-            
+
             <div className={styles.imageContainer} onClick={openModal}>
-              <img 
-                src={images[currentImageIndex].src} 
+              <img
+                src={images[currentImageIndex].src}
                 alt={images[currentImageIndex].alt}
                 className={styles.landmarkImage}
               />
             </div>
-            
-            <IconButton 
-              className={styles.arrowButton} 
+
+            <IconButton
+              className={styles.arrowButton}
               onClick={handleNext}
               aria-label="Следующее фото"
             >
               <ChevronRight className={styles.arrowIcon} />
             </IconButton>
           </div>
+        </div>
 
-      {/* Модальное окно для полноэкранного просмотра */}
-      <Dialog
-        open={isModalOpen}
-        onClose={closeModal}
-        maxWidth="lg"
-        sx={{
-          '& .MuiDialog-paper': {
-            backgroundColor: 'transparent',
-            boxShadow: 'none',
-            maxWidth: '100vw',
-            overflow: 'visible',
-          },
-          '& .MuiDialogContent-root': {
-            padding: 0,
-            backgroundColor: 'transparent',
-          }
-        }}
-        BackdropProps={{
-          sx: {
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            backdropFilter: 'blur(4px)',
-          }
-        }}
-      >
-        <DialogContent className={styles.modalContent}>
-          
-          <Box className={styles.modalGallery}>
-            <IconButton 
-              className={styles.modalArrow}
-              onClick={handlePrev}
-              aria-label="Предыдущее фото"
-            >
-              <ChevronLeft />
-            </IconButton>
-            <div className={styles.modalImage}>
-            <img 
-              src={images[currentImageIndex].src} 
-              alt={images[currentImageIndex].alt}
-              className={styles.modalImage}
-            /></div>
-            
-            <IconButton 
-              className={styles.modalArrow}
-              onClick={handleNext}
-              aria-label="Следующее фото"
-            >
-              <ChevronRight />
-            </IconButton>
-          </Box>
-        </DialogContent>
-      </Dialog>
+        {/* Модальное окно для полноэкранного просмотра */}
+        <Dialog
+          open={isModalOpen}
+          onClose={closeModal}
+          maxWidth="lg"
+          sx={{
+            '& .MuiDialog-paper': {
+              backgroundColor: 'transparent',
+              boxShadow: 'none',
+              maxWidth: '100vw',
+              overflow: 'visible',
+            },
+            '& .MuiDialogContent-root': {
+              padding: 0,
+              backgroundColor: 'transparent',
+            }
+          }}
+          BackdropProps={{
+            sx: {
+              backgroundColor: 'rgba(0,0,0,0.8)',
+              backdropFilter: 'blur(4px)',
+            }
+          }}
+        >
+          <DialogContent className={styles.modalContent}>
+
+            <Box className={styles.modalGallery}>
+              <IconButton
+                className={styles.modalArrow}
+                onClick={handlePrev}
+                aria-label="Предыдущее фото"
+              >
+                <ChevronLeft />
+              </IconButton>
+              <div className={styles.modalImage}>
+                <img
+                  src={images[currentImageIndex].src}
+                  alt={images[currentImageIndex].alt}
+                  className={styles.modalImage}
+                /></div>
+
+              <IconButton
+                className={styles.modalArrow}
+                onClick={handleNext}
+                aria-label="Следующее фото"
+              >
+                <ChevronRight />
+              </IconButton>
+            </Box>
+          </DialogContent>
+        </Dialog>
 
         <div className={styles.textBlock}>
-          
+
           <div className={styles.scrollableContent}>
             <Typography variant="body1" className={styles.paragraph}>
               Появление в городе Брест‑Литовске (ныне Брест) крепости тесно связано с
@@ -174,16 +239,16 @@ const BrestFortressPage: React.FC = () => {
             <Typography variant="body1" className={styles.paragraph}>
               Неизвестно, сколько дней длилась оборона Брестской крепости и какое количество
               солдат в ней участвовало. Принято считать, что речь идёт как минимум о месяце боёв
-              и 3,5 тысячи советских солдат. И всё же крепость пала. Известно, что одни из 
+              и 3,5 тысячи советских солдат. И всё же крепость пала. Известно, что одни из
               последних её защитников были взяты в плен в конце июля 1941 года.
             </Typography>
 
             <Typography variant="body1" className={styles.paragraph}>
-            Город освободили 24 июля 1944 года. Советские войска, вошедшие в него, обнаружили
-            руины старинного укрепления. В течение последующих лет строение восстанавливали,
-            а слух о подвиге его героев распространялся среди народа. Крепость стала символом
-            бесстрашия советских солдат. В 1965 г. цитадели присвоили звание «крепость‑герой»,
-            а через год был открыт Музей обороны Брестской крепости.
+              Город освободили 24 июля 1944 года. Советские войска, вошедшие в него, обнаружили
+              руины старинного укрепления. В течение последующих лет строение восстанавливали,
+              а слух о подвиге его героев распространялся среди народа. Крепость стала символом
+              бесстрашия советских солдат. В 1965 г. цитадели присвоили звание «крепость‑герой»,
+              а через год был открыт Музей обороны Брестской крепости.
             </Typography>
           </div>
         </div>
