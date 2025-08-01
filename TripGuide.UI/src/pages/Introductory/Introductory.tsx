@@ -14,11 +14,11 @@ const Introductory: React.FC = () => {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const navigate = useNavigate();
-  
+
   const handleClick = (link: string) => {
     navigate(link);
   };
-  
+
   return (
     <div className={styles.container}>
 
@@ -26,7 +26,7 @@ const Introductory: React.FC = () => {
         <div className={styles.logoContainer}>
           <img src={logo} alt="МарHistory" className={styles.logoImage} />
           <Typography
-            variant="h3" 
+            variant="h3"
             className={styles.logoText}
             sx={{
               fontFamily: "'Lobster', sans-serif",
@@ -35,7 +35,7 @@ const Introductory: React.FC = () => {
             МарHistory
           </Typography>
         </div>
-        
+
         <nav className={styles.nav}>
           <Button className={styles.navButton} onClick={() => handleClick('/home')}>
             Главная
@@ -46,7 +46,7 @@ const Introductory: React.FC = () => {
           <Button className={styles.navButton} onClick={() => setIsAuthModalOpen(true)}>
             Авторизация
           </Button>
-          
+
           <div className={styles.socialIconsHeader}>
             <a href="https://vk.com" className={styles.socialLink} target="_blank" rel="noopener noreferrer">
               <img src={vkIcon} alt="VK" className={styles.socialIcon} />
@@ -59,15 +59,15 @@ const Introductory: React.FC = () => {
             </a>
           </div>
         </nav>
-        
 
-        <AboutModal 
-          open={isAboutModalOpen} 
-          onClose={() => setIsAboutModalOpen(false)} 
+
+        <AboutModal
+          open={isAboutModalOpen}
+          onClose={() => setIsAboutModalOpen(false)}
         />
-        <AuthModal 
-          open={isAuthModalOpen} 
-          onClose={() => setIsAuthModalOpen(false)} 
+        <AuthModal
+          open={isAuthModalOpen}
+          onClose={() => setIsAuthModalOpen(false)}
         />
       </header>
 
@@ -93,7 +93,9 @@ const Introductory: React.FC = () => {
             Путешествуйте по карте и узнавайте новое
           </Typography>
         </div>
+        
       </main>
+
     </div>
   );
 };
