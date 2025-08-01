@@ -45,7 +45,7 @@ const KupallePage = () => {
       events: [
         {
           title: "Богач",
-          link: "/none",
+          link: "/bogach",
         },
       ],
     },
@@ -54,7 +54,7 @@ const KupallePage = () => {
       events: [
         {
           title: "Вербное воскресенье",
-          link: "/none",
+          link: "/sunday",
         },
       ],
     },
@@ -63,7 +63,7 @@ const KupallePage = () => {
       events: [
         {
           title: "Громницы",
-          link: "/none",
+          link: "/gromnitsy",
         },
       ],
     },
@@ -72,7 +72,7 @@ const KupallePage = () => {
       events: [
         {
           title: "Деды",
-          link: "/none",
+          link: "/grandfathers",
         },
       ],
     },
@@ -99,7 +99,7 @@ const KupallePage = () => {
       events: [
         {
           title: "Зажинки",
-          link: "/none",
+          link: "/zazhinki",
         },
       ],
     },

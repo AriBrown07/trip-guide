@@ -31,6 +31,15 @@ import { KupallePage } from '../pages/TheoryPages/Culture/KupallePage';
 import { NemigaPage } from '../pages/TheoryPages/Events/NemigaPage';
 import { SkarynaPage } from '../pages/TheoryPages/People/SkarynaPage';
 
+// my page 
+
+import { BogachPage } from '../pages/TheoryPages/Culture/BogachPage';
+import { PalmSunday } from '../pages/TheoryPages/Culture/PalmSunday';
+import { Gromnitsy } from '../pages/TheoryPages/Culture/Gromnitsy';
+import { Grandfathers } from '../pages/TheoryPages/Culture/Grandfathers';
+import { Zazhinki } from '../pages/TheoryPages/Culture/Zazhinki';
+import { Palette } from 'lucide-react';
+// end my page 
 
 interface PrivateRouteProps {
   children: React.ReactElement;
@@ -73,6 +82,11 @@ export const AppRoutes: React.FC = () => {
       <Route path="/kupalle" element={<KupallePage />} />
       <Route path="/nemiga" element={<NemigaPage />} />
       <Route path="/skaryna" element={<SkarynaPage />} />
+      <Route path="/bogach" element={<BogachPage />} />
+      <Route path="/sunday" element={<PalmSunday />} />
+      <Route path="/gromnitsy" element={<Gromnitsy />} />
+      <Route path="/grandfathers" element={<Grandfathers/>} />
+      <Route path="/zazhinki" element={<Zazhinki/>} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
