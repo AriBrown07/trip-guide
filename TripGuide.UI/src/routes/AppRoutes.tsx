@@ -38,6 +38,20 @@ import { PalmSunday } from '../pages/TheoryPages/Culture/PalmSunday';
 import { Gromnitsy } from '../pages/TheoryPages/Culture/Gromnitsy';
 import { Grandfathers } from '../pages/TheoryPages/Culture/Grandfathers';
 import { Zazhinki } from '../pages/TheoryPages/Culture/Zazhinki';
+import { Kolyada } from '../pages/TheoryPages/Culture/Kolyada';
+import { Lyalnik } from '../pages/TheoryPages/Culture/Lyalnik';
+import { Carnival } from '../pages/TheoryPages/Culture/Carnival';
+import { NewYear } from '../pages/TheoryPages/Culture/NewYear';
+import { October } from '../pages/TheoryPages/Culture/October';
+import { Cover } from '../pages/TheoryPages/Culture/Cover';
+import { Easter } from '../pages/TheoryPages/Culture/Easter';
+import { Radunitsa } from '../pages/TheoryPages/Culture/Radunitsa';
+import { Sorochiny } from '../pages/TheoryPages/Culture/Sorochiny';
+import { Cleanup } from '../pages/TheoryPages/Culture/Cleanup';
+import { Generous } from '../pages/TheoryPages/Culture/Generous';
+import { Yuriev } from '../pages/TheoryPages/Culture/Yuriev';
+import { Apple } from '../pages/TheoryPages/Culture/Apple';
+import { Draniki } from '../pages/TheoryPages/Culture/Draniki';
 import { Palette } from 'lucide-react';
 // end my page 
 
@@ -87,6 +101,20 @@ export const AppRoutes: React.FC = () => {
       <Route path="/gromnitsy" element={<Gromnitsy />} />
       <Route path="/grandfathers" element={<Grandfathers/>} />
       <Route path="/zazhinki" element={<Zazhinki/>} />
+      <Route path="/kolyada" element={<Kolyada/>} />
+      <Route path="/lyalnik" element={<Lyalnik/>} />
+      <Route path="/carnival" element={<Carnival/>} />
+      <Route path="/newYear" element={<NewYear/>} />
+      <Route path="/october" element={<October/>} />
+      <Route path="/cover" element={<Cover/>} />
+      <Route path="/easter" element={<Easter/>} />
+      <Route path="/radunitsa" element={<Radunitsa/>} />
+      <Route path="/sorochiny" element={<Sorochiny/>} />
+      <Route path="/cleanup" element={<Cleanup/>} />
+      <Route path="/generous" element={<Generous/>} />
+      <Route path="/yuriev" element={<Yuriev/>} />
+      <Route path="/apple" element={<Apple/>} />
+      <Route path="/draniki" element={<Draniki/>} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
