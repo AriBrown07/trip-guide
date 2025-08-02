@@ -74,6 +74,10 @@ const PalmSunday = () => {
           title: "Деды",
           link: "/grandfathers",
         },
+        {
+          title: "Драники",
+          link: "/draniki",
+        },
       ],
     },
     // {
@@ -117,7 +121,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Коляды",
-          link: "/none",
+          link: "/kolyada",
         },
         {
           title: "Купалье",
@@ -130,7 +134,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Ляльник",
-          link: "/none",
+          link: "/lyalnik",
         },
       ],
     },
@@ -139,7 +143,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Масленица",
-          link: "/none",
+          link: "/carnival",
         },
       ],
     },
@@ -148,7 +152,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Новый Год",
-          link: "/none",
+          link: "/newYear",
         },
       ],
     },
@@ -157,7 +161,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "День Октябрьской революции",
-          link: "/none",
+          link: "/october",
         },
       ],
     },
@@ -166,11 +170,11 @@ const PalmSunday = () => {
       events: [
         {
           title: "Покров",
-          link: "/none",
+          link: "/cover",
         },
         {
           title: "Пасха",
-          link: "/none",
+          link: "/easter",
         },
       ],
     },
@@ -179,7 +183,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Радуница",
-          link: "/none",
+          link: "/radunitsa",
         },
       ],
     },
@@ -188,7 +192,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Сорочины",
-          link: "/none",
+          link: "/sorochiny",
         },
       ],
     },
@@ -197,7 +201,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Толока",
-          link: "/none",
+          link: "/cleanup",
         },
       ],
     },
@@ -268,7 +272,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Щедрый вечер",
-          link: "/none",
+          link: "/generous",
         },
       ],
     },
@@ -286,7 +290,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Юрьев день",
-          link: "/none",
+          link: "/yuriev",
         },
       ],
     },
@@ -295,7 +299,7 @@ const PalmSunday = () => {
       events: [
         {
           title: "Яблочный Спас",
-          link: "/none",
+          link: "/apple",
         },
       ],
     },
