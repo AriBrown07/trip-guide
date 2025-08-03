@@ -881,4 +881,47 @@
       }
     }
   }
+  
+
 }
+
+ .city-optgroup {
+      color: #1a73e8; // Синий цвет Google
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 4px;
+      padding-bottom: 4px;
+
+      &::before {
+        content: "🏙️ ";
+      }
+
+      option {
+        color: #202124; // Темный цвет для опций
+        background-color: #f8f9fa; // Светлый фон
+        
+        &:hover {
+          background-color: #e8f0fe; // Голубой при наведении
+          color: #1a73e8;
+        }
+      }
+    }
+     .countrywide-optgroup {
+      color: #1a73e8;; 
+      border-bottom: 1px solid #e0e0e0;
+      margin-top: 8px;
+      padding-top: 8px;
+
+      &::before {
+        content: "🗺️ ";
+      }
+
+      option {
+        color: #202124;
+        background-color: #f8f9fa;
+        
+        &:hover {
+          background-color: #e6f4ea; 
+          color: #1a73e8;
+        }
+      }
+    }
