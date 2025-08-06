@@ -16,8 +16,7 @@ const TestPage: React.FC = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
   const [showResults, setShowResults] = useState<boolean>(false);
   const [currentTest, setCurrentTest] = useState<number>(0);
-  const [showResultModal, setShowResultModal] = useState(true);
-
+  const [showResultModal, setShowResultModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const handleClick = (link: string) => {
@@ -232,6 +231,7 @@ const TestPage: React.FC = () => {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowResults(true);
+      setShowResultModal(true);
     }
   };
 
@@ -322,7 +322,11 @@ const TestPage: React.FC = () => {
         ) : (  
           <div className="results-container">
             {showResultModal && (
-              <Result onClose={() => setShowResultModal(false)} />
+              <Result 
+                onClose={() => setShowResultModal(false)}
+                score={calculateScore()}
+                totalQuestions={currentQuestions.length}
+               />
             )}
             <h2 className="results-title">Результаты теста</h2>
             <p className="results-score">Вы ответили правильно на {calculateScore()} из {currentQuestions.length} вопросов</p>

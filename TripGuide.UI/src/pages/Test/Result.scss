@@ -1,4 +1,4 @@
-.welcome-banner {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,40 +11,30 @@
   z-index: 1000;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none; // Блокируем клики, когда невидимо
 
   &.visible {
     opacity: 1;
-  }
-
- .welcome-content {
-    justify-content: center;
-    background-color: white;
-    border-radius: 15px;
-    padding: 40px;
-    max-width: 600px;
-    width: 90%;
-    text-align: center;
-    position: relative;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
-
-  &.visible {
-
-    opacity: 1;
-  }
-    
-
-   
-
-    // Clear floats after images
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
+    pointer-events: auto; // Разрешаем клики, когда видимо
   }
 }
 
+.welcome-content {
+  background-color: white;
+  border-radius: 15px;
+  padding: 40px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  pointer-events: auto; // Разрешаем клики внутри контента
+
+  .visible & {
+    transform: translateY(0);
+  }
+}
 
 .close-button {
   position: absolute;
@@ -61,35 +51,13 @@
   }
 }
 
-.text-line {
-  font-size: 24px;
-  font-weight: 500;
-  color: #333;
-  line-height: 1.4;
-  margin: 5px 0;
-}
-
 .highlighted-text {
   font-size: 49px;
-  font-weight: 1000px;
+  font-weight: bold;
   color: #4f2d0b;
   margin-top: 15px;
   text-transform: uppercase;
 }
-
-@media (max-width: 768px) {
-  .text-line {
-    font-size: 20px;
-  }
-
-  .highlighted-text {
-    font-size: 24px;
-  }
-
-
-  /* Results.css */
-
-
 
 .result-image-container {
   margin: 20px 0;
@@ -103,6 +71,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
+@media (max-width: 768px) {
+  .highlighted-text {
+    font-size: 24px;
+  }
+  
+  .welcome-content {
+    padding: 20px;
+  }
 }
-

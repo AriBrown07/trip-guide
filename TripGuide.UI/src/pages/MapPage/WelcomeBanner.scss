@@ -11,12 +11,14 @@
   z-index: 1000;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none; // Блокируем клики, когда невидимо
 
   &.visible {
     opacity: 1;
+    pointer-events: auto; // Разрешаем клики, когда видимо
   }
 
- .welcome-content {
+  .welcome-content {
     justify-content: center;
     background-color: white;
     border-radius: 15px;
@@ -27,16 +29,13 @@
     position: relative;
     transform: translateY(20px);
     transition: transform 0.3s ease;
+    pointer-events: auto; // Разрешаем клики внутри контента
 
-  &.visible {
+    .visible & {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    opacity: 1;
-  }
-    
-
-   
-
-    // Clear floats after images
     &:after {
       content: "";
       display: table;
@@ -44,7 +43,6 @@
     }
   }
 }
-
 
 .close-button {
   position: absolute;
@@ -55,6 +53,7 @@
   font-size: 24px;
   cursor: pointer;
   color: #777;
+  z-index: 2; // Убедимся, что кнопка поверх других элементов
 
   &:hover {
     color: #333;
@@ -71,7 +70,7 @@
 
 .highlighted-text {
   font-size: 49px;
-  font-weight: 700px;
+  font-weight: 700; // Исправлено: убрал 'px'
   color: #1976d2;
   margin-top: 15px;
   text-transform: uppercase;
@@ -85,5 +84,8 @@
   .highlighted-text {
     font-size: 24px;
   }
+  
+  .welcome-content {
+    padding: 20px;
+  }
 }
-
