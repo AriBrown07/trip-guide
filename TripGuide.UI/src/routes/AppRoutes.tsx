@@ -30,6 +30,7 @@ import { GusovskyPage } from '../pages/TheoryPages/People/MykolaGusovskyPage';
 import { KupallePage } from '../pages/TheoryPages/Culture/KupallePage';
 import { NemigaPage } from '../pages/TheoryPages/Events/NemigaPage';
 import { SkarynaPage } from '../pages/TheoryPages/People/SkarynaPage';
+import { TurovPage } from '../pages/TheoryPages/Events/Turov';
 
 // my page 
 
@@ -53,6 +54,10 @@ import { Yuriev } from '../pages/TheoryPages/Culture/Yuriev';
 import { Apple } from '../pages/TheoryPages/Culture/Apple';
 import { Draniki } from '../pages/TheoryPages/Culture/Draniki';
 import { Palette } from 'lucide-react';
+import { BaptismPage } from '../pages/TheoryPages/Events/Baptism';
+import { MenskPage } from '../pages/TheoryPages/Events/Mensk';
+import { BorisovPage } from '../pages/TheoryPages/Events/Borisov';
+import { UniyaPage } from '../pages/TheoryPages/Events/KrevskayaUniya';
 // end my page 
 
 interface PrivateRouteProps {
@@ -83,6 +88,13 @@ export const AppRoutes: React.FC = () => {
       {/* theory pages */}
       <Route path="/kolas" element={<KolasPage />} />
       <Route path="/polock" element={<PolockPage />} />
+    {/* 𖦹новые странички𖦹 */}
+      <Route path='/turov' element={<TurovPage/>}/>
+      <Route path='/baptism' element={<BaptismPage/>}/>
+      <Route path='/mensk' element={<MenskPage/>}/>
+      <Route path='/borisov' element={<BorisovPage/>}/>
+      <Route path='/uniya' element={<UniyaPage/>}/>
+    {/* 𖦹новые странички𖦹 */}
       <Route path="/mir" element={<MirCastlePage />} />
       <Route path="/nesvizh" element={<NesvizhCastlePage />} />
       <Route path="/brest" element={<BrestFortressPage />} />

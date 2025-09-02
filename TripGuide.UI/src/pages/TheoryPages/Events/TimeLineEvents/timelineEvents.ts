@@ -13,7 +13,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Первое упоминание Турова",
-          link: "/none",
+          link: "/turov",
         },
       ],
     },
@@ -22,7 +22,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Крещение Руси",
-          link: "/none",
+          link: "/baptism",
         },
       ],
     },
@@ -35,7 +35,7 @@ export const timelineEvents = [
         },
         {
           title: "Первое упоминание Менска",
-          link: "/none",
+          link: "/mensk",
         },
       ],
     },
@@ -44,7 +44,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Основание Борисова",
-          link: "/none",
+          link: "/borisov",
         },
       ],
     },
@@ -53,7 +53,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Кревская уния",
-          link: "/none",
+          link: "/uniya",
         },
       ],
     },
