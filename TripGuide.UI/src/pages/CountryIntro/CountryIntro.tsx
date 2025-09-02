@@ -21,20 +21,21 @@ const CountryIntro: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const navigate = useNavigate();
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
   // Объект с маршрутами для каждого элемента
   const itemRoutes = {
     'Франциск Скорина': '/skaryna',
     'Якуб Колас': '/kolas',
     'Симон Будный': '/budny',
-    'Микола Гусовский': '/gusovsky', 
-    'Первое упоминание Полоцка': '/polock', 
-    'Битва на Немиге': '/nemiga', 
+    'Микола Гусовский': '/gusovsky',
+    'Первое упоминание Полоцка': '/polock',
+    'Битва на Немиге': '/nemiga',
     'Восстание Калиновского': '/kalinovsky', //нет
     'Несвижский замок': '/nesvizh',
     'Мирский замок': '/mir',
     'Беловежская пуща': '/pushcha',
-    'Купалье': '/kupalle', 
+    'Купалье': '/kupalle',
     'Масленица': '/maslenitsa', // нет
     'Слуцкие пояса': '/slutsk-belts' //нет
   };
@@ -82,6 +83,15 @@ const CountryIntro: React.FC = () => {
     navigate('/map');
   };
 
+    const handleProfile = () => {
+    navigate('/profile');
+  };
+
+   const handleGame = () => {
+    navigate('/game');
+  };
+
+
   const filteredCategories = categories.map(category => ({
     ...category,
     items: category.items.filter(item =>
@@ -89,6 +99,7 @@ const CountryIntro: React.FC = () => {
   }));
 
   return (
+
     <main className={styles.mainContent}>
       {/* Кнопка назад */}
       <div className={styles.backButtonCont}>
@@ -98,6 +109,25 @@ const CountryIntro: React.FC = () => {
         >
           <img src={map1} className={styles.map1} alt="map icon" />
         </Button>
+
+        <div className={styles.profileButtonCont}>
+          <Button
+            className={styles.navButton}
+            onClick={handleProfile}
+          >
+            Профиль
+          </Button>
+        </div>
+
+        <div className={styles.profileButtonCont}>
+          <Button
+            className={styles.navButton}
+            onClick={handleGame}
+          >
+            Игра
+          </Button>
+        </div>
+
       </div>
 
       <div className={styles.textBox}>
@@ -237,6 +267,7 @@ const CountryIntro: React.FC = () => {
           Пройти тест
         </Button>
       </div>
+
     </main>
   );
 };

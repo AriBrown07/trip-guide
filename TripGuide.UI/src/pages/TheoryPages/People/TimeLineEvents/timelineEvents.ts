@@ -4,11 +4,11 @@ export const timelineEvents = [
       events: [
         {
           title: "Жорес Алфёров",
-          link: "/none",
+          link: "/alferov",
         },
         {
           title: "Светлана Алексиевич",
-          link: "/none",
+          link: "/alexievich",
         },
       ],
     },
@@ -30,7 +30,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Валентий Ванькович",
-          link: "/none",
+          link: "/vankovich",
         },
       ],
     },
@@ -48,11 +48,11 @@ export const timelineEvents = [
       events: [
         {
           title: "Игнат Домейко",
-          link: "/none",
+          link: "/domeyko",
         },
         {
           title: "Винцент Дунин-Марцинкевич",
-          link: "/none",
+          link: "/vincent",
         },
       ],
     },
@@ -70,7 +70,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Дмитрий Жилунович",
-          link: "/none",
+          link: "/zhilunovich",
         },
       ],
     },

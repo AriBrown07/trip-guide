@@ -14,6 +14,8 @@ import { App } from '../pages/MapPage/Map';
 import Folk from '../pages/ExstraInform/Folk';
 import Independence from '../pages/ExstraInform/Independence';
 import Victory from '../pages/ExstraInform/Victory';
+import Profile from '../pages/Profile/Profile';
+
 //theory pages
 import { MirCastlePage } from '../pages/TheoryPages/Landmarks/MirCastlePage';
 import { NesvizhCastlePage } from '../pages/TheoryPages/Landmarks/NesvizhCastlePage';
@@ -52,7 +54,17 @@ import { Generous } from '../pages/TheoryPages/Culture/Generous';
 import { Yuriev } from '../pages/TheoryPages/Culture/Yuriev';
 import { Apple } from '../pages/TheoryPages/Culture/Apple';
 import { Draniki } from '../pages/TheoryPages/Culture/Draniki';
-import { Palette } from 'lucide-react';
+import { Alferov } from '../pages/TheoryPages/People/Alferov';
+import { Alexievich } from '../pages/TheoryPages/People/Alexievich';
+import { Bogdanovich } from '../pages/TheoryPages/People/Bogdanovich';
+import { Vankovich } from '../pages/TheoryPages/People/Vankovich';
+import { Domeyko } from '../pages/TheoryPages/People/Domeyko';
+import { Vincent } from '../pages/TheoryPages/People/Vincent';
+import { Zhilunovich } from '../pages/TheoryPages/People/Zhilunovich';
+
+import Gamefirst from '../pages/Game/Gamefirst';
+import AlexanderStory from '../pages/Game/AlexanderStory';
+
 // end my page 
 
 interface PrivateRouteProps {
@@ -64,11 +76,13 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
+
+
 export const AppRoutes: React.FC = () => {
   return (
     <Routes>
 
-      <Route path="/" element={<Introductory/>} />
+      <Route path="/" element={<Introductory />} />
       <Route path="/introductory" element={<Introductory />} />
       <Route path="/home" element={<CountryIntro />} />
       <Route path="/weather" element={<Weather />} />
@@ -76,10 +90,12 @@ export const AppRoutes: React.FC = () => {
       <Route path="/sign" element={<RegisterPage />} />
       <Route path="/map" element={<App />} />
       <Route path="/test" element={<TestPage />} />
-
       <Route path="/folk" element={<Folk />} />
       <Route path="/independence" element={<Independence />} />
       <Route path="/victory" element={<Victory />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/game" element={<Gamefirst />} />
+      <Route path="/alexanderStory" element={<AlexanderStory onBack={() => console.log('Back pressed')} />} />
       {/* theory pages */}
       <Route path="/kolas" element={<KolasPage />} />
       <Route path="/polock" element={<PolockPage />} />
@@ -99,22 +115,32 @@ export const AppRoutes: React.FC = () => {
       <Route path="/bogach" element={<BogachPage />} />
       <Route path="/sunday" element={<PalmSunday />} />
       <Route path="/gromnitsy" element={<Gromnitsy />} />
-      <Route path="/grandfathers" element={<Grandfathers/>} />
-      <Route path="/zazhinki" element={<Zazhinki/>} />
-      <Route path="/kolyada" element={<Kolyada/>} />
-      <Route path="/lyalnik" element={<Lyalnik/>} />
-      <Route path="/carnival" element={<Carnival/>} />
-      <Route path="/newYear" element={<NewYear/>} />
-      <Route path="/october" element={<October/>} />
-      <Route path="/cover" element={<Cover/>} />
-      <Route path="/easter" element={<Easter/>} />
-      <Route path="/radunitsa" element={<Radunitsa/>} />
-      <Route path="/sorochiny" element={<Sorochiny/>} />
-      <Route path="/cleanup" element={<Cleanup/>} />
-      <Route path="/generous" element={<Generous/>} />
-      <Route path="/yuriev" element={<Yuriev/>} />
-      <Route path="/apple" element={<Apple/>} />
-      <Route path="/draniki" element={<Draniki/>} />
+      <Route path="/grandfathers" element={<Grandfathers />} />
+      <Route path="/zazhinki" element={<Zazhinki />} />
+      <Route path="/kolyada" element={<Kolyada />} />
+      <Route path="/lyalnik" element={<Lyalnik />} />
+      <Route path="/carnival" element={<Carnival />} />
+      <Route path="/newYear" element={<NewYear />} />
+      <Route path="/october" element={<October />} />
+      <Route path="/cover" element={<Cover />} />
+      <Route path="/easter" element={<Easter />} />
+      <Route path="/radunitsa" element={<Radunitsa />} />
+      <Route path="/sorochiny" element={<Sorochiny />} />
+      <Route path="/cleanup" element={<Cleanup />} />
+      <Route path="/generous" element={<Generous />} />
+      <Route path="/yuriev" element={<Yuriev />} />
+      <Route path="/apple" element={<Apple />} />
+      <Route path="/draniki" element={<Draniki />} />
+      <Route path="/alferov" element={<Alferov />} />
+      <Route path="/alexievich" element={<Alexievich />} />
+      <Route path="/bogdanovich" element={<Bogdanovich />} />
+      <Route path="/vankovich" element={<Vankovich />} />
+      <Route path="/domeyko" element={<Domeyko />} />
+      <Route path="/vincent" element={<Vincent />} />
+      <Route path="/zhilunovich" element={<Zhilunovich />} />
+
+
+
 
       <Route path="*" element={<NotFound />} />
     </Routes>
