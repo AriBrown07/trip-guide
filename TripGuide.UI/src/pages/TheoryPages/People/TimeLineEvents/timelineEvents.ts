@@ -79,7 +79,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Михась Зарецкий",
-          link: "/none",
+          link: "/zaretsky",
         },
       ],
     },
@@ -105,11 +105,11 @@ export const timelineEvents = [
         },
         {
           title: "Кастусь Калиновский",
-          link: "/kalinowski",
+          link: "/kalinovsky",
         },
         {
           title: "Владимир Короткевич",
-          link: "/none",
+          link: "/korotkevich",
         },
       ],
     },
@@ -118,7 +118,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Михась Лыньков",
-          link: "/none",
+          link: "/lynkov",
         },
       ],
     },
@@ -127,7 +127,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Петр Машеров",
-          link: "/none",
+          link: "/masherov",
         },
       ],
     },
@@ -145,7 +145,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Наполеон Орда",
-          link: "/orda",
+          link: "/horde",
         },
       ],
     },
@@ -154,7 +154,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Ефросинья Полоцкая",
-          link: "/none",
+          link: "/polotsk",
         },
       ],
     },
@@ -176,7 +176,7 @@ export const timelineEvents = [
         },
         {
           title: "Михаил Савицкий",
-          link: "/none",
+          link: "/savitsky",
         },
       ],
     },
@@ -185,7 +185,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Тётка (Алоиза Пашкевич)",
-          link: "/none",
+          link: "/aunt",
         },
         {
           title: "Максим Танк",
@@ -216,7 +216,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Иван Хруцкий",
-          link: "/none",
+          link: "/khrutsky",
         },
       ],
     },
@@ -225,7 +225,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Виталий Цвирко",
-          link: "/none",
+          link: "/tsvirko",
         },
       ],
     },
@@ -234,7 +234,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Михась Чарот",
-          link: "/none",
+          link: "/charot",
         },
       ],
     },
@@ -243,7 +243,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Марк Шагал",
-          link: "/none",
+          link: "/сhagall",
         },
       ],
     },

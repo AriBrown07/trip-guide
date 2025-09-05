@@ -61,6 +61,21 @@ import { Vankovich } from '../pages/TheoryPages/People/Vankovich';
 import { Domeyko } from '../pages/TheoryPages/People/Domeyko';
 import { Vincent } from '../pages/TheoryPages/People/Vincent';
 import { Zhilunovich } from '../pages/TheoryPages/People/Zhilunovich';
+import { Zaretsky } from '../pages/TheoryPages/People/Zaretsky';
+import { Kupala } from '../pages/TheoryPages/People/Kupala';
+import { Kalinovsky } from '../pages/TheoryPages/People/Kalinovsky';
+import { Korotkevich } from '../pages/TheoryPages/People/Korotkevich';
+import { Lynkov } from '../pages/TheoryPages/People/Lynkov';
+import { Masherov } from '../pages/TheoryPages/People/Masherov';
+import { Horde } from '../pages/TheoryPages/People/Horde';
+import { Polotsk } from '../pages/TheoryPages/People/Polotsk';
+import { Savitsky } from '../pages/TheoryPages/People/Savitsky';
+import { Aunt } from '../pages/TheoryPages/People/Aunt';
+import { Tank } from '../pages/TheoryPages/People/Tank';
+import { Khrutsky } from '../pages/TheoryPages/People/Khrutsky';
+import { Tsvirko } from '../pages/TheoryPages/People/Tsvirko';
+import {Charot } from '../pages/TheoryPages/People/Charot';
+import {Chagall } from '../pages/TheoryPages/People/Chagall';
 
 import Gamefirst from '../pages/Game/Gamefirst';
 import AlexanderStory from '../pages/Game/AlexanderStory';
@@ -138,9 +153,21 @@ export const AppRoutes: React.FC = () => {
       <Route path="/domeyko" element={<Domeyko />} />
       <Route path="/vincent" element={<Vincent />} />
       <Route path="/zhilunovich" element={<Zhilunovich />} />
-
-
-
+      <Route path="/zaretsky" element={<Zaretsky />} />
+      <Route path="/kupala" element={<Kupala />} />
+      <Route path="/kalinovsky" element={<Kalinovsky />} />
+      <Route path="/korotkevich" element={<Korotkevich />} />
+      <Route path="/lynkov" element={<Lynkov />} />
+      <Route path="/masherov" element={<Masherov />} />
+      <Route path="/horde" element={<Horde />} />
+      <Route path="/polotsk" element={<Polotsk />} />
+      <Route path="/savitsky" element={<Savitsky />} />
+      <Route path="/aunt" element={<Aunt />} />
+      <Route path="/tank" element={<Tank />} />
+      <Route path="/khrutsky" element={<Khrutsky />} />
+      <Route path="/tsvirko" element={<Tsvirko />} />
+      <Route path="/charot" element={<Charot />} />
+      <Route path="/сhagall" element={<Chagall />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
