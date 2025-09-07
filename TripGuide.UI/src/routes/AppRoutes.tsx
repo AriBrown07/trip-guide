@@ -79,6 +79,39 @@ import {Chagall } from '../pages/TheoryPages/People/Chagall';
 
 import Gamefirst from '../pages/Game/Gamefirst';
 import AlexanderStory from '../pages/Game/AlexanderStory';
+import { TurovPage } from '../pages/TheoryPages/Events/Turov';
+import { BaptismPage } from '../pages/TheoryPages/Events/Baptism';
+import { MenskPage } from '../pages/TheoryPages/Events/Mensk';
+import { BorisovPage } from '../pages/TheoryPages/Events/Borisov';
+import { UniyaPage } from '../pages/TheoryPages/Events/KrevskayaUniya';
+import { GrunvaldPage } from '../pages/TheoryPages/Events/Grunvald';
+import { TorunPage } from '../pages/TheoryPages/Events/Torun';
+import { Statut1Page } from '../pages/TheoryPages/Events/Statut1';
+import { Statut2Page } from '../pages/TheoryPages/Events/Statut2';
+import { Statut3Page } from '../pages/TheoryPages/Events/Statut3';
+import { LubPage } from '../pages/TheoryPages/Events/LubUniya';
+import { BerestPage } from '../pages/TheoryPages/Events/Berest';
+import { Razdel1Page } from '../pages/TheoryPages/Events/Razdel1';
+import { Razdel2Page } from '../pages/TheoryPages/Events/Razdel2';
+import { Razdel3Page } from '../pages/TheoryPages/Events/Razdel3';
+import { ConstPage } from '../pages/TheoryPages/Events/Constitution';
+import { KostPage } from '../pages/TheoryPages/Events/Kostiushko';
+import { NapoleonPage } from '../pages/TheoryPages/Events/Napoleon';
+import { KalinovskyPage } from '../pages/TheoryPages/Events/Kalinovsky';
+import { BSGPage } from '../pages/TheoryPages/Events/Gramada';
+import { StolypinPage } from '../pages/TheoryPages/Events/Stolypin';
+import { Nikolay2Page } from '../pages/TheoryPages/Events/Nikolay2';
+import { OctoberPage } from '../pages/TheoryPages/Events/October';
+import { BLPage } from '../pages/TheoryPages/Events/Brestlitovsk';
+import { BNRPage } from '../pages/TheoryPages/Events/BNRPage';
+import { BSSRPage } from '../pages/TheoryPages/Events/BSSR';
+import { BSSR2Page } from '../pages/TheoryPages/Events/BSSR2';
+import { RigaPage } from '../pages/TheoryPages/Events/Riga';
+import { WestBelPage } from '../pages/TheoryPages/Events/WestBelarus';
+import { VOVPage } from '../pages/TheoryPages/Events/VOVPage';
+import { OONPage } from '../pages/TheoryPages/Events/OON';
+import { UNESCOPage } from '../pages/TheoryPages/Events/UNESCO';
+import { ChernobylPage } from '../pages/TheoryPages/Events/Chernobyl';
 
 // end my page 
 
@@ -112,6 +145,41 @@ export const AppRoutes: React.FC = () => {
       <Route path="/game" element={<Gamefirst />} />
       <Route path="/alexanderStory" element={<AlexanderStory onBack={() => console.log('Back pressed')} />} />
       {/* theory pages */}
+      {/* k` */}
+      <Route path="/turov" element={<TurovPage />} />
+      <Route path="/baptism" element={<BaptismPage />} />
+      <Route path="/mensk" element={<MenskPage />} />
+      <Route path="/borisov" element={<BorisovPage />} />
+      <Route path="/krev" element={<UniyaPage />} />
+      <Route path="/grunvald" element={<GrunvaldPage />} />
+      <Route path="/torun" element={<TorunPage />} />
+      <Route path="/statut1" element={<Statut1Page />} />
+      <Route path="/statut2" element={<Statut2Page />} />
+      <Route path="/statut3" element={<Statut3Page />} />
+      <Route path="/lub" element={<LubPage />} />
+      <Route path="/berest" element={<BerestPage />} />
+      <Route path="/razdel1" element={<Razdel1Page />} />
+      <Route path="/razdel2" element={<Razdel2Page />} />
+      <Route path="/razdel3" element={<Razdel3Page />} />
+      <Route path="/const" element={<ConstPage />} />
+      <Route path="/kost" element={<KostPage />} />
+      <Route path="/napoleon" element={<NapoleonPage />} />
+      <Route path="/kalin" element={<KalinovskyPage />} />
+      <Route path="/bsg" element={<BSGPage />} />
+      <Route path="/stolypin" element={<StolypinPage />} />
+      <Route path="/nik2" element={<Nikolay2Page />} />
+      <Route path="/october" element={<OctoberPage />} />
+      <Route path="/brestlit" element={<BLPage />} />
+      <Route path="/bnr" element={<BNRPage />} />
+      <Route path="/bssr" element={<BSSRPage />} />
+      <Route path="/bssr2" element={<BSSR2Page />} />
+      <Route path="/riga" element={<RigaPage />} />
+      <Route path="/westbel" element={<WestBelPage />} />
+      <Route path="/vov" element={<VOVPage />} />
+      <Route path="/oon" element={<OONPage />} />
+      <Route path="/unesco" element={<UNESCOPage />} />
+      <Route path="/chernobyl" element={<ChernobylPage />} />
+      {/* k` */}
       <Route path="/kolas" element={<KolasPage />} />
       <Route path="/polock" element={<PolockPage />} />
       <Route path="/mir" element={<MirCastlePage />} />

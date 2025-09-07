@@ -13,7 +13,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Первое упоминание Турова",
-          link: "/none",
+          link: "/turov",
         },
       ],
     },
@@ -22,7 +22,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Крещение Руси",
-          link: "/none",
+          link: "/baptism",
         },
       ],
     },
@@ -35,7 +35,7 @@ export const timelineEvents = [
         },
         {
           title: "Первое упоминание Менска",
-          link: "/none",
+          link: "/mensk",
         },
       ],
     },
@@ -44,7 +44,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Основание Борисова",
-          link: "/none",
+          link: "/borisov",
         },
       ],
     },
@@ -53,7 +53,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Кревская уния",
-          link: "/none",
+          link: "/krev",
         },
       ],
     },
@@ -62,7 +62,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Грюнвальдская битва",
-          link: "/none",
+          link: "/grunvald",
         },
       ],
     },
@@ -71,7 +71,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Торуньский мир",
-          link: "/none",
+          link: "/torun",
         },
       ],
     },
@@ -80,7 +80,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Принятие I Статута ВКЛ",
-          link: "/none",
+          link: "/statut1",
         },
       ],
     },
@@ -89,7 +89,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Принятие II Статута ВКЛ",
-          link: "/none",
+          link: "/statut2",
         },
       ],
     },
@@ -98,7 +98,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Люблинская уния",
-          link: "/none",
+          link: "/lub",
         },
       ],
     },
@@ -107,7 +107,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Принятие III Статута ВКЛ",
-          link: "/none",
+          link: "/statut3",
         },
       ],
     },
@@ -116,7 +116,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Берестейская церковная уния",
-          link: "/none",
+          link: "/berest",
         },
       ],
     },
@@ -125,7 +125,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Первый раздел Речи Посполитой",
-          link: "/none",
+          link: "/razdel1",
         },
       ],
     },
@@ -134,7 +134,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Принятие Конституции Речи Посполитой",
-          link: "/none",
+          link: "/const",
         },
       ],
     },
@@ -143,7 +143,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Второй раздел Речи Посполитой",
-          link: "/none",
+          link: "/razdel2",
         },
       ],
     },
@@ -152,7 +152,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Восстание под руководством Т. Костюшко",
-          link: "/none",
+          link: "/kost",
         },
       ],
     },
@@ -161,7 +161,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Третий раздел Речи Посполитой",
-          link: "/none",
+          link: "/razdel3",
         },
       ],
     },
@@ -170,7 +170,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Вторжение армии Наполеона",
-          link: "/none",
+          link: "/napoleon",
         },
       ],
     },
@@ -179,7 +179,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Восстание под руководством К. Калиновского",
-          link: "/none",
+          link: "/kalin",
         },
       ],
     },
@@ -188,7 +188,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Формирование 'Громады'",
-          link: "/none",
+          link: "/bsg",
         },
       ],
     },
@@ -197,7 +197,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Столыпинская аграрная реформа",
-          link: "/none",
+          link: "/stolypin",
         },
       ],
     },
@@ -206,11 +206,11 @@ export const timelineEvents = [
       events: [
         {
           title: "Отречение Николая II от престола",
-          link: "/none",
+          link: "/nik2",
         },
         {
           title: "Октябрьская революция",
-          link: "/none",
+          link: "/october",
         },
       ],
     },
@@ -219,11 +219,11 @@ export const timelineEvents = [
       events: [
         {
           title: "Брест-Литовский договор",
-          link: "/none",
+          link: "/brestlit",
         },
         {
           title: "Провозглашение БНР",
-          link: "/none",
+          link: "/bnr",
         },
       ],
     },
@@ -232,7 +232,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Провозглашение БССР",
-          link: "/none",
+          link: "/bssr",
         },
       ],
     },
@@ -241,7 +241,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Рижский мирный договор",
-          link: "/none",
+          link: "/riga",
         },
       ],
     },
@@ -250,7 +250,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Присоединение Западной Беларуси",
-          link: "/none",
+          link: "/westbel",
         },
       ],
     },
@@ -259,7 +259,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Великая Отечественная война",
-          link: "/none",
+          link: "/vov",
         },
       ],
     },
@@ -268,7 +268,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Вступление в ООН",
-          link: "/none",
+          link: "/oon",
         },
       ],
     },
@@ -277,7 +277,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Вступление в ЮНЕСКО",
-          link: "/none",
+          link: "/unesco",
         },
       ],
     },
@@ -286,7 +286,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Авария на Чернобыльской АЭС",
-          link: "/none",
+          link: "/chernobyl",
         },
       ],
     },
@@ -295,7 +295,7 @@ export const timelineEvents = [
       events: [
         {
           title: "Независимость БССР",
-          link: "/none",
+          link: "/bssr2",
         },
       ],
     },
