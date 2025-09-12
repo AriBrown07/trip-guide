@@ -77,8 +77,8 @@ import { Tsvirko } from '../pages/TheoryPages/People/Tsvirko';
 import {Charot } from '../pages/TheoryPages/People/Charot';
 import {Chagall } from '../pages/TheoryPages/People/Chagall';
 
-import Gamefirst from '../pages/Game/Gamefirst';
-import AlexanderStory from '../pages/Game/AlexanderStory';
+import {FlagsCapitalsGame} from '../pages/Game/FlagsCapitalsGame';
+
 
 // end my page 
 
@@ -109,8 +109,8 @@ export const AppRoutes: React.FC = () => {
       <Route path="/independence" element={<Independence />} />
       <Route path="/victory" element={<Victory />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/game" element={<Gamefirst />} />
-      <Route path="/alexanderStory" element={<AlexanderStory onBack={() => console.log('Back pressed')} />} />
+      <Route path="/game" element={<FlagsCapitalsGame />} />
+     
       {/* theory pages */}
       <Route path="/kolas" element={<KolasPage />} />
       <Route path="/polock" element={<PolockPage />} />
