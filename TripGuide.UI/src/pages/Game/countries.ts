@@ -5,6 +5,16 @@ export interface Country {
   flag: string;
 }
 
+export interface Country {
+  name: string;
+  capital: string;
+  code: string;
+  flag: string;
+  population?: number;
+  area?: number;
+}
+
+
 export const countries: Country[] = [
   { name: "Россия", capital: "Москва", code: "RU", flag: "🇷🇺" },
   { name: "США", capital: "Вашингтон", code: "US", flag: "🇺🇸" },

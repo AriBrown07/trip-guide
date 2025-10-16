@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { decode } from '@mapbox/polyline';
 import axios from 'axios';
 import MapViewer from '../MapViewer/MapViewer';
 import './RoutePlanner.scss'
+
 type Point = [number, number];
 
 interface MapPoint {
@@ -57,6 +59,7 @@ function optimizeRoutePoints(points: Point[]): Point[] {
 }
 
 export default function RoutePlanner({ places }: RoutePlannerProps) {
+  const navigate = useNavigate();
   const [points, setPoints] = useState<Point[]>([]);
   const [optimizedPoints, setOptimizedPoints] = useState<Point[]>([]);
   const [route, setRoute] = useState<Point[]>([]);
@@ -136,6 +139,10 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
     setRouteInfo(null);
   };
 
+  const handleHomeClick = () => {
+    navigate('/home');
+  };
+
   return (
     <div className="route-planner">
       <div className="controls">
@@ -145,24 +152,37 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
           </div>
         )}
         
-        <div className="route-buttons">
-          <button 
-            onClick={fetchRoute} 
-            disabled={isLoading || optimizedPoints.length < 2}
-            className={`route-button ${isLoading ? 'loading' : ''}`}
-          >
-            {isLoading ? 'Построение маршрута...' : 'Построить маршрут'}
-          </button>
-          
-          {route.length > 0 && (
+        <div className="controls-row">
+          <div className="route-buttons">
             <button 
-              onClick={clearRoute}
-              disabled={isLoading}
-              className="route-button clear-button"
+              onClick={fetchRoute} 
+              disabled={isLoading || optimizedPoints.length < 2}
+              className={`route-button ${isLoading ? 'loading' : ''}`}
             >
-              Удалить маршрут
+              {isLoading ? 'Построение маршрута...' : 'Построить маршрут'}
             </button>
-          )}
+            
+            {route.length > 0 && (
+              <button 
+                onClick={clearRoute}
+                disabled={isLoading}
+                className="route-button clear-button"
+              >
+                Удалить маршрут
+              </button>
+            )}
+          </div>
+          
+          <button 
+            onClick={handleHomeClick}
+            className="home-button-corner"
+            title="Вернуться на главную"
+          >
+            <svg className="home-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            Домой
+          </button>
         </div>
       </div>
       
