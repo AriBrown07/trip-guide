@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import "./YandexSearch.scss"
 
 const YANDEX_SUGGEST_API = 'https://suggest-maps.yandex.ru/v1/suggest';
 const YANDEX_GEOCODER_API = 'https://geocode-maps.yandex.ru/1.x/';
@@ -19,7 +20,7 @@ export default function YandexSearch({ onPlaceSelect }: YandexSearchProps) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Замените на ваши реальные ключи
+
   const SUGGEST_API_KEY = '47d3d6a3-6021-4036-b604-ab5950c51572';
   const GEOCODER_API_KEY = '3562d98a-f820-4a49-9f8b-5c0b232b10b9';
 
@@ -33,11 +34,11 @@ export default function YandexSearch({ onPlaceSelect }: YandexSearchProps) {
       const response = await fetch(
         `${YANDEX_SUGGEST_API}?apikey=${SUGGEST_API_KEY}&text=${encodeURIComponent(query)}&lang=ru_RU&bbox=23.1784,51.2626,32.7626,56.1721`
       );
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       setSuggestions(data.results || []);
       setError(null);
@@ -53,15 +54,15 @@ export default function YandexSearch({ onPlaceSelect }: YandexSearchProps) {
       const response = await fetch(
         `${YANDEX_GEOCODER_API}?apikey=${GEOCODER_API_KEY}&format=json&geocode=${encodeURIComponent(address)}`
       );
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       const pos = data.response.GeoObjectCollection.featureMember[0]
         .GeoObject.Point.pos.split(' ');
-      
+
       onPlaceSelect({
         name: address,
         coordinates: [parseFloat(pos[1]), parseFloat(pos[0])]
@@ -98,9 +99,9 @@ export default function YandexSearch({ onPlaceSelect }: YandexSearchProps) {
           className="search-input"
         />
       </div>
-      
+
       {error && <div className="error-message">{error}</div>}
-      
+
       {showSuggestions && suggestions.length > 0 && (
         <div className="suggestions-container">
           {suggestions.map((suggestion, index) => (
@@ -113,10 +114,14 @@ export default function YandexSearch({ onPlaceSelect }: YandexSearchProps) {
                 geocodeAddress(suggestion.title.text);
               }}
             >
-              {suggestion.title.text}
-              <div className="suggestion-subtitle">
-                {suggestion.subtitle?.text || ''}
+              <div className="suggestion-title">
+                {suggestion.title.text}
               </div>
+              {suggestion.subtitle?.text && (
+                <div className="suggestion-subtitle">
+                  {suggestion.subtitle.text}
+                </div>
+              )}
             </div>
           ))}
         </div>

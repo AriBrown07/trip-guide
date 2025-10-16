@@ -1,927 +1,483 @@
-@import '~react-datepicker/dist/react-datepicker.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .app-container {
   display: flex;
   height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.sidebar {
-  width: 380px;
-  padding: 25px;
-  background: #f8f9fa;
-  border-right: 1px solid #e0e0e0;
-  overflow-y: auto;
-}
-
-.filter-group {
-  margin-bottom: 25px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eaeaea;
-  
-  label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    font-weight: 600;
-    color: #495057;
-    gap: 10px;
-    font-size: 1.1rem;
-  }
-  
-  input, select {
-    width: 92%;
-    padding: 10px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: all 0.2s;
-    
-    &:focus {
-      border-color: #4a6bff;
-      box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
-      outline: none;
-    }
-  }
-}
-
-.icon {
-  color: #4a6bff;
-  font-size: 1.1rem;
-}
-
-/* Стили для календаря */
-.calendar-section {
-  .date-range-picker {
-    margin: 15px 0;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    padding: 10px;
-  }
-  
-  .custom-calendar {
-    border: none;
-    width: 100%;
-    
-    .react-datepicker__header {
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-    
-    .react-datepicker__month-container {
-      width: 100%;
-    }
-    
-    .react-datepicker__day {
-      width: 2.2rem;
-      line-height: 2.2rem;
-      margin: 0.1rem;
-      border-radius: 50%;
-      transition: all 0.2s;
-      
-      &:hover {
-        background: #e6edff;
-      }
-      
-      &.in-range {
-        background: #e6edff;
-        color: #2c3e50;
-      }
-      
-      &.range-edge {
-        background: #4a6bff;
-        color: white;
-        font-weight: bold;
-      }
-    }
-    
-    .react-datepicker__current-month {
-      font-size: 1.1rem;
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
-    
-    .react-datepicker__navigation {
-      top: 10px;
-      
-      &--previous {
-        left: 10px;
-      }
-      
-      &--next {
-        right: 10px;
-      }
-    }
-  }
-  
-  .date-summary {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 15px;
-    
-    .date-item {
-      background: white;
-      padding: 10px 15px;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      flex: 1;
-      min-width: 120px;
-      
-      span {
-        display: block;
-        font-size: 0.9rem;
-        color: #6c757d;
-      }
-      
-      strong {
-        font-size: 1.1rem;
-        color: #2c3e50;
-      }
-      
-      &.highlight {
-        background: #4a6bff;
-        
-        span, strong {
-          color: white;
-        }
-      }
-    }
-  }
-}
-
-/* Стили для блока бюджета */
-.budget-input-container {
-  display: flex;
-  gap: 10px;
-  
-  .currency-select {
-    width: 90px;
-    flex-shrink: 0;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 15px;
-    padding-right: 30px;
-  }
-  
-  .currency-input {
-    flex-grow: 1;
-  }
-}
-
-/* Стили для радио-кнопок */
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  
-  label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: normal;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: all 0.2s;
-    
-    &:hover {
-      background: #f0f4ff;
-    }
-    
-    input {
-      width: auto;
-      margin: 0;
-    }
-  }
-}
-
-/* Стили для выбранных мест */
-.selected-places {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-  
-  .place-tag {
-    background: #e6edff;
-    color: #2c3e50;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    
-    .remove-place {
-      background: none;
-      border: none;
-      color: #6c757d;
-      cursor: pointer;
-      font-size: 1rem;
-      line-height: 1;
-      padding: 0;
-      
-      &:hover {
-        color: #dc3545;
-      }
-    }
-  }
-}
-
-.no-places {
-  color: #6c757d;
-  font-size: 0.9rem;
-  margin-top: 5px;
-}
-
-/* Стили для исторических событий */
-.historical-events {
-  .events-timeline {
-    margin-top: 10px;
-    
-    .event-item {
-      display: flex;
-      padding: 8px 0;
-      border-bottom: 1px dashed #eaeaea;
-      
-      .event-date {
-        width: 90px;
-        color: #6c757d;
-        font-size: 0.9rem;
-      }
-      
-      .event-name {
-        flex-grow: 1;
-        color: #2c3e50;
-      }
-    }
-  }
-}
-
-.map-container {
-  flex: 1;
-  height: 100%;
-  position: relative;
-  background: #f0f2f5;
-}
-
-.controls {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-  
-  button {
-    padding: 8px 16px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    
-    &:hover {
-      background: #0069d9;
-    }
-    
-    &:disabled {
-      background: #6c757d;
-      cursor: not-allowed;
-    }
-  }
-}
-
-
-
-/* Обновим стили для выбранных мест */
-.selected-places {
-  .place-tag {
-    background: #e6edff;
-    padding: 8px 12px;
-    border-radius: 20px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .remove-place {
-      background: none;
-      border: none;
-      color: #6c757d;
-      cursor: pointer;
-      font-size: 1rem;
-      padding: 0 0 0 8px;
-
-      &:hover {
-        color: #dc3545;
-      }
-    }
-  }
-}
-
-.route-planner {
-  .controls {
-    margin-bottom: 15px;
-    
-    .start-point-info {
-      margin-bottom: 10px;
-      padding: 8px 12px;
-      background-color: #e8f5e9;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    
-    .route-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      
-      .route-button {
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: all 0.2s;
-        background-color: #4CAF50;
-        color: white;
-        
-        &:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-          background-color: #cccccc;
-        }
-        
-        &.loading {
-          background-color: #FF9800;
-        }
-      }
-      
-      .clear-button {
-        background-color: #f44336;
-        
-        &:hover:not(:disabled) {
-          background-color: #d32f2f;
-        }
-      }
-    }
-  }
-  
-  .error-message {
-    color: #f44336;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #ffebee;
-    border-radius: 5px;
-  }
-  
-  .route-info {
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    
-    p {
-      margin: 5px 0;
-      font-size: 15px;
-      
-      &.optimized-notice {
-        font-style: italic;
-        color: #4CAF50;
-        margin-top: 10px;
-      }
-    }
-  }
-}
-
-.yandex-search-container {
-  position: relative;
-  margin-bottom: 20px;
-
-  .search-input-container {
-    position: relative;
-    
-    .search-input {
-      width: 90%;
-      padding: 12px 15px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      
-      &:focus {
-        border-color: #4a6bff;
-        box-shadow: 0 2px 12px rgba(74, 107, 255, 0.2);
-        outline: none;
-      }
-      
-      &::placeholder {
-        color: #9e9e9e;
-      }
-    }
-  }
-
-  .suggestions-container {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    max-height: 300px;
-    overflow-y: auto;
-    margin-top: 4px;
-    border: 1px solid #e0e0e0;
-    border-top: none;
-
-    .suggestion-item {
-      padding: 12px 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid #f5f5f5;
-      display: flex;
-      flex-direction: column;
-
-      &:last-child {
-        border-bottom: none;
-        border-radius: 0 0 8px 8px;
-      }
-
-      &:hover {
-        background-color: #f8f9ff;
-      }
-
-      .suggestion-subtitle {
-        font-size: 13px;
-        color: #757575;
-        margin-top: 4px;
-      }
-    }
-  }
-
-  .error-message {
-    color: #ff5252;
-    font-size: 14px;
-    margin-top: 8px;
-    padding: 8px 12px;
-    background-color: #fff5f5;
-    border-radius: 4px;
-  }
-
-  .app-container {
-  position: relative;
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  
-  .sidebar {
-    width: 750px;
-    background: #f5f5f5;
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
-  .map-container {
-    flex: 1;
-    position: relative;
-  }
-}
-
-
+  background: #f8fafc;
+  overflow: hidden;
 }
 
 .burger-button {
-  display: none !important;
   position: fixed;
-  top: 50px;
-  right: 11px;
-  z-index: 1001;
-  background: white;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  width: 48px;
+  height: 48px;
   border: none;
+  border-radius: 12px;
+  background: white;
+  color: #1e293b;
   cursor: pointer;
-  color: #495057;
-  width: 30px;
-  height: 30px;
-  font-size: 1.5rem;
-  display: flex;             /* для центровки иконки */
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
 
   &:hover {
-    background: #f0f0f0;
+    background: #f1f5f9;
     transform: scale(1.05);
   }
-}
 
-.map-container {
-  flex: 1;
-  height: 100%;
-  position: relative;
-  background: #f0f2f5;
-}
-
-@media (max-width: 1270px) {
- 
-  .sidebar {
-    width: 320px;
-    padding: 20px;
+  &:active {
+    transform: scale(0.95);
   }
 
-  .search-input {
-    font-size: 1rem;
-    padding: 10px 12px 10px 36px;
-  }
-
-  .filter-group label {
-    font-size: 1rem;
+  @media (min-width: 1024px) {
+    display: none;
   }
 }
 
-@media (max-width: 1024px) {
+.sidebar {
+  width: 400px;
+  background: white;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 
-  .app-container {
-    flex-direction: column;
+  @media (max-width: 1023px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 99;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+
+    &.open {
+      transform: translateX(0);
+    }
   }
 
-  .sidebar {
+  @media (max-width: 640px) {
     width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .map-container {
-    height: calc(100vh - 400px); // примерная высота для карты
-  }
-
-  .calendar-section .date-summary {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .budget-input-container {
-    flex-direction: column;
+    max-width: 380px;
   }
 }
 
-@media (max-width: 768px) {
-
-
-    .sidebar {
-    position: fixed;
-    top: 0;
-    left: -400px;
-    width: 280px;
-    height: 100vh;
-    padding: 20px;
-    z-index: 1000;
-    &.open {
-      left: 0;
-    }
-  }
-
-    .map-container {
-    margin-left: 0;
-    height: calc(100vh - 160px);
-  }
-
-  .app-container {
-    padding-left: 0;   
-  }
-
-  .search-input {
-    font-size: 0.95rem;
-  }
-
-  .search-container .search-icon {
-    font-size: 0.9rem;
-    left: 10px;
-  }
-
-  .calendar-section .react-datepicker__day {
-    width: 2rem;
-    line-height: 2rem;
-  }
-
-  .filter-group label {
-    font-size: 0.95rem;
-  }
-
-  .controls button {
-    padding: 6px 12px;
-    font-size: 0.9rem;
-  }
-
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
 }
 
-
-@media (max-width: 480px) {
-  .sidebar {
-    padding: 10px;
-  }
-
-  .search-container {
-    margin-bottom: 15px;
-  }
-
-  .search-input {
-    font-size: 0.9rem;
-    padding: 8px 12px 8px 32px;
-  }
-
-  .filter-group label {
-    font-size: 0.9rem;
-    gap: 6px;
-  }
-
-  .date-summary .date-item {
-    padding: 8px 10px;
-    font-size: 0.85rem;
-
-    span {
-      font-size: 0.8rem;
-    }
-
-    strong {
-      font-size: 1rem;
-    }
-  }
-
-  .radio-group label {
-    font-size: 0.9rem;
-    padding: 6px 10px;
-  }
-
-  .selected-places .place-tag {
-    font-size: 0.8rem;
-    padding: 4px 10px;
-  }
-
-  .map-container {
-    height: calc(100vh - 350px);
-  }
-
-  .controls {
-    top: 10px;
-    left: 10px;
-
-    button {
-      font-size: 0.85rem;
-      padding: 6px 10px;
-    }
-  }
-
-  .calendar-section {
-    .date-range-picker {
-      margin: 5px 0;
-      padding: 5px;
-    }
-    
-    .custom-calendar {
-      .react-datepicker__current-month {
-        font-size: 0.9rem;
-        margin-bottom: 5px;
-      }
-      .react-datepicker__day-name,
-      .react-datepicker__day {
-        width: 1.6rem;
-        line-height: 1.6rem;
-        font-size: 0.75rem;
-        margin: 0.05rem;
-      }
-      
-      .react-datepicker__navigation {
-        top: 5px;
-        width: 1rem;
-        height: 1rem;
-      }
-    }
-    
-    .date-summary {
-      flex-direction: column;
-      .date-item {
-        width: 100%;
-        padding: 6px 8px;
-        min-width: auto;
-        
-        span {
-          font-size: 0.7rem;
-        }
-        
-        strong {
-          font-size: 0.85rem;
-        }
-      }
-    }
-  }
-
-}
-@media (max-width: 1024px) and (min-width: 769px) {
-
-
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -320px;
-    width: 320px;
-    height: 100vh;
-    padding: 20px;
-    z-index: 1000;
-    &.open {
-      left: 0;
-    }
-  }
-
-  .map-container {
-    margin-left: 0;
-    height: calc(100vh - 200px);
-  }
-
-  .app-container {
-    padding-left: 0;
-  }
-}
-@media (max-width: 1024px) {
-  .burger-button {
-    display: flex !important;
-  }
+.sidebar-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
 }
 
-/* Стили для готовых маршрутов */
-.predefined-routes {
-  .routes-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 10px;
+.sidebar-subtitle {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+
+  &::-webkit-scrollbar {
+    width: 6px;
   }
 
-  .route-card {
-    background: white;
-    border-radius: 8px;
-    padding: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
 
     &:hover {
-      border-color: #4a6bff;
-      box-shadow: 0 2px 10px rgba(74, 107, 255, 0.15);
-    }
-
-    &.active {
-      border-color: #4a6bff;
-      background-color: #f0f4ff;
-    }
-
-    h4 {
-      margin: 0 0 8px 0;
-      font-size: 1rem;
-      color: #2c3e50;
-    }
-
-    .route-description {
-      margin: 0 0 10px 0;
-      font-size: 0.85rem;
-      color: #6c757d;
-      line-height: 1.4;
-    }
-
-    .route-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-
-      .duration {
-        color: #4a6bff;
-        font-weight: 500;
-      }
-
-      .places-count {
-        color: #6c757d;
-      }
+      background: #94a3b8;
     }
   }
 }
 
-/* Адаптивные стили */
-@media (max-width: 768px) {
-  .predefined-routes {
-    .route-card {
-      padding: 12px;
+.filter-section {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
 
-      h4 {
-        font-size: 0.95rem;
-      }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
 
-      .route-description {
-        font-size: 0.8rem;
-      }
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: #3b82f6;
+
+  h3 {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: #1e293b;
+    flex: 1;
+  }
+}
+
+.routes-count {
+  background: #3b82f6;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+
+.select-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  &:hover {
+    border-color: #cbd5e1;
+  }
+}
+
+.selected-places {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.place-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #1e40af;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+  }
+
+  span {
+    font-weight: 500;
+  }
+}
+
+.remove-place {
+  border: none;
+  background: transparent;
+  color: #3b82f6;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #ef4444;
+    transform: scale(1.2);
+  }
+}
+
+.custom-calendar {
+  border: none !important;
+  font-family: 'Inter', sans-serif !important;
+  width: 100% !important;
+
+  .react-datepicker__header {
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding-top: 0.75rem !important;
+  }
+
+  .react-datepicker__current-month {
+    font-weight: 700 !important;
+    color: #1e293b !important;
+  }
+
+  .react-datepicker__day-name {
+    color: #64748b !important;
+    font-weight: 600 !important;
+  }
+
+  .react-datepicker__day {
+    color: #1e293b !important;
+    font-weight: 500 !important;
+    border-radius: 8px !important;
+
+    &:hover {
+      background: #eff6ff !important;
+      color: #3b82f6 !important;
+    }
+
+    &--selected {
+      background: #3b82f6 !important;
+      color: white !important;
+    }
+
+    &--in-range {
+      background: #dbeafe !important;
+      color: #1e40af !important;
+    }
+
+    &--keyboard-selected {
+      background: #eff6ff !important;
     }
   }
 }
 
-@media (max-width: 480px) {
-  .predefined-routes {
-    .route-card {
-      padding: 10px;
-
-      h4 {
-        font-size: 0.9rem;
-      }
-
-      .route-description {
-        font-size: 0.75rem;
-      }
-
-      .route-meta {
-        font-size: 0.75rem;
-      }
-    }
-  }
-}
-.filter-group.historical-events {
-  .events-timeline {
-    .event-item-link {
-      text-decoration: none; // Убираем подчеркивание
-      color: inherit; // Наследуем цвет текста от родителя
-      display: block; // Чтобы ссылка занимала всю ширину контейнера
-
-      &:hover, &:focus {
-        .event-item {
-          background-color: rgba(0, 0, 0, 0.05); // Легкий эффект при наведении
-          transition: background-color 0.2s ease; // Плавное изменение
-        }
-      }
-
-      .event-item {
-        padding: 8px 12px; // Отступы для удобного клика
-        border-radius: 4px; // Скругление углов
-
-        .event-date {
-          display: inline-block;
-          width: 100px; // Фиксированная ширина для дат
-          color: #666;
-        }
-
-        .event-name {
-          font-weight: 500;
-        }
-      }
-    }
-  }
-  
-
+.date-summary {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
- .city-optgroup {
-      color: #1a73e8; // Синий цвет Google
-      border-bottom: 1px solid #e0e0e0;
-      margin-bottom: 4px;
-      padding-bottom: 4px;
+.date-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
 
-      &::before {
-        content: "🏙️ ";
-      }
+  &.highlight {
+    padding-top: 0.5rem;
+    border-top: 1px solid #e2e8f0;
+    font-weight: 600;
+    color: #3b82f6;
+  }
+}
 
-      option {
-        color: #202124; // Темный цвет для опций
-        background-color: #f8f9fa; // Светлый фон
-        
-        &:hover {
-          background-color: #e8f0fe; // Голубой при наведении
-          color: #1a73e8;
-        }
-      }
-    }
-     .countrywide-optgroup {
-      color: #1a73e8;; 
-      border-bottom: 1px solid #e0e0e0;
-      margin-top: 8px;
-      padding-top: 8px;
+.date-label {
+  color: #64748b;
+  font-weight: 500;
+}
 
-      &::before {
-        content: "🗺️ ";
-      }
+.date-value {
+  font-weight: 600;
+  color: #1e293b;
+}
 
-      option {
-        color: #202124;
-        background-color: #f8f9fa;
-        
-        &:hover {
-          background-color: #e6f4ea; 
-          color: #1a73e8;
-        }
-      }
-    }
+.budget-input-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.currency-select {
+  width: 90px;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.currency-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: white;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.budget-hint {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+
+  strong {
+    color: #3b82f6;
+    font-weight: 700;
+  }
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1e293b;
+
+  &:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+  }
+
+  input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #3b82f6;
+  }
+
+  input[type="radio"]:checked + span {
+    font-weight: 600;
+    color: #3b82f6;
+  }
+
+  &:has(input:checked) {
+    border-color: #3b82f6;
+    background: #eff6ff;
+  }
+}
+
+.routes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.route-card {
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+
+  &:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+  }
+}
+
+.route-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.route-description {
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.route-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.meta-item {
+  white-space: nowrap;
+}
+
+.meta-divider {
+  color: #cbd5e1;
+}
+
+.no-routes {
+  padding: 2rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem;
+  overflow: hidden;
+
+  @media (max-width: 1023px) {
+    padding: 5rem 1rem 1rem;
+  }
+}

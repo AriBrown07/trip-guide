@@ -1,0 +1,158 @@
+.route-planner {
+  .controls {
+    margin-bottom: 1rem;
+    
+    .start-point-info {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      border-left: 3px solid #007bff;
+    }
+    
+    .route-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      
+      .route-button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 160px;
+        
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+        
+        &:not(:disabled):hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        &:not(:disabled):active {
+          transform: translateY(0);
+        }
+        
+        // Стили для основной кнопки "Построить маршрут"
+        &:not(.clear-button) {
+          background: linear-gradient(135deg, #007bff, #0056b3);
+          color: white;
+          
+          &:not(:disabled):hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+          }
+          
+          // Стиль для состояния загрузки
+          &.loading {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            position: relative;
+            color: transparent;
+            
+            &::after {
+              content: '';
+              position: absolute;
+              width: 16px;
+              height: 16px;
+              border: 2px solid transparent;
+              border-top: 2px solid white;
+              border-radius: 50%;
+              animation: spin 1s linear infinite;
+            }
+          }
+        }
+        
+        // Стили для кнопки "Удалить маршрут"
+        &.clear-button {
+          background: linear-gradient(135deg, #dc3545, #c82333);
+          color: white;
+          
+          &:not(:disabled):hover {
+            background: linear-gradient(135deg, #c82333, #a71e2a);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+          }
+        }
+      }
+    }
+  }
+  
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #f5c6cb;
+    margin-bottom: 1rem;
+  }
+  
+  .route-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #e7f3ff;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+    
+    p {
+      margin: 0.25rem 0;
+      
+      &.optimized-notice {
+        font-style: italic;
+        color: #6c757d;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
+
+// Анимация загрузки
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Адаптивность для мобильных устройств
+@media (max-width: 768px) {
+  .route-planner {
+    .controls {
+      .route-buttons {
+        flex-direction: column;
+        
+        .route-button {
+          min-width: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Темная тема (опционально)
+@media (prefers-color-scheme: dark) {
+  .route-planner {
+    .controls {
+      .start-point-info {
+        background-color: #2d3748;
+        color: #e2e8f0;
+      }
+    }
+    
+    .route-info {
+      background-color: #2d3748;
+      color: #e2e8f0;
+      
+      .optimized-notice {
+        color: #a0aec0;
+      }
+    }
+  }
+}

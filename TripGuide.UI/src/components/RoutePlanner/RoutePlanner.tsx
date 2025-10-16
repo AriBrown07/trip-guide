@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { decode } from '@mapbox/polyline';
 import axios from 'axios';
 import MapViewer from '../MapViewer/MapViewer';
-
+import './RoutePlanner.scss'
 type Point = [number, number];
 
 interface MapPoint {
