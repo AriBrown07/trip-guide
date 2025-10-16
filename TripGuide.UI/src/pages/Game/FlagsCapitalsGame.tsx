@@ -1,86 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { countries, Country } from './countries';
-import { Trophy, Star, RotateCcw, BookOpen, Globe, Flag, MapPin, Zap } from 'lucide-react';
+import { Trophy, Star, RotateCcw, BookOpen, Globe } from 'lucide-react';
 import './FlagsCapitalsGame.scss';
 
-type GameMode = 'flags' | 'capitals' | 'mixed';
-type QuestionType = 'flag-to-country' | 'flag-to-capital' | 'capital-to-country' | 'country-to-capital';
+type GameMode = 'capitals' | 'flags';
+type QuestionType = 'flag-to-capital' | 'capital-to-country' | 'flag-to-country';
 
 interface Question {
   country: Country;
   options: string[];
   correct: string;
   type: QuestionType;
-  difficulty: 'easy' | 'medium' | 'hard';
 }
 
-interface GameStats {
-  correct: number;
-  incorrect: number;
-  currentStreak: number;
-  bestStreak: number;
-  perfectRounds: number;
-}
-
-
-const FloatingShapes = () => (
-  <>
-    <div className="floating-shape shape-1"></div>
-    <div className="floating-shape shape-2"></div>
-    <div className="floating-shape shape-3"></div>
-  </>
-);
-
-const Confetti = () => {
-  return (
-    <>
-      {Array.from({ length: 50 }).map((_, i) => (
-        <div key={i} className="confetti" />
-      ))}
-    </>
-  );
-};
-
-const DifficultyIndicator: React.FC<{ difficulty: string }> = ({ difficulty }) => {
-  const getDifficultyColor = (diff: string) => {
-    switch (diff) {
-      case 'easy': return '#10b981';
-      case 'medium': return '#f59e0b';
-      case 'hard': return '#ef4444';
-      default: return '#64748b';
-    }
-  };
-
-  return (
-    <div className="difficulty-indicator" style={{ backgroundColor: getDifficultyColor(difficulty) }}>
-      {difficulty === 'easy' && '🟢 Легко'}
-      {difficulty === 'medium' && '🟡 Средне'}
-      {difficulty === 'hard' && '🔴 Сложно'}
-    </div>
-  );
-};
+// количество вопросов в одной игре
+const QUESTIONS_PER_GAME = 15;
 
 export const FlagsCapitalsGame: React.FC = () => {
-  const [gameState, setGameState] = useState<'menu' | 'playing' | 'finished'>('menu');
-  const [gameMode, setGameMode] = useState<GameMode>('mixed');
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameMode, setGameMode] = useState<GameMode>('capitals');
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
+  const [score, setScore] = useState(0);
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [gameCountries, setGameCountries] = useState<Country[]>([]);
   const [usedCountries, setUsedCountries] = useState<Set<string>>(new Set());
+  const [gameFinished, setGameFinished] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [combo, setCombo] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
-  const [timerActive, setTimerActive] = useState(false);
+  const [streak, setStreak] = useState(0);
+  const [bestStreak, setBestStreak] = useState(0);
 
-  const [stats, setStats] = useState<GameStats>({
-    correct: 0,
-    incorrect: 0,
-    currentStreak: 0,
-    bestStreak: 0,
-    perfectRounds: 0
-  });
-
-  const totalQuestions = 10;
+  const getRandomSubset = (arr: Country[], count: number): Country[] => {
+    const shuffled = [...arr].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  };
 
   const getRandomCountries = (excludeCountry: Country, count: number): Country[] => {
     const filtered = countries.filter(c => c.code !== excludeCountry.code);
@@ -89,57 +42,26 @@ export const FlagsCapitalsGame: React.FC = () => {
   };
 
   const getUnusedCountry = (): Country | null => {
-    const availableCountries = countries.filter(c => !usedCountries.has(c.code));
+    const availableCountries = gameCountries.filter(c => !usedCountries.has(c.code));
     if (availableCountries.length === 0) return null;
     return availableCountries[Math.floor(Math.random() * availableCountries.length)];
   };
 
-const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
-  // Используем другие критерии для определения сложности
-  // Например, можно использовать длину названия страны или известность
-  
-  const nameLength = country.name.length;
-  const knownCountries = ['Россия', 'США', 'Китай', 'Германия', 'Франция', 'Великобритания', 'Япония'];
-  
-  // Известные страны - легкие
-  if (knownCountries.includes(country.name)) return 'easy';
-  // Страны с очень длинными названиями - сложные
-  if (nameLength > 15) return 'hard';
-  // Остальные - средние
-  return 'medium';
-};
   const generateQuestion = (): Question => {
     const randomCountry = getUnusedCountry();
     if (!randomCountry) {
-      // Если страны закончились, используем любую случайную
-      const randomIndex = Math.floor(Math.random() * countries.length);
-      const fallbackCountry = countries[randomIndex];
-      
+      setGameFinished(true);
       return {
-        country: fallbackCountry,
-        options: [fallbackCountry.name, ...getRandomCountries(fallbackCountry, 3).map(c => c.name)],
-        correct: fallbackCountry.name,
-        type: 'flag-to-country',
-        difficulty: 'medium'
+        country: countries[0],
+        options: [],
+        correct: '',
+        type: 'flag-to-capital'
       };
     }
 
-    const difficulty = calculateDifficulty(randomCountry);
-    let questionTypes: QuestionType[] = [];
-
-    switch (gameMode) {
-      case 'flags':
-        questionTypes = ['flag-to-country', 'flag-to-capital'];
-        break;
-      case 'capitals':
-        questionTypes = ['capital-to-country', 'country-to-capital'];
-        break;
-      case 'mixed':
-        questionTypes = ['flag-to-country', 'flag-to-capital', 'capital-to-country', 'country-to-capital'];
-        break;
-      default:
-        questionTypes = ['flag-to-country', 'flag-to-capital'];
-    }
+    const questionTypes: QuestionType[] = gameMode === 'capitals'
+      ? ['flag-to-capital', 'capital-to-country']
+      : ['flag-to-country'];
 
     const questionType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
     const wrongCountries = getRandomCountries(randomCountry, 3);
@@ -148,10 +70,6 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
     let correct: string = '';
 
     switch (questionType) {
-      case 'flag-to-country':
-        correct = randomCountry.name;
-        options = [randomCountry.name, ...wrongCountries.map(c => c.name)];
-        break;
       case 'flag-to-capital':
         correct = randomCountry.capital;
         options = [randomCountry.capital, ...wrongCountries.map(c => c.capital)];
@@ -160,135 +78,110 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
         correct = randomCountry.name;
         options = [randomCountry.name, ...wrongCountries.map(c => c.name)];
         break;
-      case 'country-to-capital':
-        correct = randomCountry.capital;
-        options = [randomCountry.capital, ...wrongCountries.map(c => c.capital)];
-        break;
-      default:
+      case 'flag-to-country':
         correct = randomCountry.name;
         options = [randomCountry.name, ...wrongCountries.map(c => c.name)];
+        break;
     }
 
-    // Перемешиваем варианты ответов
     options.sort(() => Math.random() - 0.5);
 
     return {
       country: randomCountry,
       options,
       correct,
-      type: questionType,
-      difficulty
+      type: questionType
     };
   };
 
   const getFlagImageUrl = (countryCode: string): string => {
-    // Добавляем fallback для некорректных кодов стран
-    const code = countryCode?.toLowerCase() || 'xx';
-    return `https://flagcdn.com/w320/${code}.png`;
+    return `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
   };
 
   const startGame = (mode: GameMode) => {
+    const subset = getRandomSubset(countries, QUESTIONS_PER_GAME);
+    setGameCountries(subset);
     setGameMode(mode);
-    setGameState('playing');
-    setStats({
-      correct: 0,
-      incorrect: 0,
-      currentStreak: 0,
-      bestStreak: 0,
-      perfectRounds: 0
-    });
+    setGameStarted(true);
+    setScore(0);
+    setQuestionNumber(1);
     setUsedCountries(new Set());
+    setGameFinished(false);
     setSelectedAnswer(null);
     setShowResult(false);
-    setCombo(0);
-    setTimeLeft(30);
-    setTimerActive(true);
+    setStreak(0);
     setCurrentQuestion(generateQuestion());
   };
 
   const handleAnswer = (answer: string) => {
     if (selectedAnswer || showResult) return;
-    
+
     setSelectedAnswer(answer);
     setShowResult(true);
-    setTimerActive(false);
-    
+
     const isCorrect = answer === currentQuestion?.correct;
-    const newStats = { ...stats };
 
     if (isCorrect) {
-      newStats.correct++;
-      newStats.currentStreak++;
-      if (newStats.currentStreak > newStats.bestStreak) {
-        newStats.bestStreak = newStats.currentStreak;
-      }
-      
-      // Бонус за комбо
-      setCombo(prev => prev + 1);
-      
-      // Конфетти за серию из 3+ правильных ответов
-      if (newStats.currentStreak >= 3) {
-        setShowConfetti(true);
-        setTimeout(() => setShowConfetti(false), 2000);
+      setScore(score + 1);
+      setStreak(streak + 1);
+      if (streak + 1 > bestStreak) {
+        setBestStreak(streak + 1);
       }
     } else {
-      newStats.incorrect++;
-      newStats.currentStreak = 0;
-      setCombo(0);
+      setStreak(0);
     }
 
-    setStats(newStats);
-
-    // Добавляем страну в использованные
     if (currentQuestion) {
       setUsedCountries(prev => new Set(Array.from(prev).concat(currentQuestion.country.code)));
     }
 
     setTimeout(() => {
-      if (newStats.correct + newStats.incorrect >= totalQuestions) {
-        setGameState('finished');
-        setShowConfetti(true);
+      if (questionNumber >= QUESTIONS_PER_GAME) {
+        setGameFinished(true);
       } else {
+        setQuestionNumber(questionNumber + 1);
         setCurrentQuestion(generateQuestion());
         setSelectedAnswer(null);
         setShowResult(false);
-        setTimeLeft(30);
-        setTimerActive(true);
       }
     }, 2000);
   };
 
   const resetGame = () => {
-    setGameState('menu');
+    setGameStarted(false);
+    setGameFinished(false);
     setCurrentQuestion(null);
+    setScore(0);
+    setQuestionNumber(0);
+    setUsedCountries(new Set());
     setSelectedAnswer(null);
     setShowResult(false);
-    setCombo(0);
-    setShowConfetti(false);
+    setStreak(0);
   };
 
-  const getQuestionText = (question: Question) => {
-    switch (question.type) {
-      case 'flag-to-country':
-        return 'Флаг какой страны изображен?';
+  const getQuestionText = () => {
+    if (!currentQuestion) return '';
+
+    switch (currentQuestion.type) {
       case 'flag-to-capital':
         return 'Какая столица у этой страны?';
       case 'capital-to-country':
-        return `Столица "${question.country.capital}" принадлежит какой стране?`;
-      case 'country-to-capital':
-        return `Какая столица у ${question.country.name}?`;
+        return `Столица ${currentQuestion.country.capital} принадлежит какой стране?`;
+      case 'flag-to-country':
+        return 'Флаг какой страны изображен?';
       default:
         return '';
     }
   };
 
-  const shouldShowFlag = (question: Question) => {
-    return question.type === 'flag-to-country' || question.type === 'flag-to-capital';
+  const shouldShowFlag = () => {
+    if (!currentQuestion) return false;
+    return currentQuestion.type === 'flag-to-capital' || currentQuestion.type === 'flag-to-country';
   };
 
   const getButtonClass = (option: string) => {
     if (!showResult) return 'game__option';
-    
+
     if (option === currentQuestion?.correct) {
       return 'game__option game__option--correct';
     } else if (option === selectedAnswer && option !== currentQuestion?.correct) {
@@ -297,87 +190,46 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
     return 'game__option game__option--disabled';
   };
 
-  // Таймер
-  useEffect(() => {
-    if (timerActive && timeLeft > 0) {
-      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (timeLeft === 0 && timerActive) {
-      // Время вышло - автоматически неправильный ответ
-      handleAnswer('');
-    }
-  }, [timeLeft, timerActive]);
-
-  const getTimeColor = () => {
-    if (timeLeft > 15) return '#10b981';
-    if (timeLeft > 5) return '#f59e0b';
-    return '#ef4444';
-  };
-
-  if (gameState === 'menu') {
+  if (!gameStarted) {
     return (
       <div className="game">
-        <FloatingShapes />
         <div className="game__scroll">
           <div className="game__content">
             <div className="game__header">
               <Globe className="game__icon" />
-              <h1 className="game__title">ГеоМастер</h1>
-              <p className="game__subtitle">Проверь свои знания географии!</p>
+              <h1 className="game__title">Знатоки Мира</h1>
+              <p className="game__subtitle">Изучение флагов и столиц стран</p>
             </div>
-            
+
             <div className="game__instructions">
               <h2>Выберите режим игры:</h2>
-              <p>Ответьте на {totalQuestions} вопросов. Таймер: 30 секунд на вопрос!</p>
-              <div className="game__features">
-                <div className="feature">
-                  <Zap className="feature-icon" />
-                  <span>Система комбо и серий</span>
-                </div>
-                <div className="feature">
-                  <Trophy className="feature-icon" />
-                  <span>3 уровня сложности</span>
-                </div>
-                <div className="feature">
-                  <Star className="feature-icon" />
-                  <span>Разные типы вопросов</span>
-                </div>
-              </div>
+              <p>Проверьте свои знания географии! Угадайте {QUESTIONS_PER_GAME} случайных стран.</p>
             </div>
-            
+
             <div className="game__modes">
-              <button 
-                className="game__mode-btn game__mode-btn--flags"
-                onClick={() => startGame('flags')}
-              >
-                <Flag className="game__mode-icon" />
-                <span className="game__mode-title">Флаги</span>
-                <span className="game__mode-desc">Угадывайте страны и столицы по флагам</span>
-              </button>
-              
               <button 
                 className="game__mode-btn game__mode-btn--capitals"
                 onClick={() => startGame('capitals')}
               >
-                <MapPin className="game__mode-icon" />
-                <span className="game__mode-title">Столицы</span>
-                <span className="game__mode-desc">Сопоставляйте страны и их столицы</span>
-              </button>
-              
-              <button 
-                className="game__mode-btn game__mode-btn--mixed"
-                onClick={() => startGame('mixed')}
-              >
                 <BookOpen className="game__mode-icon" />
-                <span className="game__mode-title">Микс</span>
-                <span className="game__mode-desc">Все типы вопросов вперемешку</span>
+                <span className="game__mode-title">Столицы</span>
+                <span className="game__mode-desc">Угадай столицы {QUESTIONS_PER_GAME} стран</span>
+              </button>
+
+              <button 
+                className="game__mode-btn game__mode-btn--flags"
+                onClick={() => startGame('flags')}
+              >
+                <Star className="game__mode-icon" />
+                <span className="game__mode-title">Флаги</span>
+                <span className="game__mode-desc">Угадай {QUESTIONS_PER_GAME} стран по флагу</span>
               </button>
             </div>
-            
-            {stats.bestStreak > 0 && (
+
+            {bestStreak > 0 && (
               <div className="game__stats">
                 <Trophy className="game__stats-icon" />
-                <span>Лучшая серия: {stats.bestStreak}</span>
+                <span>Лучшая серия: {bestStreak}</span>
               </div>
             )}
           </div>
@@ -386,55 +238,35 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
     );
   }
 
-  if (gameState === 'finished') {
-    const percentage = Math.round((stats.correct / totalQuestions) * 100);
+  if (gameFinished) {
+    const percentage = Math.round((score / QUESTIONS_PER_GAME) * 100);
     let grade = '';
-    let gradeIcon = '';
-    
-    if (percentage >= 90) {
-      grade = 'Великолепно! 🏆';
-      gradeIcon = '🏆';
-    } else if (percentage >= 70) {
-      grade = 'Отлично! ⭐';
-      gradeIcon = '⭐';
-    } else if (percentage >= 50) {
-      grade = 'Хорошо! 👍';
-      gradeIcon = '👍';
-    } else {
-      grade = 'Продолжайте учиться! 📚';
-      gradeIcon = '📚';
-    }
+
+    if (percentage >= 90) grade = 'Превосходно!';
+    else if (percentage >= 70) grade = 'Хорошо!';
+    else if (percentage >= 50) grade = 'Удовлетворительно';
+    else grade = 'Нужно больше практики';
 
     return (
       <div className="game">
-        <FloatingShapes />
-        {showConfetti && <Confetti />}
         <div className="game__scroll">
           <div className="game__content">
             <div className="game__results">
               <Trophy className="game__results-icon" />
               <h2 className="game__results-title">Игра завершена!</h2>
-              
-              <div className="results-stats">
-                <div className="stat">
-                  <span className="stat-value">{stats.correct}/{totalQuestions}</span>
-                  <span className="stat-label">Правильных ответов</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-value">{percentage}%</span>
-                  <span className="stat-label">Точность</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-value">{stats.bestStreak}</span>
-                  <span className="stat-label">Лучшая серия</span>
-                </div>
+              <div className="game__results-score">
+                <span className="game__results-points">{score}/{QUESTIONS_PER_GAME}</span>
+                <span className="game__results-percentage">({percentage}%)</span>
               </div>
-              
-              <div className="game__results-grade">
-                <span className="grade-icon">{gradeIcon}</span>
-                {grade}
-              </div>
-              
+              <p className="game__results-grade">{grade}</p>
+
+              {bestStreak > 0 && (
+                <div className="game__results-streak">
+                  <Star className="game__results-streak-icon" />
+                  <span>Лучшая серия: {bestStreak}</span>
+                </div>
+              )}
+
               <div className="game__results-actions">
                 <button 
                   className="game__action-btn game__action-btn--primary"
@@ -443,7 +275,7 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
                   <RotateCcw className="game__action-icon" />
                   Играть снова
                 </button>
-                
+
                 <button 
                   className="game__action-btn"
                   onClick={resetGame}
@@ -460,53 +292,37 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
 
   return (
     <div className="game">
-      <FloatingShapes />
-      {showConfetti && <Confetti />}
       <div className="game__scroll">
         <div className="game__content">
           <div className="game__progress">
             <div className="game__progress-info">
               <span className="game__question-counter">
-                Вопрос {stats.correct + stats.incorrect + 1} из {totalQuestions}
+                Вопрос {questionNumber} из {QUESTIONS_PER_GAME}
               </span>
               <div className="game__score">
                 <Star className="game__score-icon" />
-                <span>{stats.correct}</span>
+                <span>Очки: {score}</span>
               </div>
             </div>
-            
+
             <div className="game__progress-bar">
               <div 
                 className="game__progress-fill"
-                style={{ width: `${((stats.correct + stats.incorrect) / totalQuestions) * 100}%` }}
+                style={{ width: `${(questionNumber / QUESTIONS_PER_GAME) * 100}%` }}
               />
             </div>
-            
-            <div className="game__meta">
-              {combo > 0 && (
-                <div className="game__combo">
-                  🔥 Комбо: x{combo}
-                </div>
-              )}
-              <div className="game__timer" style={{ color: getTimeColor() }}>
-                ⏱️ {timeLeft}с
+
+            {streak > 0 && (
+              <div className="game__streak">
+                🔥 Серия: {streak}
               </div>
-            </div>
+            )}
           </div>
-          
+
           {currentQuestion && (
             <div className="game__question">
-              <div className="question-header">
-                <DifficultyIndicator difficulty={currentQuestion.difficulty} />
-                {stats.currentStreak > 2 && (
-                  <div className="streak-indicator">
-                    🔥 Серия: {stats.currentStreak}
-                  </div>
-                )}
-              </div>
-              
               <div className="game__flag">
-                {shouldShowFlag(currentQuestion) ? (
+                {shouldShowFlag() ? (
                   <div className="game__flag-container">
                     <img 
                       src={getFlagImageUrl(currentQuestion.country.code)}
@@ -523,21 +339,13 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
                       {currentQuestion.country.flag}
                     </span>
                   </div>
-                ) : currentQuestion.type === 'capital-to-country' ? (
-                  <div className="capital-display">
-                    <MapPin className="capital-icon" />
-                    <span className="capital-text">{currentQuestion.country.capital}</span>
-                  </div>
                 ) : (
-                  <div className="country-display">
-                    <Globe className="country-icon" />
-                    <span className="country-text">{currentQuestion.country.name}</span>
-                  </div>
+                  <span className="game__flag-emoji">{currentQuestion.country.flag}</span>
                 )}
               </div>
-              
-              <h3 className="game__question-text">{getQuestionText(currentQuestion)}</h3>
-              
+
+              <h3 className="game__question-text">{getQuestionText()}</h3>
+
               <div className="game__options">
                 {currentQuestion.options.map((option, index) => (
                   <button
@@ -550,16 +358,13 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
                   </button>
                 ))}
               </div>
-              
+
               {showResult && (
                 <div className={`game__result ${selectedAnswer === currentQuestion.correct ? 'game__result--correct' : 'game__result--wrong'}`}>
                   {selectedAnswer === currentQuestion.correct ? (
                     <div className="game__result-content">
                       <span className="game__result-icon">✅</span>
-                      <div className="game__result-info">
-                        <span className="game__result-text">Правильно! +1 очко</span>
-                        {combo > 1 && <span className="combo-bonus">Комбо x{combo}!</span>}
-                      </div>
+                      <span className="game__result-text">Правильно!</span>
                     </div>
                   ) : (
                     <div className="game__result-content">
@@ -574,7 +379,7 @@ const calculateDifficulty = (country: Country): 'easy' | 'medium' | 'hard' => {
               )}
             </div>
           )}
-          
+
           <button 
             className="game__quit-btn"
             onClick={resetGame}
