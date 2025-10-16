@@ -12,7 +12,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ onClose }) => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 300);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -21,27 +21,46 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ onClose }) => {
     setTimeout(onClose, 300);
   };
 
-  // Обработчик клика по оверлею
   const handleOverlayClick = () => {
     handleClose();
   };
 
-  // Обработчик клика по контенту (чтобы не закрывалось при клике внутри)
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
 
   return (
-    <div 
+    <div
       className={`welcome-banner ${isVisible ? 'visible' : ''}`}
       onClick={handleOverlayClick}
     >
       <div className="welcome-content" onClick={handleContentClick}>
         <button className="close-button" onClick={handleClose}>×</button>
-        <div className="text-line">ПОСТРОЙТЕ СВОЙ</div>
-        <div className="text-line">ПЕРСОНАЛЬНЫЙ МАРШРУТ</div>
-        <div className="text-line">И ОТПРАВЬТЕСЬ В</div>
-        <div className="highlighted-text">НЕЗАБЫВАЕМОЕ ПУТЕШЕСТВИЕ</div>
+
+        <div className="welcome-icon">✈️</div>
+        <h2 className="welcome-title">Откройте мир приключений</h2>
+        <p className="welcome-description">
+          Создайте уникальный маршрут по историческим местам и отправьтесь в незабываемое путешествие
+        </p>
+
+        <div className="welcome-features">
+          <div className="feature-item">
+            <span className="feature-icon">🗺️</span>
+            <span className="feature-text">Персональные маршруты</span>
+          </div>
+          <div className="feature-item">
+            <span className="feature-icon">🏛️</span>
+            <span className="feature-text">Исторические памятники</span>
+          </div>
+          <div className="feature-item">
+            <span className="feature-icon">📍</span>
+            <span className="feature-text">Интерактивная карта</span>
+          </div>
+        </div>
+
+        <button className="start-button" onClick={handleClose}>
+          Начать путешествие
+        </button>
       </div>
     </div>
   );
