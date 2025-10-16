@@ -1,72 +1,112 @@
-// Базовые переменные в винтажном стиле
-$primary-brown: #8B4513;
-$light-brown: #DEB887;
-$dark-brown: #654321;
-$parchment: #F5DEB3;
-$cream: #FFF8DC;
-$gold: #DAA520;
-$shadow-color: rgba(0, 0, 0, 0.3);
-$text-dark: #2F1B14;
-$success-green: #228B22;
-$error-red: #DC143C;
+// Светлая цветовая палитра
+$primary: #6366f1;
+$primary-light: #818cf8;
+$secondary: #ec4899;
+$accent: #06b6d4;
+$success: #10b981;
+$error: #ef4444;
+$warning: #f59e0b;
+$background: #ffffff;
+$surface: #f8fafc;
+$card: #ffffff;
+$text-primary: #1e293b;
+$text-secondary: #64748b;
+$text-light: #94a3b8;
+$border: #e2e8f0;
+$border-light: #f1f5f9;
+
+// Градиенты
+$gradient-primary: linear-gradient(135deg, $primary 0%, $primary-light 100%);
+$gradient-accent: linear-gradient(135deg, $accent 0%, $secondary 100%);
+$gradient-bg: linear-gradient(135deg, #f0f4ff 0%, #fdf2ff 50%, #f0fdf4 100%);
+$gradient-card: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+
+// Тени
+$shadow-sm: 0 2px 12px rgba(99, 102, 241, 0.08);
+$shadow-md: 0 8px 30px rgba(99, 102, 241, 0.12);
+$shadow-lg: 0 20px 50px rgba(99, 102, 241, 0.15);
+$shadow-hover: 0 25px 60px rgba(99, 102, 241, 0.2);
+
+// Радиусы
+$radius-sm: 12px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 32px;
 
 // Миксины
-@mixin vintage-shadow {
-  box-shadow: 0 4px 15px $shadow-color;
+@mixin card-effect {
+  background: $card;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  backdrop-filter: blur(20px);
 }
 
-@mixin parchment-texture {
-  background: linear-gradient(135deg, $parchment 0%, lighten($parchment, 5%) 50%, darken($parchment, 3%) 100%);
-  position: relative;
+@mixin hover-lift {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      radial-gradient(circle at 20% 80%, transparent 8px, rgba(139, 69, 19, 0.1) 9px),
-      radial-gradient(circle at 80% 20%, transparent 6px, rgba(139, 69, 19, 0.1) 7px),
-      radial-gradient(circle at 40% 40%, transparent 5px, rgba(139, 69, 19, 0.05) 6px);
-    pointer-events: none;
-    opacity: 0.7;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $shadow-hover;
   }
 }
 
-@mixin torn-edges {
-  &::after {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: 
-      radial-gradient(circle at 10% 10%, transparent 5px, $dark-brown 6px) 0 0,
-      radial-gradient(circle at 90% 10%, transparent 5px, $dark-brown 6px) 100% 0,
-      radial-gradient(circle at 10% 90%, transparent 5px, $dark-brown 6px) 0 100%,
-      radial-gradient(circle at 90% 90%, transparent 5px, $dark-brown 6px) 100% 100%;
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    z-index: -1;
+@mixin gradient-text {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Анимации
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-// Основные стили компонента
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes confetti {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+// Основные стили
 .game {
   min-height: 100vh;
-  background: 
-    radial-gradient(ellipse at center, lighten($light-brown, 15%) 0%, $light-brown 70%, darken($light-brown, 10%) 100%);
-  background-attachment: fixed;
-  padding: 2rem 1rem;
+  background: $gradient-bg;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Georgia', serif;
-  
-  // Добавляем текстуру к фону
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  position: relative;
+  overflow: hidden;
+
   &::before {
     content: '';
     position: fixed;
@@ -74,180 +114,238 @@ $error-red: #DC143C;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 2px,
-        rgba(139, 69, 19, 0.03) 2px,
-        rgba(139, 69, 19, 0.03) 4px
-      );
-    pointer-events: none;
+    background: 
+      radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
     z-index: 0;
   }
 
+  .floating-shape {
+    position: fixed;
+    opacity: 0.1;
+    z-index: 0;
+    
+    &.shape-1 {
+      top: 10%;
+      left: 10%;
+      width: 100px;
+      height: 100px;
+      background: $primary;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    &.shape-2 {
+      top: 70%;
+      right: 10%;
+      width: 150px;
+      height: 150px;
+      background: $secondary;
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      animation: float 12s ease-in-out infinite reverse;
+    }
+    
+    &.shape-3 {
+      bottom: 20%;
+      left: 20%;
+      width: 80px;
+      height: 80px;
+      background: $accent;
+      border-radius: 50%;
+      animation: bounce 4s ease-in-out infinite;
+    }
+  }
+
   &__scroll {
-    @include parchment-texture;
-    @include vintage-shadow;
-    border: 3px solid $dark-brown;
-    border-radius: 15px;
-    max-width: 800px;
+    @include card-effect;
+    max-width: 500px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
     z-index: 1;
+    transition: all 0.3s ease;
     
-    // Декоративные углы
-    &::before {
-      z-index: 1;
-    }
-    
-    // Имитация старинного свитка
-    &::after {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: 10px;
-      right: 10px;
-      height: 10px;
-      background: linear-gradient(90deg, 
-        transparent 0%, 
-        $dark-brown 20%, 
-        $dark-brown 80%, 
-        transparent 100%);
-      border-radius: 50%;
+    &:hover {
+      box-shadow: $shadow-md;
     }
   }
 
   &__content {
-    padding: 3rem 2rem;
+    padding: 2.5rem 2rem;
     position: relative;
     z-index: 2;
   }
 
-  // Заголовок и иконка
+  // Заголовок
   &__header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
 
   &__icon {
-    font-size: 3rem;
-    color: $primary-brown;
+    font-size: 4rem;
     margin-bottom: 1rem;
+    @include gradient-text;
+    animation: bounce 3s ease-in-out infinite;
+    filter: drop-shadow(0 8px 20px rgba(99, 102, 241, 0.2));
   }
 
   &__title {
     font-size: 2.5rem;
-    color: $dark-brown;
+    font-weight: 800;
     margin: 0 0 0.5rem 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
-    letter-spacing: 2px;
+    @include gradient-text;
+    letter-spacing: -0.5px;
   }
 
   &__subtitle {
-    font-size: 1.2rem;
-    color: $primary-brown;
+    font-size: 1.1rem;
+    color: $text-secondary;
     margin: 0;
-    font-style: italic;
+    font-weight: 500;
   }
 
-  // Инструкции
+  // Инструкции и фичи
   &__instructions {
     text-align: center;
     margin-bottom: 2rem;
     
     h2 {
-      color: $dark-brown;
-      font-size: 1.5rem;
+      @include gradient-text;
+      font-size: 1.4rem;
       margin-bottom: 1rem;
+      font-weight: 700;
     }
     
     p {
-      color: $text-dark;
-      font-size: 1.1rem;
+      color: $text-secondary;
+      font-size: 1rem;
       line-height: 1.6;
+      margin-bottom: 1.5rem;
     }
   }
 
-  // Режимы игры
+  .game__features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: $radius-sm;
+    color: $text-primary;
+    font-size: 0.9rem;
+    
+    .feature-icon {
+      color: $primary;
+      font-size: 1.1rem;
+    }
+  }
+
+  // Карточки режимов
   &__modes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
   }
 
   &__mode-btn {
-    @include parchment-texture;
-    border: 2px solid $primary-brown;
-    border-radius: 10px;
-    padding: 1.5rem;
+    @include card-effect;
+    padding: 2rem 1.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    background-color: transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
     position: relative;
+    overflow: hidden;
     
-    &:hover {
-      transform: translateY(-3px);
-      @include vintage-shadow;
-      border-color: $gold;
+    @include hover-lift;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.05), transparent);
+      transition: left 0.6s;
     }
     
-    &:active {
-      transform: translateY(0);
-    }
-    
-    &--capitals {
-      .game__mode-icon {
-        color: #4682B4;
-      }
+    &:hover::before {
+      left: 100%;
     }
     
     &--flags {
-      .game__mode-icon {
-        color: #DC143C;
-      }
+      border-top: 4px solid $accent;
+    }
+    
+    &--capitals {
+      border-top: 4px solid $secondary;
+    }
+    
+    &--mixed {
+      border-top: 4px solid $warning;
     }
   }
 
   &__mode-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
+    transition: transform 0.3s ease;
     display: block;
+    
+    .game__mode-btn--flags & {
+      color: $accent;
+    }
+    
+    .game__mode-btn--capitals & {
+      color: $secondary;
+    }
+    
+    .game__mode-btn--mixed & {
+      color: $warning;
+    }
   }
 
   &__mode-title {
     display: block;
     font-size: 1.3rem;
-    font-weight: bold;
-    color: $dark-brown;
+    font-weight: 700;
     margin-bottom: 0.5rem;
+    color: $text-primary;
   }
 
   &__mode-desc {
     display: block;
-    font-size: 1rem;
-    color: $text-dark;
-    line-height: 1.4;
+    font-size: 0.95rem;
+    color: $text-secondary;
+    line-height: 1.5;
   }
 
   // Статистика
   &__stats {
-    text-align: center;
+    @include card-effect;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    color: $gold;
-    font-size: 1.1rem;
-    font-weight: bold;
+    gap: 0.75rem;
+    color: $text-primary;
+    font-weight: 600;
+    margin: 0 auto;
+    max-width: 200px;
   }
 
   &__stats-icon {
-    color: $gold;
+    color: $warning;
   }
 
   // Прогресс игры
@@ -263,49 +361,116 @@ $error-red: #DC143C;
   }
 
   &__question-counter {
-    font-size: 1.1rem;
-    color: $dark-brown;
-    font-weight: bold;
+    font-size: 1rem;
+    color: $text-primary;
+    font-weight: 600;
+    background: $surface;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid $border;
   }
 
   &__score {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: $gold;
-    font-weight: bold;
+    color: $text-primary;
+    font-weight: 700;
+    background: $surface;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid $border;
   }
 
   &__score-icon {
-    color: $gold;
+    color: $warning;
   }
 
   &__progress-bar {
     width: 100%;
     height: 8px;
-    background-color: rgba(139, 69, 19, 0.2);
-    border-radius: 4px;
+    background: $border-light;
+    border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 0.5rem;
+    border: 1px solid $border;
   }
 
   &__progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, $gold 0%, lighten($gold, 15%) 100%);
-    transition: width 0.5s ease;
+    background: $gradient-accent;
+    border-radius: 10px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+      animation: shine 2s infinite;
+    }
   }
 
-  &__streak {
-    text-align: center;
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 1rem;
-    font-size: 1.1rem;
-    color: #FF6347;
-    font-weight: bold;
+  }
+
+  &__combo {
+    font-size: 0.95rem;
+    color: $warning;
+    font-weight: 700;
+    background: rgba(245, 158, 11, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+
+  &__timer {
+    font-size: 0.95rem;
+    font-weight: 700;
+    background: $surface;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid $border;
   }
 
   // Вопрос и флаг
   &__question {
     text-align: center;
     margin-bottom: 2rem;
+    animation: slideIn 0.6s ease-out;
+  }
+
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .difficulty-indicator {
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .streak-indicator {
+    background: rgba(245, 158, 11, 0.1);
+    color: $warning;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(245, 158, 11, 0.2);
   }
 
   &__flag {
@@ -313,10 +478,10 @@ $error-red: #DC143C;
   }
 
   &__flag-emoji {
-    font-size: 4rem;
+    font-size: 5rem;
     display: block;
     margin-bottom: 1rem;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.1));
   }
 
   &__flag-container {
@@ -327,81 +492,104 @@ $error-red: #DC143C;
   }
 
   &__flag-image {
-    width: 200px;
+    width: 220px;
     height: auto;
-    max-height: 120px;
-    object-fit: contain;
-    border: 3px solid $dark-brown;
-    border-radius: 8px;
-    @include vintage-shadow;
+    max-height: 140px;
+    object-fit: cover;
+    border-radius: $radius-md;
+    box-shadow: $shadow-md;
     margin-bottom: 1rem;
+    border: 3px solid $border;
+    transition: all 0.3s ease;
     
-    @media (max-width: 768px) {
-      width: 150px;
-      max-height: 90px;
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: $shadow-lg;
+    }
+  }
+
+  .capital-display, .country-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: $surface;
+    border-radius: $radius-md;
+    border: 2px solid $border;
+    
+    .capital-icon, .country-icon {
+      font-size: 3rem;
+      color: $primary;
     }
     
-    @media (max-width: 480px) {
-      width: 120px;
-      max-height: 72px;
+    .capital-text, .country-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $text-primary;
     }
   }
 
   &__country-name {
-    font-size: 1.2rem;
-    color: $primary-brown;
-    font-weight: bold;
+    font-size: 1.3rem;
+    color: $text-primary;
+    font-weight: 700;
+    background: $surface;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    display: inline-block;
+    border: 1px solid $border;
   }
 
   &__question-text {
     font-size: 1.4rem;
-    color: $dark-brown;
+    color: $text-primary;
     margin-bottom: 2rem;
-    line-height: 1.5;
+    font-weight: 600;
+    line-height: 1.4;
   }
 
   // Варианты ответов
   &__options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
   }
 
   &__option {
-    @include parchment-texture;
-    border: 2px solid $primary-brown;
-    border-radius: 8px;
-    padding: 1rem;
+    @include card-effect;
+    padding: 1.25rem 1.5rem;
     font-size: 1rem;
-    color: $text-dark;
+    color: $text-primary;
     cursor: pointer;
-    transition: all 0.3s ease;
-    background-color: transparent;
-    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    text-align: left;
+    border: 2px solid transparent;
+    
+    @include hover-lift;
     
     &:hover:not(:disabled) {
-      transform: translateY(-2px);
-      border-color: $gold;
-      @include vintage-shadow;
+      border-color: $primary-light;
+      background: rgba(99, 102, 241, 0.02);
     }
     
     &:disabled {
       cursor: not-allowed;
+      transform: none !important;
     }
     
     &--correct {
-      border-color: $success-green;
-      background: lighten($success-green, 45%);
-      color: $success-green;
-      font-weight: bold;
+      background: rgba(16, 185, 129, 0.1);
+      border-color: $success;
+      color: $success;
+      animation: pulse 1s;
     }
     
     &--wrong {
-      border-color: $error-red;
-      background: lighten($error-red, 35%);
-      color: $error-red;
-      font-weight: bold;
+      background: rgba(239, 68, 68, 0.1);
+      border-color: $error;
+      color: $error;
     }
     
     &--disabled {
@@ -411,21 +599,22 @@ $error-red: #DC143C;
 
   // Результат ответа
   &__result {
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 8px;
-    font-weight: bold;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border-radius: $radius-md;
+    font-weight: 600;
+    animation: slideIn 0.4s ease-out;
     
     &--correct {
-      background: lighten($success-green, 45%);
-      border: 2px solid $success-green;
-      color: $success-green;
+      background: rgba(16, 185, 129, 0.1);
+      border: 2px solid $success;
+      color: $success;
     }
     
     &--wrong {
-      background: lighten($error-red, 35%);
-      border: 2px solid $error-red;
-      color: $error-red;
+      background: rgba(239, 68, 68, 0.1);
+      border: 2px solid $error;
+      color: $error;
     }
   }
 
@@ -433,7 +622,7 @@ $error-red: #DC143C;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
   &__result-icon {
@@ -444,67 +633,108 @@ $error-red: #DC143C;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__result-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .combo-bonus {
+    font-size: 0.9rem;
+    color: $warning;
+    font-weight: 600;
   }
 
   &__result-correct {
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    opacity: 0.8;
+    font-size: 0.95rem;
+    opacity: 0.9;
   }
 
-  // Результаты игры
+  // Экран результатов
   &__results {
     text-align: center;
+    animation: slideIn 0.6s ease-out;
   }
 
   &__results-icon {
-    font-size: 4rem;
-    color: $gold;
-    margin-bottom: 1rem;
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    @include gradient-text;
+    animation: bounce 3s ease-in-out infinite;
   }
 
   &__results-title {
-    font-size: 2rem;
-    color: $dark-brown;
+    font-size: 2.2rem;
+    color: $text-primary;
+    margin-bottom: 2rem;
+    font-weight: 800;
+  }
+
+  .results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
     margin-bottom: 2rem;
   }
 
-  &__results-score {
-    margin-bottom: 1rem;
-  }
-
-  &__results-points {
-    font-size: 3rem;
-    color: $primary-brown;
-    font-weight: bold;
-  }
-
-  &__results-percentage {
-    font-size: 1.5rem;
-    color: $text-dark;
-    margin-left: 1rem;
+  .stat {
+    @include card-effect;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    
+    .stat-value {
+      display: block;
+      font-size: 2rem;
+      font-weight: 800;
+      @include gradient-text;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      color: $text-secondary;
+      font-weight: 500;
+    }
   }
 
   &__results-grade {
-    font-size: 1.5rem;
-    color: $gold;
+    font-size: 1.4rem;
+    color: $accent;
     margin-bottom: 2rem;
-    font-weight: bold;
+    font-weight: 700;
+    background: $surface;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid $border;
+    
+    .grade-icon {
+      font-size: 1.6rem;
+    }
   }
 
   &__results-streak {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    color: $gold;
-    font-size: 1.2rem;
-    font-weight: bold;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    color: $warning;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: rgba(245, 158, 11, 0.1);
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    display: inline-flex;
+    border: 1px solid rgba(245, 158, 11, 0.2);
   }
 
   &__results-streak-icon {
-    color: $gold;
+    color: $warning;
   }
 
   // Кнопки действий
@@ -516,30 +746,36 @@ $error-red: #DC143C;
   }
 
   &__action-btn {
-    @include parchment-texture;
-    border: 2px solid $primary-brown;
-    border-radius: 8px;
-    padding: 1rem 2rem;
+    @include card-effect;
+    padding: 1.25rem 2rem;
     font-size: 1.1rem;
-    color: $dark-brown;
+    color: $text-primary;
     cursor: pointer;
-    transition: all 0.3s ease;
-    background-color: transparent;
-    font-family: inherit;
-    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+    border: 2px solid transparent;
+    
+    @include hover-lift;
     
     &:hover {
-      transform: translateY(-2px);
-      border-color: $gold;
-      @include vintage-shadow;
+      border-color: $primary-light;
+      background: rgba(99, 102, 241, 0.02);
     }
     
     &--primary {
-      border-color: $gold;
-      color: $gold;
+      background: $gradient-primary;
+      color: white;
+      border: none;
+      
+      &:hover {
+        background: linear-gradient(135deg, lighten($primary, 5%) 0%, lighten($primary-light, 5%) 100%);
+      }
     }
   }
 
@@ -548,20 +784,40 @@ $error-red: #DC143C;
   }
 
   &__quit-btn {
+    @include card-effect;
     display: block;
     margin: 2rem auto 0;
-    padding: 0.5rem 1rem;
-    background: transparent;
-    border: 1px solid rgba(139, 69, 19, 0.5);
-    border-radius: 6px;
-    color: rgba(139, 69, 19, 0.7);
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    color: $text-secondary;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: inherit;
+    font-weight: 500;
+    border: 1px solid $border;
     
     &:hover {
-      border-color: $primary-brown;
-      color: $primary-brown;
+      background: $surface;
+      color: $text-primary;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Конфетти
+.confetti {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: $warning;
+  top: -20px;
+  animation: confetti 3s linear forwards;
+  
+  @for $i from 1 through 50 {
+    &:nth-child(#{$i}) {
+      left: random(100) * 1%;
+      background: hsl(random(360), 100%, 60%);
+      animation-delay: random(3) * 0.1s;
+      animation-duration: random(3) + 2s;
     }
   }
 }
@@ -569,36 +825,40 @@ $error-red: #DC143C;
 // Адаптивность
 @media (max-width: 768px) {
   .game {
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     
     &__content {
-      padding: 2rem 1rem;
+      padding: 2rem 1.5rem;
     }
     
     &__title {
       font-size: 2rem;
     }
     
-    &__modes {
+    &__flag-image {
+      width: 180px;
+      max-height: 110px;
+    }
+    
+    &__question-text {
+      font-size: 1.2rem;
+    }
+    
+    .results-stats {
       grid-template-columns: 1fr;
+      gap: 0.75rem;
     }
     
-    &__options {
-      grid-template-columns: 1fr;
-    }
-    
-    &__flag-emoji {
-      font-size: 3rem;
-    }
-    
-    &__results-actions {
-      flex-direction: column;
-      width: 100%;
+    .stat {
+      padding: 1rem;
       
-      .game__action-btn {
-        width: 100%;
-        justify-content: center;
+      .stat-value {
+        font-size: 1.5rem;
       }
+    }
+    
+    .floating-shape {
+      display: none;
     }
   }
 }
@@ -606,62 +866,64 @@ $error-red: #DC143C;
 @media (max-width: 480px) {
   .game {
     &__content {
-      padding: 1.5rem 0.5rem;
+      padding: 1.5rem 1rem;
     }
     
     &__title {
       font-size: 1.8rem;
     }
     
-    &__question-text {
-      font-size: 1.2rem;
+    &__flag-emoji {
+      font-size: 4rem;
     }
     
-    &__progress-info {
+    &__flag-image {
+      width: 150px;
+      max-height: 90px;
+    }
+    
+    &__results-points {
+      font-size: 2.8rem;
+    }
+    
+    &__action-btn {
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+    }
+    
+    .question-header {
       flex-direction: column;
       gap: 0.5rem;
-      align-items: center;
     }
   }
 }
 
-// Анимации
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.game__question {
-  animation: slideIn 0.5s ease;
-}
-
-.game__result {
-  animation: slideIn 0.3s ease;
-}
-
-// Скролл-бар стилизация
+// Скролл-бар
 .game__scroll {
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
   
   &::-webkit-scrollbar-track {
-    background: rgba(139, 69, 19, 0.1);
-    border-radius: 4px;
+    background: $border-light;
+    border-radius: 3px;
   }
   
   &::-webkit-scrollbar-thumb {
-    background: $primary-brown;
-    border-radius: 4px;
+    background: $primary-light;
+    border-radius: 3px;
     
     &:hover {
-      background: $dark-brown;
+      background: $primary;
     }
   }
+}
+
+// Анимации появления
+.game__mode-btn,
+.game__stats,
+.game__progress,
+.game__question,
+.game__results {
+  animation: slideIn 0.6s ease-out;
 }

@@ -10,77 +10,120 @@
       border-left: 3px solid #007bff;
     }
     
+    .controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
     .route-buttons {
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
+      flex: 1;
+    }
+    
+    .route-button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px;
       
-      .route-button {
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 160px;
-        
-        &:disabled {
-          cursor: not-allowed;
-          opacity: 0.6;
-        }
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+      
+      &:not(:disabled):hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+      
+      &:not(:disabled):active {
+        transform: translateY(0);
+      }
+      
+      // Стили для основной кнопки "Построить маршрут"
+      &:not(.clear-button) {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
         
         &:not(:disabled):hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          background: linear-gradient(135deg, #0056b3, #004085);
+          box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
         }
         
-        &:not(:disabled):active {
-          transform: translateY(0);
+        // Стиль для состояния загрузки
+        &.loading {
+          background: linear-gradient(135deg, #6c757d, #5a6268);
+          position: relative;
+          color: transparent;
+          
+          &::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+          }
         }
+      }
+      
+      // Стили для кнопки "Удалить маршрут"
+      &.clear-button {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: white;
         
-        // Стили для основной кнопки "Построить маршрут"
-        &:not(.clear-button) {
-          background: linear-gradient(135deg, #007bff, #0056b3);
-          color: white;
-          
-          &:not(:disabled):hover {
-            background: linear-gradient(135deg, #0056b3, #004085);
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-          }
-          
-          // Стиль для состояния загрузки
-          &.loading {
-            background: linear-gradient(135deg, #6c757d, #5a6268);
-            position: relative;
-            color: transparent;
-            
-            &::after {
-              content: '';
-              position: absolute;
-              width: 16px;
-              height: 16px;
-              border: 2px solid transparent;
-              border-top: 2px solid white;
-              border-radius: 50%;
-              animation: spin 1s linear infinite;
-            }
-          }
+        &:not(:disabled):hover {
+          background: linear-gradient(135deg, #c82333, #a71e2a);
+          box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
         }
-        
-        // Стили для кнопки "Удалить маршрут"
-        &.clear-button {
-          background: linear-gradient(135deg, #dc3545, #c82333);
-          color: white;
-          
-          &:not(:disabled):hover {
-            background: linear-gradient(135deg, #c82333, #a71e2a);
-            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-          }
-        }
+      }
+    }
+    
+    .home-button-corner {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+      min-width: 120px;
+      
+      &:hover {
+        background: linear-gradient(135deg, #20c997, #1e9e6f);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        transform: translateY(-1px);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+      
+      .home-icon {
+        transition: transform 0.2s ease-in-out;
+      }
+      
+      &:hover .home-icon {
+        transform: scale(1.1);
       }
     }
   }
@@ -124,13 +167,24 @@
 @media (max-width: 768px) {
   .route-planner {
     .controls {
+      .controls-row {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
       .route-buttons {
         flex-direction: column;
+        width: 100%;
         
         .route-button {
           min-width: 100%;
           width: 100%;
         }
+      }
+      
+      .home-button-corner {
+        width: 100%;
+        order: -1; // Кнопка Домой будет первой на мобильных
       }
     }
   }
