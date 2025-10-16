@@ -9,7 +9,7 @@ import { TestPage } from "../pages/Test/TestPage";
 import { LoginPage } from '../pages/Login/LoginPage';
 import { RegisterPage } from '../pages/Signin/RegisterPage';
 import NotFound from "../pages/NotFound/NotFound"
-import { App } from '../pages/MapPage/Map';
+import App from '../pages/MapPage/Map';
 
 import Folk from '../pages/ExstraInform/Folk';
 import Independence from '../pages/ExstraInform/Independence';
