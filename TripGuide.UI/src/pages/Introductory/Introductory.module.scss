@@ -1,4 +1,4 @@
-/* Base styles (for desktop first) */
+/* Base styles */
 body, html {
   margin: 0;
   padding: 0;
@@ -12,17 +12,18 @@ body, html {
   margin: 0;
   padding: 0;
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 5vw;
-  background-color: #FAF1E0;
+  background: transparent !important;
   z-index: 10;
   flex-shrink: 0;
   height: 80px;
@@ -38,40 +39,37 @@ body, html {
 .logoImage {
   height: 40px;
   width: auto;
-}
-
-@font-face {
-  font-family: 'Lobster';
-  src: url('../../fonts/Lobster-Regular.ttf') format('ttf');
-  font-weight: 700;
-  font-style: normal;
+  filter: brightness(0) invert(1);
 }
 
 .logoText {
-  font-family: 'Lobster', sans-serif !important;
-  font-weight: 600 !important;
-  color: #2b1e18 !important;
-  -webkit-text-stroke: 1.5px #C17C45;
-  paint-order: stroke fill;
-  letter-spacing: 3px !important;
-  font-size: 1.7rem !important;
-  white-space: nowrap;
+  font-family: 'Lobster', cursive !important;
+  font-weight: 400 !important;
+  color: white !important;
+  font-size: 2rem !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px !important;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: min(4vw, 10px);
+  gap: min(4vw, 20px);
 }
 
 .navButton {
   font-size: 1.1rem !important;
   text-transform: none !important;
-  color: #333 !important;
+  color: white !important;
   padding: 0.6rem 1.2rem !important;
   white-space: nowrap;
+  border-radius: 25px !important;
+  transition: all 0.3s ease !important;
+  
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -85,130 +83,229 @@ body, html {
     width: 28px;
     height: 28px;
     object-fit: contain;
-    transition: transform 0.2s ease;
-    opacity: 0.8;
+    transition: all 0.3s ease;
+    opacity: 0.9;
     aspect-ratio: 1/1;
+    filter: brightness(0) invert(1);
     
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
       opacity: 1;
     }
   }
 }
 
-.divider {
-  height: 1px;
-  background-color: #FAF1E0;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  flex-shrink: 0;
-}
-
-.mainContent {
-  flex: 1;
-  background-image: url('../../pics/landmark-bg.png');
-  background-size: cover;
-  background-position: center;
-  box-shadow: inset 0 0 0 1000px rgba(255,255,255,.4);
+/* Кнопка карты в правом верхнем углу */
+.mapButton {
+  position: fixed;
+  align-items: center;
+  top: 2rem;
+  right: 2rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: auto;
+  gap: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  padding-left: 0.7rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
 }
 
-.textBlock {
+.mapText {
+  font-family: 'unbounded', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  color: rgba(58, 118, 185) !important;
+  text-transform: lowercase;
+  margin: 0 !important;
+  letter-spacing: 0.5px;
+}
+
+.mapIcon {
+  width: 0.9rem;
+  height: 0.9rem;
+  object-fit: contain;
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  background: 
+    /* PNG текстура */
+    url('../../pics/texture.png'),
+    /* Градиенты поверх текстуры */
+    radial-gradient(
+      ellipse at top right,
+      rgba(58, 118, 181, 0.9) 0%,
+      rgba(77, 168, 218, 0.9) 50%,
+      rgba(138, 197, 237, 0.9) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(18, 52, 88, 0.7) 0%,
+      rgba(77, 168, 218, 0.4) 100%
+    );
+  background-blend-mode: overlay, multiply, normal;
+  background-size: cover, cover, cover;
+  background-position: center, top right, center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
+  overflow: auto;
+  padding: 0 5vw;
+  min-height: 100vh;
+}
+
+/* Для создания эффекта осветления при прокрутке */
+.mainContent::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  pointer-events: none;
   z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Эффект при прокрутке */
+.mainContent.scrolled::before {
+  opacity: 1;
+}
+
+/* Планета */
+.planetContainer {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.planetImage {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(77, 168, 218, 0.8));
+  animation: float 6s ease-in-out infinite;
+  z-index: 2;
+  position: relative;
+}
+
+.planetGlow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(77, 168, 218, 0.3) 0%, rgba(77, 168, 218, 0) 70%);
+  border-radius: 50%;
+  animation: glow 4s ease-in-out infinite alternate;
+}
+
+/* Текстовая часть */
+.textBlock {
+  flex: 1;
+  position: relative;
+  z-index: 3;
   text-align: left;
-  width: 1000px;
-  padding: 4rem 3rem;
-  margin: 2rem;
-  background-color: none;
-  left: 0; /* Ensures it stays left-aligned */
+  padding: 2rem;
 }
 
-.title {
-  font-family: 'Seymour One', sans-serif !important;
-  font-size: 45px !important;
-  font-weight: 400 !important; /* Fixed typo from 400px to 400 */
-  margin-bottom: 1.5rem !important;
-  color: #2b1e18 !important;
-  line-height: 1 !important;
-  font-stretch: condensed;
+.titleLine {
+  font-family: 'Widock', sans-serif !important;
+  font-size: 3.2rem !important;
+  font-weight: 700 !important;
+  color: white !important;
+  text-shadow:
+    -5px 6px 0 rgba(255, 255, 255, 0.2) !important;
+  margin: 0 !important;
+  line-height: 1.1 !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase;
 }
 
-.underTitleDivider {
-  width: 170px;
-  height: 5px;
-  background-color: #C17C45;
-  margin-top: 1.8rem;
-  margin-bottom: 1.8rem;
+/* Стрелка */
+.arrowContainer {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.arrow {
+  width: 30rem;
+  height: 5rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+  animation: bounce 2s ease-in-out infinite;
 }
 
 .subtitle {
   font-family: 'Arial', sans-serif !important;
-  font-weight: 900 !important; /* Fixed typo from 900px to 900 */
-  font-size: 25px !important;
-  color: #2b1e18 !important;
-  line-height: 1.5 !important;
+  font-weight: 300 !important;
+  font-size: 1.5rem !important;
+  color: white !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px !important;
+  margin-top: 1rem !important;
 }
 
-.journeySection {
-  text-align: center;
-  max-width: 600px;
-  width: 100%;
+/* Анимации */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
 }
 
-.journeyTitle {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+@keyframes glow {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
 
-
-.actionButtons {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.secondaryButton {
-  margin-top: 0.4rem;
-  background: transparent;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  padding: 1rem 2.5rem;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
   }
 }
 
 /* --- Media Queries --- */
 
-/* Tablet styles (e.g., max-width: 1024px) */
+/* Tablet styles */
 @media (max-width: 1024px) {
   .header {
     padding: 1rem 3vw;
@@ -220,13 +317,7 @@ body, html {
   }
 
   .logoText {
-    font-size: 1.5rem !important;
-    letter-spacing: 2px !important;
-    -webkit-text-stroke: 1px #C17C45;
-  }
-
-  .nav {
-    gap: 15px;
+    font-size: 1.8rem !important;
   }
 
   .navButton {
@@ -234,172 +325,126 @@ body, html {
     padding: 0.5rem 1rem !important;
   }
 
-  .socialIconsHeader {
-    gap: 15px;
-    margin-left: 20px;
-    img {
-        width: 24px;
-        height: 24px;
-    }
+  .planetImage {
+    width: 400px;
+    height: 400px;
   }
 
-  .textBlock {
-    padding: 3rem 2rem;
-    margin: 1.5rem auto;
+  .planetGlow {
+    width: 480px;
+    height: 480px;
   }
 
-  .title {
-    font-size: 38px !important; /* Slightly smaller for tablets */
-    margin-bottom: 1rem !important;
+  .titleLine {
+    font-size: 3.5rem !important;
   }
 
-  .underTitleDivider {
-    width: 140px;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+  .arrow {
+    width: 25rem;
+    height: 4rem;
   }
 
   .subtitle {
-    font-size: 20px !important; /* Slightly smaller for tablets */
+    font-size: 1.3rem !important;
   }
 }
 
-/* Mobile styles (e.g., max-width: 768px) */
+/* Mobile styles */
 @media (max-width: 768px) {
   .header {
-    flex-direction: column; /* Stack header items vertically */
-    height: auto; /* Allow header height to adjust */
+    flex-direction: column;
+    height: auto;
     padding: 15px 20px;
-    align-items: flex-start; /* Align items to the start */
-    gap: 15px; /* Space between logo and nav */
+    gap: 15px;
   }
 
   .logoContainer {
-    width: 100%; /* Make logo take full width */
-    justify-content: center; /* Center logo */
-    gap: 5px;
-  }
-
-  .logoImage {
-    height: 30px;
-  }
-
-  .logoText {
-    font-size: 1.2rem !important;
-    letter-spacing: 1.5px !important;
-    -webkit-text-stroke: 0.8px #C17C45;
+    width: 100%;
+    justify-content: center;
   }
 
   .nav {
-    flex-direction: column; /* Stack nav buttons vertically */
-    width: 100%; /* Make nav take full width */
+    flex-direction: column;
+    width: 100%;
     gap: 10px;
-    align-items: center; /* Center nav items */
-  }
-
-  .navButton {
-    font-size: 0.9rem !important;
-    padding: 0.4rem 0.8rem !important;
-    width: 80%; /* Make buttons wider */
-    text-align: center; /* Center text within buttons */
   }
 
   .socialIconsHeader {
-    margin-left: 0; /* Remove left margin when stacked */
-    margin-top: 10px; /* Add some top margin */
-    justify-content: center; /* Center social icons */
-    width: 100%; /* Take full width */
-    gap: 10px;
-    img {
-        width: 20px;
-        height: 20px;
-    }
-  }
-
-  .divider {
-    margin-top: 10px; /* Add a little space after header */
+    margin-left: 0;
+    margin-top: 10px;
+    justify-content: center;
   }
 
   .mainContent {
-    justify-content: center; /* Center content horizontally */
-    align-items: flex-start; /* Align content to the top */
-    padding-top: 20px; /* Add some padding at the top */
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    background: radial-gradient(ellipse at center, #123458 0%, #4DA8DA 100%);
+  }
+
+  .planetContainer {
+    order: 2;
+    height: auto;
+    margin-top: 2rem;
+  }
+
+  .planetImage {
+    width: 300px;
+    height: 300px;
+  }
+
+  .planetGlow {
+    width: 360px;
+    height: 360px;
   }
 
   .textBlock {
-    text-align: center; /* Center text for mobile */
-    padding: 2rem 1rem;
-    margin: 1rem auto;
-    width: 95%; /* Adjust width for smaller screens */
+    order: 1;
+    padding: 1rem;
+    text-align: center;
   }
 
-  .title {
-    font-size: 25px !important; /* Significantly reduced for mobile */
-    margin-bottom: 0.8rem !important;
-    line-height: 1.2 !important; /* Adjust line height for better wrapping */
+  .titleLine {
+    font-size: 2.5rem !important;
+    letter-spacing: 2px !important;
   }
 
-  .underTitleDivider {
-    width: 100px; /* Smaller divider */
-    margin: 1rem auto; /* Center the divider */
+  .arrowContainer {
+    justify-content: center;
+  }
+
+  .arrow {
+    width: 20rem;
+    height: 3rem;
   }
 
   .subtitle {
-    font-size: 16px !important; /* Significantly reduced for mobile */
-    line-height: 1.4 !important;
+    font-size: 1.1rem !important;
   }
 }
 
-/* Extra small mobile devices (e.g., max-width: 480px) */
+/* Extra small mobile */
 @media (max-width: 480px) {
-    .header {
-        padding: 10px 15px;
-    }
+  .planetImage {
+    width: 250px;
+    height: 250px;
+  }
 
-    .logoImage {
-        height: 25px;
-    }
+  .planetGlow {
+    width: 300px;
+    height: 300px;
+  }
 
-    .logoText {
-        font-size: 1rem !important;
-        letter-spacing: 1px !important;
-        -webkit-text-stroke: 0.5px #C17C45;
-    }
+  .titleLine {
+    font-size: 2rem !important;
+  }
 
-    .navButton {
-        font-size: 0.8rem !important;
-        padding: 0.3rem 0.6rem !important;
-        width: 90%;
-    }
+  .arrow {
+    width: 15rem;
+    height: 2.5rem;
+  }
 
-    .socialIconsHeader {
-        gap: 8px;
-        img {
-            width: 18px;
-            height: 18px;
-        }
-    }
-
-    .mainContent {
-        padding-top: 15px;
-    }
-
-    .textBlock {
-        padding: 1.5rem 0.8rem;
-        margin: 0.8rem auto;
-    }
-
-    .title {
-        font-size: 17px !important;
-        margin-bottom: 0.6rem !important;
-    }
-
-    .underTitleDivider {
-        width: 80px;
-        margin: 0.8rem auto;
-    }
-
-    .subtitle {
-        font-size: 14px !important;
-    }
+  .subtitle {
+    font-size: 1rem !important;
+  }
 }
