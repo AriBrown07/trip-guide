@@ -90,6 +90,17 @@
           box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
         }
       }
+
+      // Стили для кнопки "ГИД"
+      &.guide-button {
+        background: linear-gradient(135deg, #ff9800, #ef6c00);
+        color: white;
+
+        &:not(:disabled):hover {
+          background: linear-gradient(135deg, #ef6c00, #e65100);
+          box-shadow: 0 4px 12px rgba(255, 152, 0, 0.25);
+        }
+      }
     }
     
     .home-button-corner {

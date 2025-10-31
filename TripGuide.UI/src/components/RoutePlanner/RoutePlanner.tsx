@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { decode } from '@mapbox/polyline';
 import axios from 'axios';
 import MapViewer from '../MapViewer/MapViewer';
+import GuideModal from '../GuideModal/GuideModal';
 import './RoutePlanner.scss'
 
 type Point = [number, number];
@@ -139,6 +140,10 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
     setRouteInfo(null);
   };
 
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
+  // prepare attractions names to pass into guide modal
+  const attractions = places.map(p => p.name);
+
   const handleHomeClick = () => {
     navigate('/home');
   };
@@ -163,13 +168,24 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
             </button>
             
             {route.length > 0 && (
-              <button 
-                onClick={clearRoute}
-                disabled={isLoading}
-                className="route-button clear-button"
-              >
-                Удалить маршрут
-              </button>
+              <>
+                <button 
+                  onClick={clearRoute}
+                  disabled={isLoading}
+                  className="route-button clear-button"
+                >
+                  Удалить маршрут
+                </button>
+
+                <button
+                  onClick={() => setIsGuideOpen(true)}
+                  disabled={isLoading}
+                  className="route-button guide-button"
+                  title="Открыть аудиогида"
+                >
+                  ГИД
+                </button>
+              </>
             )}
           </div>
           
@@ -201,6 +217,8 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
           )}
         </div>
       )}
+
+      <GuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} defaultAudioId={startPoint?.name ? `guide-${startPoint.name.replace(/\s+/g, '-')}` : 'guide-route'} attractions={attractions} defaultDescription={`Аудиогид для маршрута из ${places.length} точек`} />
     </div>
   );
 }
