@@ -27,7 +27,7 @@ const Introductory: React.FC = () => {
   };
 
   const handleCreateRoute = () => {
-    navigate('/route-creator');
+    navigate('/map');
   };
 
   useEffect(() => {
@@ -85,16 +85,12 @@ const Introductory: React.FC = () => {
         {/* Текстовая часть */}
         <div className={styles.textBlock}>
           <Typography variant="h1" className={styles.titleLine}>
-            ВАШ МАРШРУТ
+            СОЗДАЙ СВОЕ
           </Typography>
           
-          {/* Стрелка */}
-          <div className={styles.arrowContainer}>
-            <img src={arrow} alt="Arrow" className={styles.arrow} />
-          </div>
-          
+       
           <Typography variant="h1" className={styles.titleLine}>
-            ВАША ИСТОРИЯ
+            ПУТЕШЕСТВИЕ
           </Typography>
 
           {/* Подзаголовок с анимацией появления */}
