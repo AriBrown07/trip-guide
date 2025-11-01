@@ -224,7 +224,7 @@ function App() {
 
         <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
           <div className="sidebar-header">
-            <h1 className="sidebar-title">Belarus Travel</h1>
+            <h1 className="sidebar-title">MapHistory</h1>
             <p className="sidebar-subtitle">Планирование маршрутов</p>
           </div>
 
