@@ -15,87 +15,57 @@ body, html {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background: #0a1a2d;
 }
 
-/* Header */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 5vw;
-  background: transparent !important;
-  z-index: 10;
-  flex-shrink: 0;
-  height: 80px;
-  box-sizing: border-box;
+/* Парящие частицы */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.logoContainer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logoImage {
-  height: 40px;
-  width: auto;
-  filter: brightness(0) invert(1);
-}
-
-.logoText {
-  font-family: 'Lobster', cursive !important;
-  font-weight: 400 !important;
-  color: white !important;
-  font-size: 2rem !important;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  letter-spacing: 1px !important;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: min(4vw, 20px);
-}
-
-.navButton {
-  font-size: 1.1rem !important;
-  text-transform: none !important;
-  color: white !important;
-  padding: 0.6rem 1.2rem !important;
-  white-space: nowrap;
-  border-radius: 25px !important;
-  transition: all 0.3s ease !important;
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(162, 218, 249, 0.6);
+  opacity: 0;
+  transition: all 2s ease-in-out;
   
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  &.active {
+    opacity: 1;
+  }
+  
+  &.particle1 {
+    width: 8px;
+    height: 8px;
+    top: 20%;
+    left: 10%;
+    animation: floatParticle 8s ease-in-out infinite;
+  }
+  
+  &.particle2 {
+    width: 12px;
+    height: 12px;
+    top: 60%;
+    left: 85%;
+    animation: floatParticle 10s ease-in-out infinite 1s;
+  }
+  
+  &.particle3 {
+    width: 6px;
+  height: 6px;
+    top: 80%;
+    left: 15%;
+    animation: floatParticle 12s ease-in-out infinite 2s;
   }
 }
 
-.socialIconsHeader {
-  display: flex;
-  align-items: center;
-  gap: min(3vw, 20px);
-  margin-left: min(4vw, 30px);
-
-  img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    transition: all 0.3s ease;
-    opacity: 0.9;
-    aspect-ratio: 1/1;
-    filter: brightness(0) invert(1);
-    
-    &:hover {
-      transform: scale(1.2);
-      opacity: 1;
-    }
-  }
-}
-
-/* Кнопка карты в правом верхнем углу */
+/* Кнопка карты */
 .mapButton {
   position: fixed;
   align-items: center;
@@ -106,7 +76,7 @@ body, html {
   gap: 0.3rem;
   padding: 0.3rem 0.5rem;
   padding-left: 0.7rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 30px;
   cursor: pointer;
   z-index: 1000;
@@ -116,22 +86,18 @@ body, html {
   
   &:hover {
     background: rgba(255, 255, 255, 1);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  &:active {
-    transform: translateY(0);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   }
 }
 
 .mapText {
-  font-family: 'unbounded', sans-serif !important;
-  font-weight: 600 !important;
-  font-size: 1rem !important;
-  color: rgba(58, 118, 185) !important;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgba(58, 118, 185);
   text-transform: lowercase;
-  margin: 0 !important;
+  margin: 0;
   letter-spacing: 0.5px;
 }
 
@@ -145,9 +111,13 @@ body, html {
 .mainContent {
   flex: 1;
   background: 
-    /* PNG текстура */
-    url('../../pics/texture.png'),
-    /* Градиенты поверх текстуры */
+    radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(110, 153, 198, 0.9) 0%,
+      rgba(170, 216, 241, 0.7) 30%,
+      rgba(138, 197, 237, 0.4) 60%,
+      transparent 100%
+    ),
     radial-gradient(
       ellipse at top right,
       rgba(58, 118, 181, 0.9) 0%,
@@ -156,11 +126,11 @@ body, html {
     ),
     linear-gradient(
       to bottom,
-      rgba(18, 52, 88, 0.7) 0%,
-      rgba(77, 168, 218, 0.4) 100%
+      rgba(18, 52, 88, 0.9) 0%,
+      rgba(77, 168, 218, 0.5) 100%
     );
   background-blend-mode: overlay, multiply, normal;
-  background-size: cover, cover, cover;
+  background-size: 200% 200%, cover, cover;
   background-position: center, top right, center;
   background-repeat: no-repeat;
   display: flex;
@@ -170,31 +140,7 @@ body, html {
   overflow: auto;
   padding: 0 5vw;
   min-height: 100vh;
-}
-
-/* Для создания эффекта осветления при прокрутке */
-.mainContent::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 30%,
-    rgba(255, 255, 255, 0.3) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-/* Эффект при прокрутке */
-.mainContent.scrolled::before {
-  opacity: 1;
+  transition: background-position 0.1s ease;
 }
 
 /* Планета */
@@ -205,72 +151,222 @@ body, html {
   justify-content: center;
   align-items: center;
   height: 100%;
+  min-height: 600px;
 }
 
 .planetImage {
-  width: 500px;
-  height: 500px;
+  width: 650px;
+  height: 650px;
   object-fit: contain;
-  filter: drop-shadow(0 0 30px rgba(77, 168, 218, 0.8));
-  animation: float 6s ease-in-out infinite;
-  z-index: 2;
+  filter: 
+    drop-shadow(0 0 50px rgba(77, 168, 218, 0.6))
+    drop-shadow(0 0 100px rgba(138, 197, 237, 0.4))
+    brightness(1.1) saturate(1.2);
+  animation: float 8s ease-in-out infinite;
+  z-index: 3;
   position: relative;
+  transition: all 0.5s ease;
+  
+  &:hover {
+    filter: 
+      drop-shadow(0 0 60px rgba(77, 168, 218, 0.8))
+      drop-shadow(0 0 120px rgba(138, 197, 237, 0.6))
+      brightness(1.2) saturate(1.3);
+    transform: scale(1.02);
+  }
 }
 
 .planetGlow {
   position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(77, 168, 218, 0.3) 0%, rgba(77, 168, 218, 0) 70%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(
+    circle, 
+    rgba(77, 168, 218, 0.4) 0%, 
+    rgba(77, 168, 218, 0.2) 30%,
+    rgba(77, 168, 218, 0.1) 50%,
+    transparent 70%
+  );
   border-radius: 50%;
-  animation: glow 4s ease-in-out infinite alternate;
+  animation: glow 6s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+.planetPulse {
+  position: absolute;
+  width: 850px;
+  height: 850px;
+  border: 2px solid rgba(77, 168, 218, 0.3);
+  border-radius: 50%;
+  animation: pulse 4s ease-out infinite;
+  z-index: 1;
+}
+
+/* Орбита планеты */
+.planetOrbit {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  z-index: 1;
+}
+
+.orbitRing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: rotate 20s linear infinite;
+}
+
+.satellite {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: rotate 15s linear infinite reverse;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: rgba(77, 168, 218, 0.6);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
 }
 
 /* Текстовая часть */
 .textBlock {
   flex: 1;
   position: relative;
-  z-index: 3;
+  z-index: 4;
   text-align: left;
   padding: 2rem;
 }
 
 .titleLine {
-  font-family: 'Widock', sans-serif !important;
-  font-size: 3.2rem !important;
-  font-weight: 700 !important;
-  color: white !important;
+  font-family: 'Widock', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: white;
   text-shadow:
-    -5px 6px 0 rgba(255, 255, 255, 0.2) !important;
-  margin: 0 !important;
-  line-height: 1.1 !important;
-  letter-spacing: 3px !important;
+    -5px 6px 0 rgba(255, 255, 255, 0.2),
+    0 0 30px rgba(77, 168, 218, 0.6);
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 4px;
   text-transform: uppercase;
+  animation: titleAppear 1s ease-out;
+  
+  &:nth-child(3) {
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+  }
 }
 
-/* Стрелка */
 .arrowContainer {
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   display: flex;
   justify-content: flex-start;
+  animation: arrowAppear 0.8s ease-out 0.6s both;
 }
 
 .arrow {
-  width: 30rem;
-  height: 5rem;
+  width: 35rem;
+  height: 6rem;
   object-fit: contain;
-  filter: brightness(0) invert(1) drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
-  animation: bounce 2s ease-in-out infinite;
+  filter: brightness(0) invert(1) drop-shadow(2px 2px 8px rgba(0,0,0,0.3));
+  animation: bounce 3s ease-in-out infinite;
 }
 
 .subtitle {
-  font-family: 'Arial', sans-serif !important;
-  font-weight: 300 !important;
-  font-size: 1.5rem !important;
+  font-family: 'Arial', sans-serif;
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+  margin: 2rem 0 3rem 0;
+  animation: subtitleAppear 1s ease-out 1s both;
+  line-height: 1.4;
+}
+
+/* Кнопка призыва к действию */
+.ctaContainer {
+  margin: 2rem 0;
+  animation: ctaAppear 1s ease-out 1.5s both;
+}
+
+.ctaButton {
+  background: linear-gradient(135deg, #4DA8DA 0%, #3A76B9 100%) !important;
   color: white !important;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  letter-spacing: 2px !important;
-  margin-top: 1rem !important;
+  font-family: 'Unbounded', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 1.3rem !important;
+  padding: 1rem 2.5rem !important;
+  border-radius: 50px !important;
+  text-transform: none !important;
+  letter-spacing: 1px;
+  transition: all 0.4s ease !important;
+  box-shadow: 
+    0 8px 25px rgba(77, 168, 218, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  
+  &:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+      0 15px 35px rgba(77, 168, 218, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    background: linear-gradient(135deg, #5db8e9 0%, #4A86C9 100%) !important;
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* Всплывающие фичи */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  animation: featuresAppear 1s ease-out 2s both;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.8rem 1.2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: default;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(10px);
+    border-color: rgba(148, 218, 255, 0.3);
+  }
+}
+
+.featureIcon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 /* Анимации */
@@ -278,19 +374,42 @@ body, html {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
-  50% {
-    transform: translateY(-20px) rotate(5deg);
+  33% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(-1deg);
   }
 }
 
 @keyframes glow {
   0% {
-    opacity: 0.6;
+    opacity: 0.4;
     transform: scale(1);
   }
   100% {
-    opacity: 0.8;
+    opacity: 0.7;
     transform: scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
@@ -299,7 +418,77 @@ body, html {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(10px);
+    transform: translateX(15px);
+  }
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-30px) translateX(15px);
+  }
+  50% {
+    transform: translateY(-15px) translateX(30px);
+  }
+  75% {
+    transform: translateY(-25px) translateX(10px);
+  }
+}
+
+@keyframes titleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes arrowAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes subtitleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ctaAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes featuresAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -307,95 +496,73 @@ body, html {
 
 /* Tablet styles */
 @media (max-width: 1024px) {
-  .header {
-    padding: 1rem 3vw;
-    height: 70px;
-  }
-
-  .logoImage {
-    height: 35px;
-  }
-
-  .logoText {
-    font-size: 1.8rem !important;
-  }
-
-  .navButton {
-    font-size: 1rem !important;
-    padding: 0.5rem 1rem !important;
-  }
-
   .planetImage {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
   }
 
   .planetGlow {
-    width: 480px;
-    height: 480px;
+    width: 600px;
+    height: 600px;
+  }
+
+  .planetPulse {
+    width: 650px;
+    height: 650px;
+  }
+
+  .planetOrbit {
+    width: 700px;
+    height: 700px;
   }
 
   .titleLine {
-    font-size: 3.5rem !important;
+    font-size: 3.2rem;
   }
 
   .arrow {
-    width: 25rem;
-    height: 4rem;
+    width: 28rem;
+    height: 5rem;
   }
 
   .subtitle {
-    font-size: 1.3rem !important;
+    font-size: 1.5rem;
   }
 }
 
 /* Mobile styles */
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    height: auto;
-    padding: 15px 20px;
-    gap: 15px;
-  }
-
-  .logoContainer {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .nav {
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-  }
-
-  .socialIconsHeader {
-    margin-left: 0;
-    margin-top: 10px;
-    justify-content: center;
-  }
-
   .mainContent {
     flex-direction: column;
     justify-content: center;
-    padding: 2rem;
-    background: radial-gradient(ellipse at center, #123458 0%, #4DA8DA 100%);
+    padding: 1rem;
   }
 
   .planetContainer {
     order: 2;
     height: auto;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    min-height: 400px;
   }
 
   .planetImage {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
   }
 
   .planetGlow {
-    width: 360px;
-    height: 360px;
+    width: 420px;
+    height: 420px;
+  }
+
+  .planetPulse {
+    width: 450px;
+    height: 450px;
+  }
+
+  .planetOrbit {
+    width: 500px;
+    height: 500px;
   }
 
   .textBlock {
@@ -405,8 +572,8 @@ body, html {
   }
 
   .titleLine {
-    font-size: 2.5rem !important;
-    letter-spacing: 2px !important;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
   }
 
   .arrowContainer {
@@ -414,37 +581,61 @@ body, html {
   }
 
   .arrow {
-    width: 20rem;
-    height: 3rem;
+    width: 22rem;
+    height: 4rem;
   }
 
   .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .ctaButton {
     font-size: 1.1rem !important;
+    padding: 0.8rem 2rem !important;
+  }
+
+  .features {
+    align-items: center;
+  }
+
+  .feature {
+    width: 100%;
+    max-width: 300px;
   }
 }
 
 /* Extra small mobile */
 @media (max-width: 480px) {
   .planetImage {
-    width: 250px;
-    height: 250px;
+    width: 280px;
+    height: 280px;
   }
 
   .planetGlow {
-    width: 300px;
-    height: 300px;
+    width: 340px;
+    height: 340px;
+  }
+
+  .planetPulse {
+    width: 360px;
+    height: 360px;
+  }
+
+  .planetOrbit {
+    width: 400px;
+    height: 400px;
   }
 
   .titleLine {
-    font-size: 2rem !important;
+    font-size: 2rem;
   }
 
   .arrow {
-    width: 15rem;
-    height: 2.5rem;
+    width: 18rem;
+    height: 3rem;
   }
 
   .subtitle {
-    font-size: 1rem !important;
+    font-size: 1.1rem;
   }
 }
