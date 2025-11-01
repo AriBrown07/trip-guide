@@ -17,6 +17,138 @@ body, html {
   overflow: hidden;
 }
 
+/* Контейнер для скролла */
+.scrollContainer {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+/* Слайды */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+/* Индикатор скролла */
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.scrollArrow {
+  width: 2rem;
+  height: 2rem;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg);
+  margin: 0 auto 0.5rem;
+  animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% {
+    transform: rotate(45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(45deg) translateY(-10px);
+  }
+}
+
+.scrollText {
+  color: white !important;
+  font-weight: 300 !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Стили для второго слайда */
+.secondSlide {
+  width: 100%;
+  height: 100%;
+  background: 
+    url('../../pics/texture.png'),
+    linear-gradient(135deg, #1565c0 0%, #42a5f5 50%, #80deea 100%);
+  background-blend-mode: overlay;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondContent {
+  text-align: center;
+  max-width: 1200px;
+  padding: 2rem;
+}
+
+.secondTitle {
+  font-family: 'Arial Black', sans-serif !important;
+  font-size: 3.5rem !important;
+  color: white !important;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem !important;
+  text-transform: uppercase;
+}
+
+.secondSubtitle {
+  font-family: 'Arial', sans-serif !important;
+  font-size: 1.5rem !important;
+  color: white !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 4rem !important;
+  font-weight: 300 !important;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.feature {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-10px);
+  }
+}
+
+.featureIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.featureTitle {
+  font-family: 'Arial', sans-serif !important;
+  font-weight: 600 !important;
+  color: white !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.3rem !important;
+}
+
+.featureText {
+  font-family: 'Arial', sans-serif !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  line-height: 1.6 !important;
+  font-size: 1rem !important;
+}
+
 /* Header */
 .header {
   display: flex;
@@ -95,17 +227,16 @@ body, html {
   }
 }
 
-/* Кнопка карты в правом верхнем углу */
 .mapButton {
   position: fixed;
-  align-items: center;
-  top: 2rem;
-  right: 2rem;
+  top: 37rem;
+  left: 50%; /* Центрирование по горизонтали */
+  transform: translateX(-50%); /* Смещение на половину своей ширины */
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.3rem 0.5rem;
-  padding-left: 0.7rem;
+  gap: 0.1rem;
+  // padding: 0.3rem 0.5rem;
+  padding-left: 4rem;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 30px;
   cursor: pointer;
@@ -116,19 +247,19 @@ body, html {
   
   &:hover {
     background: rgba(255, 255, 255, 1);
-    transform: translateY(-2px);
+    transform: translateX(-50%) translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
   
   &:active {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 }
 
 .mapText {
   font-family: 'unbounded', sans-serif !important;
-  font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-weight: 700 !important;
+  font-size: 2.5rem !important;
   color: rgba(58, 118, 185) !important;
   text-transform: lowercase;
   margin: 0 !important;
@@ -136,28 +267,20 @@ body, html {
 }
 
 .mapIcon {
-  width: 0.9rem;
-  height: 0.9rem;
+  width: 8rem;
+  height: 2rem;
   object-fit: contain;
 }
 
 /* Main Content */
 .mainContent {
   flex: 1;
-  background: 
-    /* PNG текстура */
-    url('../../pics/texture.png'),
-    /* Градиенты поверх текстуры */
+  background:
     radial-gradient(
-      ellipse at top right,
-      rgba(58, 118, 181, 0.9) 0%,
-      rgba(77, 168, 218, 0.9) 50%,
-      rgba(138, 197, 237, 0.9) 100%
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(18, 52, 88, 0.7) 0%,
-      rgba(77, 168, 218, 0.4) 100%
+      ellipse at bottom left,
+      rgb(240, 247, 255) 0%,
+      rgba(212, 232, 255) 50%,
+      rgb(173, 213, 255) 100%,
     );
   background-blend-mode: overlay, multiply, normal;
   background-size: cover, cover, cover;
@@ -239,7 +362,7 @@ body, html {
   font-family: 'Widock', sans-serif !important;
   font-size: 3.2rem !important;
   font-weight: 700 !important;
-  color: white !important;
+  color: rgba(58, 118, 185) !important;//112,188,243
   text-shadow:
     -5px 6px 0 rgba(255, 255, 255, 0.2) !important;
   margin: 0 !important;
@@ -259,7 +382,7 @@ body, html {
   width: 30rem;
   height: 5rem;
   object-fit: contain;
-  filter: brightness(0) invert(1) drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+  filter: brightness(0) invert(1) drop-shadow(2px 2px 4px rgb(0, 71, 152));
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -300,6 +423,69 @@ body, html {
   }
   50% {
     transform: translateX(10px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes glow {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+  .scrollContainer {
+    scroll-snap-type: y proximity;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .secondTitle {
+    font-size: 2.5rem !important;
+  }
+  
+  .secondSubtitle {
+    font-size: 1.2rem !important;
+  }
+  
+  .mainContent {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .textBlock {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .arrowContainer {
+    justify-content: center;
   }
 }
 
