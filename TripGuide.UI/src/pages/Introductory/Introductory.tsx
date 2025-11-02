@@ -50,7 +50,7 @@ const Introductory: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -67,15 +67,10 @@ const Introductory: React.FC = () => {
         <div className={`${styles.particle} ${styles.particle3} ${activeParticle === 2 ? styles.active : ''}`}></div>
       </div>
 
-      {/* Кнопка карты */}
-      <div className={styles.mapButton} onClick={handleMapClick}>
-        <Typography variant="h6" className={styles.mapText}>
-          карта
-        </Typography>
-        <img src={mapIcon} alt="Map" className={styles.mapIcon} />
-      </div>
+     
+   
 
-      <main 
+      <main
         className={`${styles.mainContent} ${isScrolled ? styles.scrolled : ''}`}
         style={{
           '--mouse-x': `${mousePosition.x}%`,
@@ -84,24 +79,19 @@ const Introductory: React.FC = () => {
       >
         {/* Текстовая часть */}
         <div className={styles.textBlock}>
-          <Typography variant="h1" className={styles.titleLine}>
-            СОЗДАЙ СВОЕ
-          </Typography>
-          
-       
-          <Typography variant="h1" className={styles.titleLine}>
-            ПУТЕШЕСТВИЕ
-          </Typography>
 
-          {/* Подзаголовок с анимацией появления */}
-          <Typography variant="h2" className={styles.subtitle}>
-            Наше приложение создает персонализированные маршруты 
+
+          <h1 className={styles.titleLine}>СОЗДАЙ СВОЕ</h1>
+          <h1 className={styles.titleLine}>ПУТЕШЕСТВИЕ</h1>
+
+          <h2 className={styles.subtitle}>
+            Наше приложение создает персонализированные маршруты
             и сопровождает путешественника аудиогидом
-          </Typography>
+          </h2>
 
           {/* Кнопка призыва к действию */}
           <div className={styles.ctaContainer}>
-            <Button 
+            <Button
               className={styles.ctaButton}
               onClick={handleCreateRoute}
               variant="contained"
@@ -127,7 +117,7 @@ const Introductory: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Планета с улучшенной анимацией */}
         <div className={styles.planetContainer}>
           <div className={styles.planetOrbit}>
@@ -141,14 +131,7 @@ const Introductory: React.FC = () => {
       </main>
 
       {/* Модальные окна */}
-      <AboutModal
-        open={isAboutModalOpen}
-        onClose={() => setIsAboutModalOpen(false)}
-      />
-      <AuthModal
-        open={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-      />
+
     </div>
   );
 };

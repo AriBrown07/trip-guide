@@ -110,23 +110,7 @@ const CountryIntro: React.FC = () => {
           <img src={map1} className={styles.map1} alt="map icon" />
         </Button>
 
-        <div className={styles.profileButtonCont}>
-          <Button
-            className={styles.navButton}
-            onClick={handleProfile}
-          >
-            Профиль
-          </Button>
-        </div>
-
-        <div className={styles.profileButtonCont}>
-          <Button
-            className={styles.navButton}
-            onClick={handleGame}
-          >
-            Игра
-          </Button>
-        </div>
+       
 
       </div>
 

@@ -24,11 +24,11 @@ function calculateDistance(point1: Point, point2: Point): number {
   const R = 6371; // Радиус Земли в км
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
 
@@ -64,7 +64,7 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
   const [points, setPoints] = useState<Point[]>([]);
   const [optimizedPoints, setOptimizedPoints] = useState<Point[]>([]);
   const [route, setRoute] = useState<Point[]>([]);
-  const [routeInfo, setRouteInfo] = useState<{distance: number, duration: number} | null>(null);
+  const [routeInfo, setRouteInfo] = useState<{ distance: number, duration: number } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [startPoint, setStartPoint] = useState<MapPoint | null>(null);
@@ -73,12 +73,12 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
     if (places.length > 0) {
       const newPoints = places.map(p => p.coordinates);
       setPoints(newPoints);
-      
+
       // Первая выбранная точка - начало маршрута
       if (places.length === 1) {
         setStartPoint(places[0]);
       }
-      
+
       // Оптимизируем порядок точек при изменении
       if (newPoints.length > 1) {
         const optimized = optimizeRoutePoints(newPoints);
@@ -86,7 +86,7 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
       } else {
         setOptimizedPoints(newPoints);
       }
-      
+
       // Сбрасываем маршрут при изменении точек
       setRoute([]);
       setRouteInfo(null);
@@ -104,17 +104,17 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
       setError('Необходимо выбрать как минимум 2 точки');
       return;
     }
-    
+
     setIsLoading(true);
     setError(null);
-    
+
     try {
       const coords = optimizedPoints.map(p => `${p[1]},${p[0]}`).join(';');
-      
+
       const response = await axios.get(
         `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=polyline`
       );
-      
+
       if (response.data.routes && response.data.routes.length > 0) {
         const decodedRoute = decode(response.data.routes[0].geometry);
         setRoute(decodedRoute.map(p => [p[0], p[1]]));
@@ -156,20 +156,20 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
             <strong>Начальная точка:</strong> {startPoint.name}
           </div>
         )}
-        
+
         <div className="controls-row">
           <div className="route-buttons">
-            <button 
-              onClick={fetchRoute} 
+            <button
+              onClick={fetchRoute}
               disabled={isLoading || optimizedPoints.length < 2}
               className={`route-button ${isLoading ? 'loading' : ''}`}
             >
               {isLoading ? 'Построение маршрута...' : 'Построить маршрут'}
             </button>
-            
+
             {route.length > 0 && (
               <>
-                <button 
+                <button
                   onClick={clearRoute}
                   disabled={isLoading}
                   className="route-button clear-button"
@@ -188,24 +188,24 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
               </>
             )}
           </div>
-          
-          <button 
+
+          <button
             onClick={handleHomeClick}
             className="home-button-corner"
             title="Вернуться на главную"
           >
             <svg className="home-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
             </svg>
             Домой
           </button>
         </div>
       </div>
-      
+
       {error && <div className="error-message">{error}</div>}
-      
+
       <MapViewer route={route} points={places} />
-      
+
       {routeInfo && (
         <div className="route-info">
           <p><strong>Дистанция:</strong> {(routeInfo.distance / 1000).toFixed(1)} км</p>
@@ -218,7 +218,12 @@ export default function RoutePlanner({ places }: RoutePlannerProps) {
         </div>
       )}
 
-      <GuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} defaultAudioId={startPoint?.name ? `guide-${startPoint.name.replace(/\s+/g, '-')}` : 'guide-route'} attractions={attractions} defaultDescription={`Аудиогид для маршрута из ${places.length} точек`} />
+      <GuideModal
+        isOpen={isGuideOpen}
+        onClose={() => setIsGuideOpen(false)}
+        attractions={attractions}
+        defaultDescription={`Аудиогид для маршрута из ${places.length} точек`}
+      />
     </div>
   );
 }

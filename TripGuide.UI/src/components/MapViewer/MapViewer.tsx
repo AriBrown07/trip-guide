@@ -83,31 +83,17 @@ export default function MapViewer({ route, points }: MapViewerProps) {
               new window.ymaps.control.TypeSelector({
                 options: {
                   float: 'right',
-                  position: { right: 75, top: 10 } // typeSelector сдвинут на 50px от правого края
+                  position: { right: 20, top: 10 } // typeSelector сдвинут на 50px от правого края
                 }
               })
             ]
           });
 
           // Создаем свою кнопку с домиком
-          const homeButton = new window.ymaps.control.Button({
-            data: {
-              content: '<div style="cursor: pointer; font-size: 20px">🏠</div>',
-              title: 'На главную'
-            },
-            options: {
-              float: 'right',
-              position: { right: 10, top: 10 } 
-            }
-          });
+          
 
           // Добавляем обработчик клика
-          homeButton.events.add('click', () => {
-            window.location.href = '/home'; 
-          });
-
-          // Добавляем кнопку на карту
-          mapInstance.current.controls.add(homeButton);
+          
 
           // Инициализация геообъектов
           geoObjects.current = new window.ymaps.GeoObjectCollection();

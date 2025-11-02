@@ -496,38 +496,43 @@ body, html {
 
 /* Tablet styles */
 @media (max-width: 1024px) {
+  /* Make tablet layout behave like mobile: stack content and place planet below text */
+  .mainContent {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    
+    padding-top: 18rem;
+  }
+
+  .textBlock {
+    order: 1;
+    width: 100%;
+    max-width: 720px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+
+  .planetContainer {
+    order: 2;
+    margin-top: 1rem;
+    min-height: 320px;
+  }
+
   .planetImage {
-    width: 500px;
-    height: 500px;
+    width: 420px;
+    height: auto;
+    max-width: 86vw;
   }
 
-  .planetGlow {
-    width: 600px;
-    height: 600px;
-  }
+  .planetGlow { width: 500px; height: 500px; }
+  .planetPulse { width: 540px; height: 540px; }
+  .planetOrbit { width: 580px; height: 580px; }
 
-  .planetPulse {
-    width: 650px;
-    height: 650px;
-  }
-
-  .planetOrbit {
-    width: 700px;
-    height: 700px;
-  }
-
-  .titleLine {
-    font-size: 3.2rem;
-  }
-
-  .arrow {
-    width: 28rem;
-    height: 5rem;
-  }
-
-  .subtitle {
-    font-size: 1.5rem;
-  }
+  .titleLine { font-size: 3rem; margin-top: 6px; }
+  .arrow { width: 26rem; height: 5rem; }
+  .subtitle { font-size: 1.45rem; }
 }
 
 /* Mobile styles */
@@ -536,6 +541,8 @@ body, html {
     flex-direction: column;
     justify-content: center;
     padding: 1rem;
+    padding-top: 18rem;
+    padding-right: 1rem;
   }
 
   .planetContainer {
@@ -567,13 +574,16 @@ body, html {
 
   .textBlock {
     order: 1;
-    padding: 1rem;
+    padding: 1rem 1rem 0.5rem 1rem;
     text-align: center;
+    margin-top: 0.2rem;
   }
 
   .titleLine {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     letter-spacing: 2px;
+    line-height: 1.02;
+    margin-top: 0;
   }
 
   .arrowContainer {
@@ -627,7 +637,9 @@ body, html {
   }
 
   .titleLine {
-    font-size: 2rem;
+    font-size: 1.9rem;
+    line-height: 1.02;
+    margin-bottom: 6px;
   }
 
   .arrow {
@@ -639,3 +651,31 @@ body, html {
     font-size: 1.1rem;
   }
 }
+
+
+@media (max-width: 360px) {
+
+.titleLine {
+    font-size: 1.6rem;
+    line-height: 1.02;
+    margin-bottom: 6px;
+  }
+}
+
+/* About button (top-right) */
+.aboutButton {
+  position: fixed;
+  top: 1.25rem;
+  right: 6.5rem; /* place left of map button */
+  background: linear-gradient(135deg, #4da8da, #1e90ff);
+  color: white;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1005;
+  box-shadow: 0 8px 20px rgba(30,144,255,0.16);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.aboutButton:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(30,144,255,0.22); }
